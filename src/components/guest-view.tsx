@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldLock } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldLock, ThumbsUp } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -48,7 +48,13 @@ const eventHistory = [
 
 const accountReports = [
     { id: "REP-001", date: "2024-07-20", report: "Minor verbal altercation.", status: "Resolved"},
-]
+];
+
+const kudosHistory = [
+    { id: "KUD-001", date: "2024-07-20", tag: "Helpful", comment: "Helped staff clean up a spill."},
+    { id: "KUD-002", date: "2024-05-15", tag: "Respectful", comment: "" },
+    { id: "KUD-003", date: "2023-12-31", tag: "Communicative", comment: "Reported a safety concern clearly."}
+];
 
 export default function GuestView() {
   const [status] = useState<Status>('Green');
@@ -128,9 +134,10 @@ export default function GuestView() {
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
+             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
             <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Events</TabsTrigger>
           </TabsList>
           <TabsContent value="history">
@@ -163,7 +170,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle>Linked Reports</CardTitle>
                     <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="space-y-6">
                     {accountReports.length > 0 ? (
                          <Table>
@@ -202,6 +209,38 @@ export default function GuestView() {
                             Appeal Status
                         </Button>
                     </div>
+                </CardContent>
+            </Card>
+          </TabsContent>
+           <TabsContent value="kudos">
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><ThumbsUp className="text-primary"/> Guest Kudos</CardTitle>
+                    <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
+                </Header>
+                <CardContent>
+                    {kudosHistory.length > 0 ? (
+                         <Table>
+                            <TableHeader>
+                                <TableRow>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Praise</TableHead>
+                                <TableHead>Comment</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {kudosHistory.map((k) => (
+                                <TableRow key={k.id}>
+                                    <TableCell>{k.date}</TableCell>
+                                    <TableCell><Badge>{k.tag}</Badge></TableCell>
+                                    <TableCell>{k.comment || 'No comment'}</TableCell>
+                                </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    ) : (
+                        <p className="text-sm text-muted-foreground text-center py-8">No kudos yet. Be helpful and respectful at events!</p>
+                    )}
                 </CardContent>
             </Card>
           </TabsContent>
