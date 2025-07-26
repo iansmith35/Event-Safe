@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Scan, Star } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Scan, Star, Heart } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -100,18 +100,18 @@ export default function GuestView() {
         </Card>
 
         <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Scan /> Guest-to-Guest Scanning</CardTitle>
-              <CardDescription>Activate this feature to check the status of other guests.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-8">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Upgrade to Enable Scanning</h3>
-                    <p className="text-muted-foreground mt-2">Unlock the ability to scan other guests' QR codes to verify their status in real-time. This is a premium feature.</p>
-                    <Button className="mt-6">Upgrade (£2/year)</Button>
-                </div>
-            </CardContent>
-          </Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2"><Heart /> Icebreaker</CardTitle>
+            <CardDescription>Find and connect with other guests at an event.</CardDescription>
+          </CardHeader>
+          <CardContent className="text-center py-8">
+            <div className="max-w-md mx-auto">
+              <h3 className="text-xl font-semibold">Activate Icebreaker</h3>
+              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature to send interest to other guests. This feature is only available at participating events.</p>
+              <Button className="mt-6">Upgrade (£1.50/month)</Button>
+            </div>
+          </CardContent>
+        </Card>
 
       </div>
 
@@ -279,8 +279,8 @@ export default function GuestView() {
           <TabsContent value="ticketing">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><ShieldCheck /> Smart Ticketing</CardTitle>
-                    <CardDescription>Browse events with score-based access control.</CardDescription>
+                    <CardTitle className="flex items-center gap-2"><Ticket /> EventSafe Pay</CardTitle>
+                    <CardDescription>Browse events, buy tickets, and manage your payments securely.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">

@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
           <TabsTrigger value="appeal-handler">Appeal Request Handler</TabsTrigger>
           <TabsTrigger value="kudos-analyzer">Kudos Analyzer</TabsTrigger>
           <TabsTrigger value="ticketing" className="flex items-center gap-2">
-            <Ticket className="h-4 w-4" /> Event Ticketing
+            <Ticket className="h-4 w-4" /> EventSafe Pay
           </TabsTrigger>
         </TabsList>
         <TabsContent value="report-analysis">
@@ -63,13 +63,13 @@ export default function AdminDashboard() {
          <TabsContent value="ticketing">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><ShieldCheck /> Smart Ticketing</CardTitle>
-              <CardDescription>Set ticket conditions based on guest scores and manage event access securely.</CardDescription>
+              <CardTitle className="flex items-center gap-2"><Ticket /> EventSafe Pay & Ticketing</CardTitle>
+              <CardDescription>Manage ticket sales, track revenue, and log payments with an embedded Stripe solution.</CardDescription>
             </CardHeader>
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Upgrade to Enable Smart Ticketing</h3>
-                    <p className="text-muted-foreground mt-2">This feature is currently inactive. Unlock score-based access control, automated flagging, and advanced event management by upgrading your plan.</p>
+                    <h3 className="text-xl font-semibold">Upgrade to Pro Safety Package</h3>
+                    <p className="text-muted-foreground mt-2">This feature is part of the Pro Safety Package. Unlock score-based access control, ticket tracking, staff fraud detection, fire logs, and guest GPS.</p>
                     <Button className="mt-6">Upgrade Plan (£20/month)</Button>
                 </div>
             </CardContent>
@@ -77,17 +77,30 @@ export default function AdminDashboard() {
         </TabsContent>
       </Tabs>
 
-      <div className="grid gap-6 md:grid-cols-2 pt-6">
+      <div className="grid gap-6 md:grid-cols-3 pt-6">
         <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><ShieldCheck /> Venue Verification Enforcement</CardTitle>
-              <CardDescription>Enforce guest score policies for ticket sales and entry.</CardDescription>
+              <CardTitle className="flex items-center gap-2"><ShieldCheck /> Post-Event Review</CardTitle>
+              <CardDescription>Log staff notes and review guest behavior after events.</CardDescription>
             </CardHeader>
             <CardContent className="text-center py-8">
                 <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Activate Enforcement</h3>
-                    <p className="text-muted-foreground mt-2">Block ticket sales to guests with high scores and log all manual overrides at the door to maintain score integrity.</p>
-                    <Button className="mt-6">Activate this Feature</Button>
+                    <h3 className="text-xl font-semibold">Activate Event Reviews</h3>
+                    <p className="text-muted-foreground mt-2">Get a color-coded summary of guest behavior and allow staff to add private notes and tags to maintain a high-quality guest list.</p>
+                    <Button className="mt-6">Upgrade (£10/month)</Button>
+                </div>
+            </CardContent>
+        </Card>
+        <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Users /> Staff Role Management</CardTitle>
+              <CardDescription>Assign specific permissions to your staff members.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center py-8">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Activate Staff Roles</h3>
+                    <p className="text-muted-foreground mt-2">Create roles like 'Door', 'Security', and 'Admin' to control access to scanning, note-taking, and administrative functions.</p>
+                    <Button className="mt-6">Upgrade (£5/month)</Button>
                 </div>
             </CardContent>
         </Card>
