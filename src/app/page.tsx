@@ -19,6 +19,7 @@ import {
   LogIn,
   UserPlus,
   Bell,
+  ChevronDown,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GuestView from '@/components/guest-view';
@@ -26,6 +27,7 @@ import AdminDashboard from '@/components/admin-dashboard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
   const handleMenuClick = (view: string) => {
@@ -112,12 +114,26 @@ export default function Home() {
                   Sign Up
                 </Link>
               </Button>
-              <Button asChild>
-                <Link href="#">
-                  <LogIn />
-                  Login
-                </Link>
-              </Button>
+               <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button>
+                    <LogIn />
+                    Login
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <Link href="#" className="flex items-center w-full">Guest Login</Link>
+                  </DropdownMenuItem>
+                   <DropdownMenuItem>
+                    <Link href="#" className="flex items-center w-full">Staff Login</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="#" className="flex items-center w-full">Admin Login</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Avatar>
                 <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
                 <AvatarFallback>G</AvatarFallback>
