@@ -54,7 +54,7 @@ export default function SignupForm() {
     
     return () => {
         if (videoRef.current && videoRef.current.srcObject) {
-            const stream = videoRef.current.srcObject as MediaStream;
+            const stream = video.current.srcObject as MediaStream;
             stream.getTracks().forEach(track => track.stop());
         }
     }
