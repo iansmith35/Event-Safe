@@ -284,7 +284,7 @@ export default function SignupForm() {
                 I agree to the terms and conditions
               </label>
               <p className="text-sm text-muted-foreground">
-                I consent to the use of my data for verification and using biometrics to prevent duplicate accounts. For fraud prevention, anonymized data may be retained after deletion for up to 12 months to prevent re-entry attempts under false identity. EventSafe only allows reports tied to verified event attendance. Reports not linked to an event via guest check-in will be rejected automatically. Venue-type also governs what level of information can be accessed in order to maintain safety without breaching event privacy boundaries.
+                By attending or hosting an EventSafe event, you agree to optional location verification to protect against fraudulent claims and unauthorized activity. All location data is stored securely and anonymized for analytics after 30 days unless legally required to retain. For fraud prevention, anonymized data may be retained after deletion for up to 12 months to prevent re-entry attempts under false identity. EventSafe only allows reports tied to verified event attendance. Reports not linked to an event via guest check-in will be rejected automatically. Venue-type also governs what level of information can be accessed in order to maintain safety without breaching event privacy boundaries.
               </p>
             </div>
           </div>
