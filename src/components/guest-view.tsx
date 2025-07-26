@@ -104,7 +104,7 @@ export default function GuestView() {
               <CardTitle className="flex items-center gap-2"><Scan /> Guest-to-Guest Scanning</CardTitle>
               <CardDescription>Activate this feature to check the status of other guests.</CardDescription>
             </CardHeader>
-            <CardContent className="text-center">
+            <CardContent className="text-center py-8">
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Upgrade to Enable Scanning</h3>
                     <p className="text-muted-foreground mt-2">Unlock the ability to scan other guests' QR codes to verify their status in real-time. This is a premium feature.</p>
@@ -296,5 +296,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    

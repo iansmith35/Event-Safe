@@ -70,7 +70,7 @@ export default function AdminDashboard() {
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Upgrade to Enable Smart Ticketing</h3>
                     <p className="text-muted-foreground mt-2">This feature is currently inactive. Unlock score-based access control, automated flagging, and advanced event management by upgrading your plan.</p>
-                    <Button className="mt-6">Upgrade Plan</Button>
+                    <Button className="mt-6">Upgrade Plan (£20/month)</Button>
                 </div>
             </CardContent>
           </Card>
@@ -108,5 +108,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
-    
