@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Scan, Star } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -98,6 +98,21 @@ export default function GuestView() {
                 </div>
             </CardContent>
         </Card>
+
+        <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Scan /> Guest-to-Guest Scanning</CardTitle>
+              <CardDescription>Activate this feature to check the status of other guests.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Upgrade to Enable Scanning</h3>
+                    <p className="text-muted-foreground mt-2">Unlock the ability to scan other guests' QR codes to verify their status in real-time. This is a premium feature.</p>
+                    <Button className="mt-6">Upgrade (£2/year)</Button>
+                </div>
+            </CardContent>
+          </Card>
+
       </div>
 
       {/* Right Column */}
@@ -123,7 +138,7 @@ export default function GuestView() {
                     <Download className="mr-2" /> Download Pass
                 </Button>
                  <Button variant="outline">
-                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55,.58,2.14,0s.59,1.54,0,2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
                     Save to Google Wallet
                 </Button>
                 <Button variant="outline">
@@ -135,10 +150,11 @@ export default function GuestView() {
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
+            <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
             <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Events</TabsTrigger>
           </TabsList>
           <TabsContent value="history">
@@ -245,6 +261,21 @@ export default function GuestView() {
                 </CardContent>
             </Card>
           </TabsContent>
+          <TabsContent value="ratings">
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Star /> Venue & Guest Ratings</CardTitle>
+                    <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center py-12">
+                    <div className="max-w-md mx-auto">
+                        <h3 className="text-xl font-semibold">Activate Ratings & Analytics</h3>
+                        <p className="text-muted-foreground mt-2">Unlock the ability to rate venues and view detailed analytics on your own ratings. This feature enhances community trust and transparency.</p>
+                        <Button className="mt-6">Activate this Feature</Button>
+                    </div>
+                </CardContent>
+            </Card>
+          </TabsContent>
           <TabsContent value="ticketing">
             <Card>
                 <CardHeader>
@@ -265,3 +296,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    

@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -76,6 +76,37 @@ export default function AdminDashboard() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      <div className="grid gap-6 md:grid-cols-2 pt-6">
+        <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><ShieldCheck /> Venue Verification Enforcement</CardTitle>
+              <CardDescription>Enforce guest score policies for ticket sales and entry.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center py-8">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Activate Enforcement</h3>
+                    <p className="text-muted-foreground mt-2">Block ticket sales to guests with high scores and log all manual overrides at the door to maintain score integrity.</p>
+                    <Button className="mt-6">Activate this Feature</Button>
+                </div>
+            </CardContent>
+        </Card>
+        <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Star /> Trust Ratings & Analytics</CardTitle>
+              <CardDescription>Allow venues and guests to rate each other and unlock powerful data.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center py-8">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Monetize Trust Data</h3>
+                    <p className="text-muted-foreground mt-2">Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</p>
+                    <Button className="mt-6">Activate this Feature</Button>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
+
+    
