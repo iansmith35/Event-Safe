@@ -5,6 +5,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { Download, Apple, Wallet } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Textarea } from "./ui/textarea";
+import { Badge } from "./ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "./ui/label";
+
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -26,59 +40,172 @@ const statusConfig = {
   },
 };
 
+const eventHistory = [
+  { event: "Summer Fest '24", date: "2024-07-20", status: "Attended" },
+  { event: "Tech Con 2024", date: "2024-05-15", status: "Attended" },
+  { event: "NYE Gala", date: "2023-12-31", status: "Attended" },
+];
+
+const accountReports = [
+    { id: "REP-001", date: "2024-07-20", report: "Minor verbal altercation.", status: "Resolved"},
+]
+
 export default function GuestView() {
   const [status] = useState<Status>('Green');
-
   const currentStatus = statusConfig[status];
+  const isAppealDisabled = status === 'Green';
 
   return (
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="lg:col-span-1">
-        <CardHeader>
-          <CardTitle>Your Status</CardTitle>
-          <CardDescription>Your current traffic light status for event entry.</CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center gap-6 pt-2">
-          <div className="relative flex items-center justify-center w-48 h-48">
-            <div className="absolute w-full h-full rounded-full bg-muted/50 animate-pulse"></div>
-            <div className={`w-40 h-40 rounded-full flex items-center justify-center shadow-lg ${currentStatus.color}`}>
-              <span className="text-4xl font-bold text-white drop-shadow-md">{currentStatus.label}</span>
+    <div className="grid gap-8 md:grid-cols-3">
+      {/* Left Column */}
+      <div className="md:col-span-1 space-y-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Your Status</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center gap-6 pt-2">
+            <div className="relative flex items-center justify-center w-40 h-40">
+              <div className="absolute w-full h-full rounded-full bg-muted/50 animate-pulse"></div>
+              <div className={`w-36 h-36 rounded-full flex items-center justify-center shadow-lg ${currentStatus.color}`}>
+                <span className="text-4xl font-bold text-white drop-shadow-md">{currentStatus.label}</span>
+              </div>
             </div>
-          </div>
-          <p className="text-center text-muted-foreground">{currentStatus.description}</p>
-        </CardContent>
-      </Card>
+            <p className="text-center text-muted-foreground px-4">{currentStatus.description}</p>
+          </CardContent>
+        </Card>
 
-      <Card className="lg:col-span-2">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle>Your Event Pass</CardTitle>
-            <CardDescription>Present this QR code for scanning at venue entry.</CardDescription>
-          </div>
-          <div className="flex items-center gap-4">
-             <Avatar>
-              <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
-              <AvatarFallback>G</AvatarFallback>
-            </Avatar>
-          </div>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center gap-6 p-10">
-          <div className="p-6 bg-white rounded-lg shadow-md">
-            <Image
-              src="https://placehold.co/300x300.png"
-              alt="QR Code"
-              width={300}
-              height={300}
-              className="rounded-md"
-              data-ai-hint="qr code"
-            />
-          </div>
-          <p className="text-sm text-center text-muted-foreground">
-            This QR code is unique to you. Do not share it.
-          </p>
-          <Button>Download Pass</Button>
-        </CardContent>
-      </Card>
+         <Card>
+            <CardHeader>
+                <CardTitle>Account Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="flex items-center gap-4">
+                    <Avatar className="w-16 h-16">
+                        <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
+                        <AvatarFallback>G</AvatarFallback>
+                    </Avatar>
+                    <div>
+                        <p className="font-bold text-lg">AgentIndigo</p>
+                        <p className="text-sm text-muted-foreground">ESG-928301</p>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
+
+      {/* Right Column */}
+      <div className="md:col-span-2 space-y-8">
+        <Card>
+          <CardHeader>
+              <CardTitle>Your Event Pass</CardTitle>
+              <CardDescription>Present this QR code for scanning at venue entry.</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col md:flex-row items-center justify-center gap-6 p-10">
+            <div className="p-4 bg-white rounded-lg shadow-md">
+              <Image
+                src="https://placehold.co/250x250.png"
+                alt="QR Code"
+                width={250}
+                height={250}
+                className="rounded-md"
+                data-ai-hint="qr code"
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+                <Button>
+                    <Download className="mr-2" /> Download Pass
+                </Button>
+                 <Button variant="outline">
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                    Save to Google Wallet
+                </Button>
+                <Button variant="outline">
+                    <Apple className="mr-2" />
+                    Save to Apple Wallet
+                </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Tabs defaultValue="history" className="w-full">
+          <TabsList>
+            <TabsTrigger value="history">Event History</TabsTrigger>
+            <TabsTrigger value="reports">My Reports</TabsTrigger>
+          </TabsList>
+          <TabsContent value="history">
+            <Card>
+                <CardHeader><CardTitle>Event Attendance</CardTitle></CardHeader>
+                <CardContent>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                            <TableHead>Event</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Status</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {eventHistory.map((event) => (
+                            <TableRow key={event.event}>
+                                <TableCell className="font-medium">{event.event}</TableCell>
+                                <TableCell>{event.date}</TableCell>
+                                <TableCell>{event.status}</TableCell>
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="reports">
+             <Card>
+                <CardHeader>
+                    <CardTitle>Linked Reports</CardTitle>
+                    <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    {accountReports.length > 0 ? (
+                         <Table>
+                            <TableHeader>
+                                <TableRow>
+                                <TableHead>Report ID</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Details</TableHead>
+                                <TableHead>Status</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {accountReports.map((r) => (
+                                <TableRow key={r.id}>
+                                    <TableCell className="font-mono text-xs">{r.id}</TableCell>
+                                    <TableCell>{r.date}</TableCell>
+                                    <TableCell>{r.report}</TableCell>
+                                    <TableCell><Badge variant="secondary">{r.status}</Badge></TableCell>
+                                </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    ) : (
+                        <p className="text-sm text-muted-foreground text-center py-8">No reports found. Keep it up!</p>
+                    )}
+
+                    <div className="space-y-2">
+                        <Label htmlFor="comment">Submit a Comment</Label>
+                        <Textarea id="comment" placeholder="You can submit comments or clarifications here. They will be logged and reviewed." />
+                        <p className="text-xs text-muted-foreground">Comments are monitored for tone and manipulation.</p>
+                    </div>
+
+                    <div className="flex gap-4">
+                        <Button>Submit Comment</Button>
+                         <Button variant="destructive" disabled={isAppealDisabled}>
+                            Appeal Status
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }
