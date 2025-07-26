@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from '@/hooks/use-toast';
-import { analyzeKudos, type AnalyzeKudosOutput, KudosTagsSchema, type KudosTags } from '@/ai/flows/analyze-kudos';
+import { analyzeKudos, type AnalyzeKudosOutput } from '@/ai/flows/analyze-kudos';
+import { KudosTagsSchema, type KudosTags } from '@/types/kudos';
 import { Loader2, ThumbsUp, PlusCircle, XCircle, BadgeHelp, BadgeCheck, MessageSquare, Smile } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Progress } from './ui/progress';
@@ -165,4 +166,3 @@ export default function AdminKudosAnalyzer() {
     </Card>
   );
 }
-

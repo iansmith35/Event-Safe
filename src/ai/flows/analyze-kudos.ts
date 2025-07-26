@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -10,9 +11,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-
-export const KudosTagsSchema = z.enum(['Helpful', 'Respectful', 'Communicative', 'Positive']);
-export type KudosTags = z.infer<typeof KudosTagsSchema>;
+import { KudosTagsSchema } from '@/types/kudos';
 
 const AnalyzeKudosInputSchema = z.object({
   guestId: z.string().describe('The ID of the guest to analyze kudos for.'),
