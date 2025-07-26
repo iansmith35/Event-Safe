@@ -6,13 +6,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Camera, Upload, Check, AlertCircle, CalendarIcon, ShieldQuestion } from 'lucide-react';
+import { Loader2, Camera, Upload, Check, AlertCircle, CalendarIcon, ShieldQuestion, UserCheck } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar } from './ui/calendar';
 import { format } from 'date-fns';
 import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
+import { checkDuplicateGuest, type CheckDuplicateGuestOutput } from '@/ai/flows/check-duplicate-guest';
 
 export default function SignupForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +22,8 @@ export default function SignupForm() {
   const [dob, setDob] = useState<Date | undefined>();
   const [consent, setConsent] = useState(false);
   const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
+  const [duplicateCheckResult, setDuplicateCheckResult] = useState<CheckDuplicateGuestOutput | null>(null);
+  const [isCheckingDuplicate, setIsCheckingDuplicate] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
@@ -54,12 +57,37 @@ export default function SignupForm() {
     
     return () => {
         if (videoRef.current && videoRef.current.srcObject) {
-            const stream = video.current.srcObject as MediaStream;
+            const stream = videoRef.current.srcObject as MediaStream;
             stream.getTracks().forEach(track => track.stop());
         }
     }
 
   }, [toast]);
+  
+  const runDuplicateCheck = async (selfieDataUrl: string) => {
+    if (!dob) {
+        toast({ variant: "destructive", title: "Please select your date of birth first."});
+        return;
+    }
+    setIsCheckingDuplicate(true);
+    setDuplicateCheckResult(null);
+    try {
+        const result = await checkDuplicateGuest({ selfieDataUri: selfieDataUrl, dob: dob.toISOString() });
+        setDuplicateCheckResult(result);
+        if (result.isPotentialDuplicate) {
+             toast({
+                variant: "destructive",
+                title: "Potential Duplicate Account",
+                description: "Your account has been flagged for manual review. You can still proceed.",
+             });
+        }
+    } catch (error) {
+        console.error("Duplicate check failed:", error);
+        toast({ variant: "destructive", title: "Could not complete duplicate check." });
+    } finally {
+        setIsCheckingDuplicate(false);
+    }
+  }
 
   const takeSelfie = () => {
     if (videoRef.current && canvasRef.current) {
@@ -72,6 +100,7 @@ export default function SignupForm() {
         context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
         const dataUrl = canvas.toDataURL('image/jpeg');
         setSelfie(dataUrl);
+        runDuplicateCheck(dataUrl);
       }
     }
   };
@@ -81,7 +110,9 @@ export default function SignupForm() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelfie(e.target?.result as string);
+        const dataUrl = e.target?.result as string;
+        setSelfie(dataUrl);
+        runDuplicateCheck(dataUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -115,6 +146,15 @@ export default function SignupForm() {
                 <CardDescription>Your payment was successful and your ID is being verified.</CardDescription>
             </CardHeader>
             <CardContent className='text-center space-y-4'>
+                 {duplicateCheckResult?.isPotentialDuplicate && (
+                    <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Account Flagged</AlertTitle>
+                        <AlertDescription>
+                            Your account requires manual review before it can be fully activated due to a potential policy conflict. You will be notified of the outcome.
+                        </AlertDescription>
+                    </Alert>
+                )}
                 <p>You will be notified once verification is complete. You can now close this page or return to the dashboard.</p>
                 <Button asChild>
                     <Link href="/">Go to Dashboard</Link>
@@ -155,19 +195,31 @@ export default function SignupForm() {
               )}
 
               <div className="flex flex-wrap gap-2 w-full">
-                <Button type="button" onClick={takeSelfie} disabled={!hasCameraPermission || !!selfie} className="flex-1">
+                <Button type="button" onClick={takeSelfie} disabled={!hasCameraPermission || !!selfie || !dob} className="flex-1">
                   <Camera className="mr-2" /> Take Selfie
                 </Button>
-                <Button asChild variant="outline" className="flex-1">
+                <Button asChild variant="outline" className="flex-1" disabled={!dob}>
                     <label htmlFor="selfie-upload">
                         <Upload className="mr-2" /> Upload Photo
                         <input id="selfie-upload" type="file" accept="image/*" className="sr-only" onChange={handleFileChange} />
                     </label>
                 </Button>
               </div>
-              {selfie && <p className="text-sm text-chart-2 flex items-center"><Check className="mr-1 h-4 w-4" /> Selfie captured. Looks good!</p>}
+              {selfie && !isCheckingDuplicate && !duplicateCheckResult && <p className="text-sm text-chart-2 flex items-center"><Check className="mr-1 h-4 w-4" /> Selfie captured. Looks good!</p>}
+              {isCheckingDuplicate && <p className="text-sm text-muted-foreground flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Running security checks...</p>}
+              {duplicateCheckResult && (
+                <Alert variant={duplicateCheckResult.isPotentialDuplicate ? "destructive" : "default"} className="text-left">
+                    {duplicateCheckResult.isPotentialDuplicate ? <AlertCircle className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
+                    <AlertTitle>
+                        {duplicateCheckResult.isPotentialDuplicate ? "Potential Duplicate Detected" : "Security Check Passed"}
+                    </AlertTitle>
+                    <AlertDescription>
+                        {duplicateCheckResult.reason}
+                    </AlertDescription>
+                </Alert>
+              )}
             </div>
-            <p className="text-xs text-muted-foreground mt-2">Make sure your face is clearly visible, with no filters or obstructions.</p>
+            <p className="text-xs text-muted-foreground mt-2">Make sure your face is clearly visible, with no filters or obstructions. You must select your date of birth before providing a selfie.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -182,6 +234,7 @@ export default function SignupForm() {
                   <Button
                     variant={"outline"}
                     className="w-full justify-start text-left font-normal"
+                    disabled={!!selfie}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {dob ? format(dob, "PPP") : <span>Pick a date</span>}
@@ -220,8 +273,8 @@ export default function SignupForm() {
             </div>
           </div>
           
-          <div className="flex items-start space-x-2 pt-2">
-            <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked as boolean)} />
+          <div className="flex items-start space-x-3 pt-2">
+            <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked as boolean)} className="mt-1" />
             <div className="grid gap-1.5 leading-none">
               <label
                 htmlFor="consent"
@@ -230,12 +283,12 @@ export default function SignupForm() {
                 I agree to the terms and conditions
               </label>
               <p className="text-sm text-muted-foreground">
-                I consent to the use of my photo and data for verification and security purposes as per the safety policy.
+                I consent to the use of my data for verification, retaining anonymized data upon deletion, and using biometrics to prevent duplicate accounts, as per the safety policy.
               </p>
             </div>
           </div>
 
-          <Button type="submit" disabled={isLoading || !selfie || !consent || !dob} className="w-full">
+          <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Pay £3 and Create Account
           </Button>
