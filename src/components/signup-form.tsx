@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRef, useState, useEffect } from 'react';
@@ -212,7 +213,7 @@ export default function SignupForm() {
                     {duplicateCheckResult.isPotentialDuplicate ? <AlertCircle className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
                     <AlertTitle>
                         {duplicateCheckResult.isPotentialDuplicate ? "Potential Duplicate Detected" : "Security Check Passed"}
-                    </AlertTitle>
+                    </Title>
                     <AlertDescription>
                         {duplicateCheckResult.reason}
                     </AlertDescription>
@@ -283,7 +284,7 @@ export default function SignupForm() {
                 I agree to the terms and conditions
               </label>
               <p className="text-sm text-muted-foreground">
-                I consent to the use of my data for verification, retaining anonymized data upon deletion, and using biometrics to prevent duplicate accounts, as per the safety policy.
+                I consent to the use of my data for verification and using biometrics to prevent duplicate accounts. For fraud prevention, anonymized data may be retained after deletion for up to 12 months to prevent re-entry attempts under false identity.
               </p>
             </div>
           </div>
