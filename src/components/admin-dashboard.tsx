@@ -6,8 +6,9 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldLock } from "lucide-react";
 import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -36,10 +37,13 @@ export default function AdminDashboard() {
       )}
 
       <Tabs defaultValue="report-analysis" className="w-full">
-        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 h-auto sm:h-10">
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-4 h-auto sm:h-10">
           <TabsTrigger value="report-analysis">AI Report Analysis</TabsTrigger>
           <TabsTrigger value="status-suggester">Status Change Suggester</TabsTrigger>
           <TabsTrigger value="appeal-handler">Appeal Request Handler</TabsTrigger>
+          <TabsTrigger value="ticketing" className="flex items-center gap-2">
+            <Ticket className="h-4 w-4" /> Event Ticketing
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="report-analysis">
           <AdminReportAnalysis />
@@ -49,6 +53,21 @@ export default function AdminDashboard() {
         </TabsContent>
         <TabsContent value="appeal-handler">
           <AdminAppealHandler />
+        </TabsContent>
+         <TabsContent value="ticketing">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><ShieldLock /> Smart Ticketing</CardTitle>
+              <CardDescription>Set ticket conditions based on guest scores and manage event access securely.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center py-12">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Upgrade to Enable Smart Ticketing</h3>
+                    <p className="text-muted-foreground mt-2">This feature is currently inactive. Unlock score-based access control, automated flagging, and advanced event management by upgrading your plan.</p>
+                    <Button className="mt-6">Upgrade Plan</Button>
+                </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
