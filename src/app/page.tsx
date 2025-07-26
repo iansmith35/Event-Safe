@@ -18,6 +18,7 @@ import {
   Menu,
   LogIn,
   UserPlus,
+  Bell,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GuestView from '@/components/guest-view';
@@ -101,6 +102,10 @@ export default function Home() {
            <header className="sticky top-0 z-10 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b h-[65px]">
             <div></div>
              <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon">
+                <Bell className="h-5 w-5" />
+                <span className="sr-only">Notifications</span>
+              </Button>
               <Button asChild variant="secondary">
                 <Link href="/signup">
                   <UserPlus />

@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Scan, Star, Heart } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -81,6 +81,17 @@ export default function GuestView() {
           </CardContent>
         </Card>
 
+        <Card className="border-destructive/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-destructive"><Siren /> Silent SOS</CardTitle>
+            <CardDescription>Discreetly alert staff to an urgent issue.</CardDescription>
+          </CardHeader>
+          <CardContent className="text-center py-4">
+            <p className="text-muted-foreground text-sm mb-4">Only use this in a genuine emergency. Misuse will result in a red status.</p>
+            <Button variant="destructive" className="w-full">Request Assistance</Button>
+          </CardContent>
+        </Card>
+
          <Card>
             <CardHeader>
                 <CardTitle>Account Details</CardTitle>
@@ -107,7 +118,7 @@ export default function GuestView() {
           <CardContent className="text-center py-8">
             <div className="max-w-md mx-auto">
               <h3 className="text-xl font-semibold">Activate Icebreaker</h3>
-              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature to send interest to other guests. This feature is only available at participating events.</p>
+              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature to send interest to other guests. To prevent spam, you can send two messages which cannot be replied to. A third attempt will block you for 24h.</p>
               <Button className="mt-6">Upgrade (£1.50/month)</Button>
             </div>
           </CardContent>
