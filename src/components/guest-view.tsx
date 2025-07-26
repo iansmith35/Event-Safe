@@ -63,7 +63,7 @@ export default function GuestView() {
   const isAppealDisabled = status === 'Green';
 
   return (
-    <div className="grid gap-8 md:grid-cols-3">
+    <div className="grid gap-8 md:grid-cols-3 noselect">
       {/* Left Column */}
       <div className="md:col-span-1 space-y-8">
         <Card>
@@ -118,7 +118,7 @@ export default function GuestView() {
           <CardContent className="text-center py-8">
             <div className="max-w-md mx-auto">
               <h3 className="text-xl font-semibold">Activate Icebreaker</h3>
-              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature to send interest to other guests. To prevent spam, you can send two messages which cannot be replied to. A third attempt will block you for 24h.</p>
+              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature. To prevent spam or harassment, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.</p>
               <Button className="mt-6">Upgrade (£1.50/month)</Button>
             </div>
           </CardContent>
@@ -149,7 +149,7 @@ export default function GuestView() {
                     <Download className="mr-2" /> Download Pass
                 </Button>
                  <Button variant="outline">
-                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55,.58,2.14,0s.59,1.54,0,2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55,.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
                     Save to Google Wallet
                 </Button>
                 <Button variant="outline">
