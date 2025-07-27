@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -17,12 +17,13 @@ import {
 } from "@/components/ui/table"
 import { Textarea } from "./ui/textarea";
 import { Badge } from "./ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
-import { Switch } from "./ui/switch";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -61,6 +62,16 @@ const kudosHistory = [
     { id: "KUD-003", date: "2023-12-31", tag: "Communicative", comment: "Reported a safety concern clearly."}
 ];
 
+const eventTeam = {
+  host: "HostPseudonym",
+  venue: "The Velvet Rope",
+  volunteers: [
+    { id: 'vol-1', pseudonym: 'SafetyFirst', role: 'Safety Officer' },
+    { id: 'vol-2', pseudonym: 'GateKeeper', role: 'Door Staff' },
+    { id: 'vol-3', pseudonym: 'VibeSetter', role: 'Ambiance' },
+  ]
+}
+
 export default function GuestView() {
   const [status] = useState<Status>('Green');
   const currentStatus = statusConfig[status];
@@ -87,7 +98,7 @@ export default function GuestView() {
 
         <Card className="border-destructive/50">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-destructive"><Siren /> Silent SOS</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-destructive"><Siren /></CardTitle>
             <CardDescription>Discreetly alert staff to an urgent issue.</CardDescription>
           </CardHeader>
           <CardContent className="text-center py-4">
@@ -118,7 +129,7 @@ export default function GuestView() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Lightbulb /> Premium Feature: Icebreaker</CardTitle>
+            <CardTitle className="flex items-center gap-2"></CardTitle>
             <CardDescription>Find and connect with other guests at an event.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -170,6 +181,28 @@ export default function GuestView() {
                 </Button>
             </div>
           </CardContent>
+          <CardContent>
+            <Separator className="mb-4" />
+            <div className="space-y-4">
+                <h3 className="font-semibold flex items-center gap-2"><Users /></h3>
+                <div className="p-4 bg-muted/50 rounded-lg space-y-3">
+                    <p className="text-sm"><strong>Host:</strong> {eventTeam.host}</p>
+                    <p className="text-sm"><strong>Venue:</strong> {eventTeam.venue}</p>
+                    <div>
+                        <p className="text-sm font-semibold">Verified Volunteers:</p>
+                        <ul className="list-disc list-inside text-sm text-muted-foreground pl-2">
+                            {eventTeam.volunteers.map(v => (
+                                <li key={v.id}>{v.pseudonym} ({v.role})</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 text-xs text-chart-2 font-medium">
+                        <ShieldCheck className="h-4 w-4" />
+                        <span>This event has verified staff/volunteers on record.</span>
+                    </div>
+                </div>
+            </div>
+          </CardContent>
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
@@ -177,8 +210,8 @@ export default function GuestView() {
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
-            <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
-            <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Events</TabsTrigger>
+            <TabsTrigger value="ratings" className="flex items-center gap-2"></TabsTrigger>
+            <TabsTrigger value="ticketing" className="flex items-center gap-2"></TabsTrigger>
           </TabsList>
           <TabsContent value="history">
             <Card>
@@ -255,7 +288,7 @@ export default function GuestView() {
           <TabsContent value="kudos">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><ThumbsUp className="text-primary"/> Guest Kudos</CardTitle>
+                    <CardTitle className="flex items-center gap-2"></CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -287,7 +320,7 @@ export default function GuestView() {
           <TabsContent value="ratings">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Star /> Venue & Guest Ratings</CardTitle>
+                    <CardTitle className="flex items-center gap-2"></CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-center py-12">
@@ -302,7 +335,7 @@ export default function GuestView() {
           <TabsContent value="ticketing">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Ticket /> Event Discovery</CardTitle>
+                    <CardTitle className="flex items-center gap-2"></CardTitle>
                     <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4 pt-6">
