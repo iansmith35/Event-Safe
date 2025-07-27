@@ -14,14 +14,8 @@ import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
 
 const eventTypes = [
-    "Sex-Positive / Kink",
-    "Private Play",
-    "Club Night / Festival",
-    "Workshop",
-    "Vanilla / Public Gathering",
-    "Commercial / Corporate",
-    "Sports",
-    "Other"
+    "Adult (Sex-Positive)",
+    "Vanilla (Non-Sexual/General)",
 ];
 
 export default function HostSignupForm() {
@@ -84,10 +78,10 @@ export default function HostSignupForm() {
                     <Input id="venue-name" placeholder="e.g., The Safe Space" required />
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="venue-type">Primary Event Type</Label>
+                    <Label htmlFor="venue-type">Primary Event Classification</Label>
                     <Select required>
                         <SelectTrigger>
-                            <SelectValue placeholder="Select event type..." />
+                            <SelectValue placeholder="Select event classification..." />
                         </SelectTrigger>
                         <SelectContent>
                             {eventTypes.map(type => <SelectItem key={type} value={type}>{type}</SelectItem>)}
@@ -111,7 +105,7 @@ export default function HostSignupForm() {
                         </label>
                     </Button>
                 </div>
-                 <p className="text-xs text-muted-foreground mt-2">Upload proof of your legitimacy, such as a business license, event listing screenshot, or venue rental agreement.</p>
+                 <p className="text-xs text-muted-foreground mt-2">Upload proof of legitimacy (e.g., business license, rental agreement). For adult events, this must be a valid license to host sex-positive activities.</p>
             </div>
 
 
@@ -122,10 +116,10 @@ export default function HostSignupForm() {
                     htmlFor="host-consent"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                    I agree to the terms and conditions for EventSafe Hosts.
+                    I agree to the EventSafe Host <Link href="#" className="underline">terms and conditions</Link>.
                 </label>
                 <p className="text-sm text-muted-foreground">
-                    I understand that I am responsible for the safety and security of my events, and I will use the EventSafe platform in accordance with its policies.
+                    I understand I am responsible for legal compliance, including venue licensing for adult events, and that EventSafe is a facilitation tool only.
                 </p>
                 </div>
             </div>
