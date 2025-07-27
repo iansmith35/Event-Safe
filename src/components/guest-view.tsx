@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -19,6 +19,7 @@ import { Textarea } from "./ui/textarea";
 import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -290,15 +291,17 @@ export default function GuestView() {
           <TabsContent value="ticketing">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Ticket /> EventSafe Pay</CardTitle>
-                    <CardDescription>Browse events, buy tickets, and manage your payments securely.</CardDescription>
+                    <CardTitle className="flex items-center gap-2"><Ticket /> Event Discovery</CardTitle>
+                    <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
                 </CardHeader>
-                <CardContent className="text-center py-12">
-                    <div className="max-w-md mx-auto">
-                        <h3 className="text-xl font-semibold">This Feature is Coming Soon</h3>
-                        <p className="text-muted-foreground mt-2">The event ticketing marketplace is currently inactive. Soon, you will be able to browse events and get tickets based on your EventSafe status.</p>
-                        <Button className="mt-6" disabled>Browse Events</Button>
+                <CardContent className="space-y-4 pt-6">
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                        <Input placeholder="Search by event name, venue, or city..." className="pl-10"/>
                     </div>
+                    <p className="text-xs text-muted-foreground text-center">
+                        See an event that isn't on EventSafe? Ask the host why they aren't part of the network.
+                    </p>
                 </CardContent>
             </Card>
           </TabsContent>
