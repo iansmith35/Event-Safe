@@ -9,3 +9,4 @@ import '@/ai/flows/check-duplicate-guest.ts';
 import '@/ai/flows/analyze-kudos.ts';
 import '@/ai/flows/get-contextual-reports.ts';
 import '@/ai/flows/get-seasonal-theme.ts';
+import '@/ai/flows/rebecca-chat.ts';

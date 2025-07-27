@@ -24,6 +24,7 @@ import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import RebeccaChatbot from "./rebecca-chatbot";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -96,6 +97,8 @@ export default function GuestView() {
           </CardContent>
         </Card>
 
+        <RebeccaChatbot />
+
         <Card className="border-destructive/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-destructive"><Siren /></CardTitle>
@@ -129,7 +132,7 @@ export default function GuestView() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"></CardTitle>
+            <CardTitle className="flex items-center gap-2"><Lightbulb /> Icebreaker</CardTitle>
             <CardDescription>Find and connect with other guests at an event.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -140,7 +143,7 @@ export default function GuestView() {
                 <Switch id="icebreaker-toggle" defaultChecked />
             </div>
             <p className="text-xs text-muted-foreground">
-              Opt-in to use our geofenced facial matching feature. To prevent spam, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.
+              This premium feature allows you to use our geofenced facial matching. To prevent spam, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.
             </p>
           </CardContent>
         </Card>
@@ -184,7 +187,7 @@ export default function GuestView() {
           <CardContent>
             <Separator className="mb-4" />
             <div className="space-y-4">
-                <h3 className="font-semibold flex items-center gap-2"><Users /></h3>
+                <h3 className="font-semibold flex items-center gap-2"><Users /> Event Team</h3>
                 <div className="p-4 bg-muted/50 rounded-lg space-y-3">
                     <p className="text-sm"><strong>Host:</strong> {eventTeam.host}</p>
                     <p className="text-sm"><strong>Venue:</strong> {eventTeam.venue}</p>
@@ -210,8 +213,8 @@ export default function GuestView() {
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
-            <TabsTrigger value="ratings" className="flex items-center gap-2"></TabsTrigger>
-            <TabsTrigger value="ticketing" className="flex items-center gap-2"></TabsTrigger>
+            <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
+            <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Find Events</TabsTrigger>
           </TabsList>
           <TabsContent value="history">
             <Card>
@@ -288,7 +291,7 @@ export default function GuestView() {
           <TabsContent value="kudos">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"></CardTitle>
+                    <CardTitle className="flex items-center gap-2"><ThumbsUp className="h-5 w-5" /> My Kudos</CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -320,7 +323,7 @@ export default function GuestView() {
           <TabsContent value="ratings">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"></CardTitle>
+                    <CardTitle className="flex items-center gap-2"><Star className="h-5 w-5" /> Ratings & Analytics</CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-center py-12">
@@ -335,7 +338,7 @@ export default function GuestView() {
           <TabsContent value="ticketing">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"></CardTitle>
+                    <CardTitle className="flex items-center gap-2"><Ticket className="h-5 w-5" /> Find Events</CardTitle>
                     <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4 pt-6">
@@ -354,5 +357,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
