@@ -158,7 +158,7 @@ export default function SignupForm() {
                 )}
                 <p>You will be notified once verification is complete. You can now close this page or return to the dashboard.</p>
                 <Button asChild>
-                    <Link href="/">Go to Dashboard</Link>
+                    <Link href="/dashboard">Go to Dashboard</Link>
                 </Button>
             </CardContent>
         </Card>
@@ -287,6 +287,11 @@ export default function SignupForm() {
                 By attending or hosting an EventSafe event, you agree to optional location verification to protect against fraudulent claims and unauthorized activity. All location data is stored securely and anonymized for analytics after 30 days unless legally required to retain. For fraud prevention, anonymized data may be retained after deletion for up to 12 months to prevent re-entry attempts under false identity. EventSafe only allows reports tied to verified event attendance. Reports not linked to an event via guest check-in will be rejected automatically. Venue-type also governs what level of information can be accessed in order to maintain safety without breaching event privacy boundaries.
               </p>
             </div>
+          </div>
+          
+          <div className="space-y-2">
+              <Label htmlFor="promo-code">Promo Code</Label>
+              <Input id="promo-code" placeholder="Enter discount code" />
           </div>
 
           <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
