@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
+import FunCourt from "./fun-court";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -136,6 +137,7 @@ export default function AdminDashboard() {
               </Card>
             </div>
              <SuggestionBox />
+             <FunCourt />
         </div>
         <div className="md:col-span-1">
           <SocialFeed />
