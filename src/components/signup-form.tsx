@@ -119,26 +119,6 @@ export default function SignupForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    toast({
-      title: "Processing Payment...",
-      description: "Redirecting to Stripe to complete your £3 signup fee.",
-    });
-    // Simulate Stripe checkout & ID verification
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsPaid(true);
-       toast({
-        title: "Payment Successful!",
-        description: "Your account is created. Please check your dashboard.",
-      });
-      // In a real app, you would handle webhooks from Stripe and the ID provider
-      // to update Firestore and set the user's status to 'verified'.
-    }, 3000);
-  };
-
   if (isPaid) {
     return (
         <Card>
@@ -172,7 +152,7 @@ export default function SignupForm() {
         <CardDescription>All fields are required to create your secure event pass.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="selfie">Your Selfie</Label>
             <div className="w-full p-2 border-dashed border-2 rounded-lg flex flex-col items-center justify-center gap-4">
@@ -213,7 +193,7 @@ export default function SignupForm() {
                     {duplicateCheckResult.isPotentialDuplicate ? <AlertCircle className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
                     <AlertTitle>
                         {duplicateCheckResult.isPotentialDuplicate ? "Potential Duplicate Detected" : "Security Check Passed"}
-                    </Title>
+                    </AlertTitle>
                     <AlertDescription>
                         {duplicateCheckResult.reason}
                     </AlertDescription>
@@ -294,12 +274,16 @@ export default function SignupForm() {
               <Input id="promo-code" placeholder="Enter discount code" />
           </div>
 
-          <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Pay £3 and Create Account
+          <Button asChild disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
+            <Link href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00">
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Proceed to Payment
+            </Link>
           </Button>
         </form>
       </CardContent>
     </Card>
   );
 }
+
+    
