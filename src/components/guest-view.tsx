@@ -83,6 +83,24 @@ export default function GuestView() {
       {/* Left Column */}
       <div className="md:col-span-1 space-y-8">
         <Card>
+            <CardHeader>
+                <CardTitle>Account Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="flex items-center gap-4">
+                    <Avatar className="w-16 h-16">
+                        <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
+                        <AvatarFallback>G</AvatarFallback>
+                    </Avatar>
+                    <div>
+                        <p className="font-bold text-lg">AgentIndigo</p>
+                        <p className="text-sm text-muted-foreground">ESG-928301</p>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
+        
+        <Card>
           <CardHeader>
             <CardTitle>Your Status</CardTitle>
           </CardHeader>
@@ -108,24 +126,6 @@ export default function GuestView() {
             <p className="text-muted-foreground text-sm mb-4">Only use this in a genuine emergency. Misuse will result in a red status.</p>
             <Button variant="destructive" className="w-full">Request Assistance</Button>
           </CardContent>
-        </Card>
-
-         <Card>
-            <CardHeader>
-                <CardTitle>Account Details</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="flex items-center gap-4">
-                    <Avatar className="w-16 h-16">
-                        <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
-                        <AvatarFallback>G</AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <p className="font-bold text-lg">AgentIndigo</p>
-                        <p className="text-sm text-muted-foreground">ESG-928301</p>
-                    </div>
-                </div>
-            </CardContent>
         </Card>
         
         <SocialFeed />
