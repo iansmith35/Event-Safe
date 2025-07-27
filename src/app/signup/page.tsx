@@ -1,6 +1,7 @@
 
 import SignupForm from "@/components/signup-form";
 import { Logo } from "@/components/logo";
+import React from 'react';
 
 export default function SignupPage() {
   return (

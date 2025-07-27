@@ -2,6 +2,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -16,7 +17,7 @@ import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
 import { checkDuplicateGuest, type CheckDuplicateGuestOutput } from '@/ai/flows/check-duplicate-guest';
 
-export default function SignupForm() {
+function SignupFormComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [selfie, setSelfie] = useState<string | null>(null);
@@ -28,6 +29,13 @@ export default function SignupForm() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('status') === 'success') {
+      setIsPaid(true);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const getCameraPermission = async () => {
@@ -118,16 +126,6 @@ export default function SignupForm() {
       reader.readAsDataURL(file);
     }
   };
-
-  const handlePayment = () => {
-    setIsLoading(true);
-    // In a real app, this would redirect to Stripe.
-    // We simulate the payment and redirect back.
-    setTimeout(() => {
-        setIsLoading(false);
-        setIsPaid(true);
-    }, 1500);
-  }
 
   if (isPaid) {
     return (
@@ -284,9 +282,8 @@ export default function SignupForm() {
               <Input id="promo-code" placeholder="Enter discount code" />
           </div>
 
-          <Button type="button" onClick={handlePayment} disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
-            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            <a href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00" target="_blank" rel="noopener noreferrer">
+          <Button asChild disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
+            <a href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00" rel="noopener noreferrer">
               Proceed to Payment
             </a>
           </Button>
@@ -294,4 +291,13 @@ export default function SignupForm() {
       </CardContent>
     </Card>
   );
+}
+
+// React Suspense is required for useSearchParams, so we wrap the component
+export default function SignupForm() {
+    return (
+        <React.Suspense fallback={<div>Loading...</div>}>
+            <SignupFormComponent />
+        </React.Suspense>
+    )
 }
