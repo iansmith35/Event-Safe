@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -353,6 +353,19 @@ export default function GuestView() {
             </Card>
           </TabsContent>
         </Tabs>
+         <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><ShoppingCart /> EventSafe Merch</CardTitle>
+                <CardDescription>Show your support with official gear or get personalized items.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center py-12">
+                <div className="max-w-md mx-auto">
+                    <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
+                    <p className="text-muted-foreground mt-2">Personalized kink-wear and event-branded apparel are on the way. Access to certain items will be based on your event history to ensure community privacy and context.</p>
+                    <Button className="mt-6" disabled>Notify Me</Button>
+                </div>
+            </CardContent>
+        </Card>
       </div>
     </div>
   );
