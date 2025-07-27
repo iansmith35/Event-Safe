@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -296,8 +296,10 @@ function SignupFormComponent() {
 // React Suspense is required for useSearchParams, so we wrap the component
 export default function SignupForm() {
     return (
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
             <SignupFormComponent />
-        </React.Suspense>
+        </Suspense>
     )
 }
+
+    
