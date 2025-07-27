@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   SidebarProvider,
   Sidebar,
@@ -16,8 +16,8 @@ import {
   LayoutDashboard,
   User,
   Menu,
-  LogIn,
   UserPlus,
+  Loader2,
 } from 'lucide-react';
 import GuestView from '@/components/guest-view';
 import AdminDashboard from '@/components/admin-dashboard';
@@ -25,6 +25,11 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
+import { auth } from '@/lib/firebase';
+import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+
+const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
   const handleMenuClick = (view: string) => {
@@ -73,7 +78,37 @@ function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: st
 export default function DashboardPage() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<FirebaseUser | null>(null);
   const isMobile = useIsMobile();
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        if (user.email === ADMIN_EMAIL) {
+          setActiveView('admin');
+        } else {
+          setActiveView('guest');
+        }
+      } else {
+        // If no user, redirect to login
+        router.push('/login');
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>
