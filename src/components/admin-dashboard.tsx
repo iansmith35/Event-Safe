@@ -123,12 +123,12 @@ export default function AdminDashboard() {
               <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Megaphone /> AI Event Promotion</CardTitle>
-                    <CardDescription>Let our AI promote your events on social media to drive attendance.</CardDescription>
+                    <CardDescription>Use AI to promote your events and drive attendance.</CardDescription>
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-lg mx-auto">
                           <h3 className="text-xl font-semibold">Activate AI Social Media Promoter</h3>
-                          <p className="text-muted-foreground mt-2">Fill out a simple event profile and our AI will generate engaging social media posts to promote your event. This is a premium add-on after a 3-month free trial period to help you get started and show you the value.</p>
+                          <p className="text-muted-foreground mt-2">Our promoter has two tiers. The basic tier allows you to post your event on the EventSafe feed. The premium tier unlocks continuous, AI-driven social media promotion that creates trendy, engaging posts up until your event date to maximize visibility.</p>
                           <Button className="mt-6">Start Your Free Trial</Button>
                       </div>
                   </CardContent>
@@ -142,5 +142,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
-    
