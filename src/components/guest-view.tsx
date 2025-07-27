@@ -325,7 +325,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star className="h-5 w-5" /> Ratings & Analytics</CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
@@ -340,7 +340,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Ticket className="h-5 w-5" /> Find Events</CardTitle>
                     <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="space-y-4 pt-6">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -356,12 +356,12 @@ export default function GuestView() {
          <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><ShoppingCart /> EventSafe Merch</CardTitle>
-                <CardDescription>Show your support with official gear or get personalized items.</CardDescription>
+                <CardDescription>Get official gear, event-specific wear, or personalized items.</CardDescription>
             </CardHeader>
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
-                    <p className="text-muted-foreground mt-2">Personalized kink-wear and event-branded apparel are on the way. Access to certain items will be based on your event history to ensure community privacy and context.</p>
+                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event, or items from exclusive collections like 'Kinky Brizzle'. Access to certain collections is based on your verified event history to ensure community privacy and context.</p>
                     <Button className="mt-6" disabled>Notify Me</Button>
                 </div>
             </CardContent>

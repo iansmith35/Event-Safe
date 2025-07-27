@@ -95,17 +95,31 @@ export default function HostSignupForm() {
                 <Textarea id="venue-address" required placeholder="123 Safety Lane, Secure City, SC 45678"/>
             </div>
             
-            <div className="space-y-2">
-                <Label htmlFor="venue-proof">Venue Legitimacy</Label>
-                <div className="w-full p-2 border-dashed border-2 rounded-lg flex flex-col items-center justify-center gap-2">
-                     <Button asChild variant="outline" className="w-full">
-                        <label htmlFor="venue-upload">
-                            <Upload className="mr-2" /> Upload License or Event Listing
-                            <input id="venue-upload" type="file" accept="image/*,application/pdf" className="sr-only" />
-                        </label>
-                    </Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <Label htmlFor="venue-proof">Venue Legitimacy</Label>
+                    <div className="w-full p-2 border-dashed border-2 rounded-lg flex flex-col items-center justify-center gap-2">
+                        <Button asChild variant="outline" className="w-full">
+                            <label htmlFor="venue-upload">
+                                <Upload className="mr-2" /> Upload License or Listing
+                                <input id="venue-upload" type="file" accept="image/*,application/pdf" className="sr-only" />
+                            </label>
+                        </Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">Upload proof of legitimacy (e.g., business license, rental agreement). For adult events, this must be a valid license to host sex-positive activities.</p>
                 </div>
-                 <p className="text-xs text-muted-foreground mt-2">Upload proof of legitimacy (e.g., business license, rental agreement). For adult events, this must be a valid license to host sex-positive activities.</p>
+                 <div className="space-y-2">
+                    <Label htmlFor="venue-logo">Venue Logo</Label>
+                    <div className="w-full p-2 border-dashed border-2 rounded-lg flex flex-col items-center justify-center gap-2">
+                        <Button asChild variant="outline" className="w-full">
+                            <label htmlFor="logo-upload">
+                                <Upload className="mr-2" /> Upload Logo
+                                <input id="logo-upload" type="file" accept="image/*" className="sr-only" />
+                            </label>
+                        </Button>
+                    </div>
+                     <p className="text-xs text-muted-foreground mt-1">Upload a logo for your venue or event series. This can be used for branding on merchandise.</p>
+                </div>
             </div>
 
 
