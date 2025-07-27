@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { getSeasonalTheme } from '@/ai/flows/get-seasonal-theme';
-import { Fireworks } from 'fireworks-js/dist/react';
+import SeasonalEffects from '@/components/seasonal-effects';
 
 export const metadata: Metadata = {
   title: 'Event Traffic',
@@ -31,25 +31,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        {theme === 'new-year' && (
-          <Fireworks
-            options={{
-                rocketsPoint: {
-                    min: 0,
-                    max: 100
-                },
-                opacity: 0.5,
-            }}
-            style={{
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              position: 'fixed',
-              zIndex: -1,
-            }}
-          />
-        )}
+        <SeasonalEffects theme={theme} />
         {children}
         <Toaster />
       </body>
