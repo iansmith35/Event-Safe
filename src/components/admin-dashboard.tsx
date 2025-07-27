@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
           <TabsTrigger value="report-analysis">AI Report Analysis</TabsTrigger>
           <TabsTrigger value="status-suggester">Status Change Suggester</TabsTrigger>
           <TabsTrigger value="appeal-handler">Appeal Request Handler</TabsTrigger>
-          <TabsTrigger value="kudos-analyzer">Kudos Analyzer</TabsTrigger>
+          <TabsTrigger value="kudos-analyzer"><div className="flex items-center gap-2"><ThumbsUp className="h-4 w-4" /> Kudos Analyzer</div></TabsTrigger>
           <TabsTrigger value="ticketing" className="flex items-center gap-2">
             <Ticket className="h-4 w-4" /> EventSafe Pay
           </TabsTrigger>
