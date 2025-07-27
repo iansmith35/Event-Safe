@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
 import SocialFeed from "./social-feed";
+import SuggestionBox from "./suggestion-box";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -69,9 +70,9 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Upgrade to Pro Safety Package</h3>
-                    <p className="text-muted-foreground mt-2">This feature is part of the Pro Safety Package. Unlock score-based access control, ticket tracking, staff fraud detection, fire logs, and guest GPS.</p>
-                    <Button className="mt-6">Upgrade Plan (£20/month)</Button>
+                    <h3 className="text-xl font-semibold">Coming Soon: Pro Safety Package</h3>
+                    <p className="text-muted-foreground mt-2">This feature is part of the upcoming Pro Safety Package. Unlock score-based access control, ticket tracking, staff fraud detection, fire logs, and guest GPS.</p>
+                    <Button className="mt-6" disabled>Notify Me</Button>
                 </div>
             </CardContent>
           </Card>
@@ -88,9 +89,9 @@ export default function AdminDashboard() {
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Activate Event Reviews</h3>
+                          <h3 className="text-xl font-semibold">Coming Soon: Event Reviews</h3>
                           <p className="text-muted-foreground mt-2">Get a color-coded summary of guest behavior and allow staff to add private notes and tags to maintain a high-quality guest list.</p>
-                          <Button className="mt-6">Upgrade (£10/month)</Button>
+                          <Button className="mt-6" disabled>Notify Me</Button>
                       </div>
                   </CardContent>
               </Card>
@@ -101,9 +102,9 @@ export default function AdminDashboard() {
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Activate Staff Roles</h3>
+                          <h3 className="text-xl font-semibold">Coming Soon: Staff Roles</h3>
                           <p className="text-muted-foreground mt-2">Create roles like 'Door', 'Security', and 'Admin' to control access to scanning, note-taking, and administrative functions.</p>
-                          <Button className="mt-6">Upgrade (£5/month)</Button>
+                          <Button className="mt-6" disabled>Notify Me</Button>
                       </div>
                   </CardContent>
               </Card>
@@ -114,9 +115,9 @@ export default function AdminDashboard() {
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Monetize Trust Data</h3>
+                          <h3 className="text-xl font-semibold">Coming Soon: Trust Data</h3>
                           <p className="text-muted-foreground mt-2">Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</p>
-                          <Button className="mt-6">Activate this Feature</Button>
+                          <Button className="mt-6" disabled>Notify Me</Button>
                       </div>
                   </CardContent>
               </Card>
@@ -127,13 +128,14 @@ export default function AdminDashboard() {
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-lg mx-auto">
-                          <h3 className="text-xl font-semibold">Activate AI Social Media Promoter</h3>
+                          <h3 className="text-xl font-semibold">Coming Soon: AI Social Media Promoter</h3>
                           <p className="text-muted-foreground mt-2">Our promoter has two tiers. The basic tier allows you to post your event on the EventSafe feed. The premium tier unlocks continuous, AI-driven social media promotion that creates trendy, engaging posts up until your event date to maximize visibility.</p>
-                          <Button className="mt-6">Start Your Free Trial</Button>
+                          <Button className="mt-6" disabled>Notify Me</Button>
                       </div>
                   </CardContent>
               </Card>
             </div>
+             <SuggestionBox />
         </div>
         <div className="md:col-span-1">
           <SocialFeed />
@@ -142,5 +144,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
-    

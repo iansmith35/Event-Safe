@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -21,6 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import SocialFeed from "./social-feed";
+import SuggestionBox from "./suggestion-box";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -121,12 +122,14 @@ export default function GuestView() {
           </CardHeader>
           <CardContent className="text-center py-8">
             <div className="max-w-md mx-auto">
-              <h3 className="text-xl font-semibold">Activate Icebreaker</h3>
+              <h3 className="text-xl font-semibold">Coming Soon: Icebreaker</h3>
               <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature. To prevent spam or harassment, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.</p>
-              <Button className="mt-6">Upgrade (£1.50/month)</Button>
+              <Button className="mt-6" disabled>Notify Me</Button>
             </div>
           </CardContent>
         </Card>
+
+        <SuggestionBox />
 
       </div>
 
@@ -284,9 +287,9 @@ export default function GuestView() {
                 </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
-                        <h3 className="text-xl font-semibold">Activate Ratings & Analytics</h3>
+                        <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
                         <p className="text-muted-foreground mt-2">Unlock the ability to rate venues and view detailed analytics on your own ratings. This feature enhances community trust and transparency.</p>
-                        <Button className="mt-6">Activate this Feature</Button>
+                        <Button className="mt-6" disabled>Notify Me</Button>
                     </div>
                 </CardContent>
             </Card>
@@ -313,5 +316,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
