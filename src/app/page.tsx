@@ -21,7 +21,6 @@ import {
   Bell,
   ChevronDown,
 } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GuestView from '@/components/guest-view';
 import AdminDashboard from '@/components/admin-dashboard';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -137,10 +136,7 @@ export default function Home() {
                     <Link href="#" className="flex items-center w-full">Guest Login</Link>
                   </DropdownMenuItem>
                    <DropdownMenuItem>
-                    <Link href="#" className="flex items-center w-full">Staff Login</Link>
-                  </DropdownMenuItem>
-                   <DropdownMenuItem>
-                    <Link href="#" className="flex items-center w-full">Host Login</Link>
+                    <Link href="#" className="flex items-center w-full">Host / Staff Login</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -148,10 +144,6 @@ export default function Home() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Avatar>
-                <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
-                <AvatarFallback>G</AvatarFallback>
-              </Avatar>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">
