@@ -1,157 +1,95 @@
 
 "use client";
 
-import { useState } from 'react';
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-} from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-import {
-  LayoutDashboard,
-  User,
-  Menu,
-  LogIn,
-  UserPlus,
-  Bell,
-  ChevronDown,
-} from 'lucide-react';
-import GuestView from '@/components/guest-view';
-import AdminDashboard from '@/components/admin-dashboard';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Link from 'next/link';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { Logo } from '@/components/logo';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Logo } from "@/components/logo";
+import { ShieldCheck, User, Users } from "lucide-react";
+import Link from "next/link";
+import RebeccaChatbot from "@/components/rebecca-chatbot";
 
-function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
-  const handleMenuClick = (view: string) => {
-    setActiveView(view);
-    if (onLinkClick) {
-      onLinkClick();
-    }
-  }
 
+export default function WelcomePage() {
   return (
-    <>
-      <SidebarHeader>
-        <div className="flex items-center gap-2">
-          <Logo className="w-auto h-8 text-primary" />
-          <h1 className="text-xl font-semibold group-data-[collapsible=icon]:hidden">EventSafe</h1>
-        </div>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={() => handleMenuClick('guest')}
-              isActive={activeView === 'guest'}
-              tooltip={{children: "Guest Dashboard"}}
-            >
-              <User />
-              <span>Guest Dashboard</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={() => handleMenuClick('admin')}
-              isActive={activeView === 'admin'}
-              tooltip={{children: "Host & Admin Tools"}}
-            >
-              <LayoutDashboard />
-              <span>Host & Admin Tools</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarContent>
-    </>
-  );
-}
+    <div className="min-h-screen bg-background flex flex-col">
+      <header className="p-4 flex justify-between items-center border-b">
+         <Logo className="w-auto h-10" />
+         <div className="flex items-center gap-4">
+            <Button asChild variant="ghost">
+                <Link href="/dashboard">Dashboard Demo</Link>
+            </Button>
+             <Button asChild>
+                <Link href="/login">Login</Link>
+            </Button>
+         </div>
+      </header>
 
-export default function Home() {
-  const [activeView, setActiveView] = useState('guest');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
-
-  return (
-    <SidebarProvider>
-      <div className="flex min-h-screen bg-background">
-        {isMobile ? (
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="fixed top-4 left-4 z-20 md:hidden">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Open menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-72 bg-sidebar text-sidebar-foreground border-r-0">
-                <AppSidebar activeView={activeView} setActiveView={setActiveView} onLinkClick={() => setMobileMenuOpen(false)} />
-            </SheetContent>
-          </Sheet>
-        ) : (
-          <Sidebar collapsible="icon" className="border-r">
-            <AppSidebar activeView={activeView} setActiveView={setActiveView} />
-          </Sidebar>
-        )}
-        <div className="flex-1 flex flex-col">
-           <header className="sticky top-0 z-10 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b h-[65px]">
-            <div></div>
-             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon">
-                <Bell className="h-5 w-5" />
-                <span className="sr-only">Notifications</span>
-              </Button>
-               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="secondary">
-                      <UserPlus />
-                      Sign Up
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Link href="/signup" className="flex items-center w-full">Guest Signup</Link>
-                  </DropdownMenuItem>
-                   <DropdownMenuItem>
-                    <Link href="/host-signup" className="flex items-center w-full">Host Signup</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button>
-                    <LogIn />
-                    Login
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Link href="#" className="flex items-center w-full">Guest Login</Link>
-                  </DropdownMenuItem>
-                   <DropdownMenuItem>
-                    <Link href="#" className="flex items-center w-full">Host / Staff Login</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <Link href="#" className="flex items-center w-full">Admin Login</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+      <main className="flex-1 flex items-center justify-center p-4 md:p-8">
+        <div className="container max-w-5xl space-y-12">
+            <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">The New Standard in Event Safety</h1>
+                <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+                    EventSafe is a unified platform for venues, hosts, and guests to create safer, more transparent, and accountable live events.
+                </p>
             </div>
-          </header>
-          <main className="flex-1 p-4 md:p-8">
-            {activeView === 'guest' && <GuestView />}
-            {activeView === 'admin' && <AdminDashboard />}
-          </main>
+
+            <div className="grid md:grid-cols-2 gap-8">
+                <Card className="flex flex-col">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                            <User className="w-8 h-8 text-primary" />
+                            <span className="text-2xl">For Guests</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Your secure, universal pass to events. Know who's running the show and feel safer with our traffic light system.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col justify-end">
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Button asChild className="flex-1" size="lg">
+                                <Link href="/dashboard?view=guest">Explore Guest Features</Link>
+                            </Button>
+                            <Button asChild className="flex-1" size="lg" variant="secondary">
+                                <Link href="/signup">Create Guest Account</Link>
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card className="flex flex-col">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                            <Users className="w-8 h-8 text-primary" />
+                            <span className="text-2xl">For Hosts & Venues</span>
+                        </CardTitle>
+                        <CardDescription>
+                            Access powerful AI tools to manage staff, handle reports, and build a trusted community around your events.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col justify-end">
+                        <div className="flex flex-col sm:flex-row gap-4">
+                             <Button asChild className="flex-1" size="lg">
+                                <Link href="/dashboard?view=admin">Explore Admin Tools</Link>
+                            </Button>
+                            <Button asChild className="flex-1" size="lg" variant="secondary">
+                                <Link href="/host-signup">Create Host Account</Link>
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="max-w-xl mx-auto w-full">
+              <RebeccaChatbot />
+            </div>
+
         </div>
-      </div>
-    </SidebarProvider>
+      </main>
+
+      <footer className="p-4 text-center text-xs text-muted-foreground border-t">
+          <p>&copy; {new Date().getFullYear()} EventSafe. All rights reserved.</p>
+          <p className="mt-1">EventSafe is a facilitation tool. Users are responsible for their own legal and tax compliance.</p>
+      </footer>
+    </div>
   );
 }
