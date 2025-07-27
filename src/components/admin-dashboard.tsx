@@ -98,13 +98,13 @@ export default function AdminDashboard() {
               <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Users /> Staff Role Management</CardTitle>
-                    <CardDescription>Assign specific permissions to your staff members.</CardDescription>
+                    <CardDescription>Build your event team with flexible, tiered role management.</CardDescription>
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Coming Soon: Staff Roles</h3>
-                          <p className="text-muted-foreground mt-2">Create roles like 'Door', 'Security', and 'Admin' to control access to scanning, note-taking, and administrative functions.</p>
-                          <Button className="mt-6" disabled>Notify Me</Button>
+                          <h3 className="text-xl font-semibold">Scalable Staffing Tiers</h3>
+                          <p className="text-muted-foreground mt-2">Our Pro Safety Package starts with 5 staff members. As your events grow, you can add more staff in increments of 5. Each additional block of 5 staff members can be added for a flat-rate fee.</p>
+                          <Button className="mt-6" disabled>Manage Staff & Plan</Button>
                       </div>
                   </CardContent>
               </Card>
