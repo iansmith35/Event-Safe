@@ -119,6 +119,16 @@ export default function SignupForm() {
     }
   };
 
+  const handlePayment = () => {
+    setIsLoading(true);
+    // In a real app, this would redirect to Stripe.
+    // We simulate the payment and redirect back.
+    setTimeout(() => {
+        setIsLoading(false);
+        setIsPaid(true);
+    }, 1500);
+  }
+
   if (isPaid) {
     return (
         <Card>
@@ -274,16 +284,14 @@ export default function SignupForm() {
               <Input id="promo-code" placeholder="Enter discount code" />
           </div>
 
-          <Button asChild disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
-            <Link href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00">
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Proceed to Payment
-            </Link>
+          <Button type="button" onClick={handlePayment} disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            <a href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00" target="_blank" rel="noopener noreferrer">
+              Proceed to Payment
+            </a>
           </Button>
         </form>
       </CardContent>
     </Card>
   );
 }
-
-    
