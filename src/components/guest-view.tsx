@@ -361,7 +361,7 @@ export default function GuestView() {
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
-                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event, or items from exclusive collections like 'Kinky Brizzle'. Access to certain collections is based on your verified event history to ensure community privacy and context.</p>
+                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event, or create your own personalized items. Access to certain collections is based on your verified event history to ensure community privacy and context.</p>
                     <Button className="mt-6" disabled>Notify Me</Button>
                 </div>
             </CardContent>
