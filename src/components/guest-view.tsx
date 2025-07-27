@@ -20,6 +20,7 @@ import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import SocialFeed from "./social-feed";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -110,6 +111,8 @@ export default function GuestView() {
                 </div>
             </CardContent>
         </Card>
+        
+        <SocialFeed />
 
         <Card>
           <CardHeader>
@@ -310,3 +313,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    

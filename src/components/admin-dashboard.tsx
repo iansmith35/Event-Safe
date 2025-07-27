@@ -11,6 +11,7 @@ import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone } from "luc
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
+import SocialFeed from "./social-feed";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -76,64 +77,70 @@ export default function AdminDashboard() {
           </Card>
         </TabsContent>
       </Tabs>
-
-      <div className="grid gap-6 md:grid-cols-3 pt-6">
-        <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><ShieldCheck /> Post-Event Review</CardTitle>
-              <CardDescription>Log staff notes and review guest behavior after events.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-8">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Activate Event Reviews</h3>
-                    <p className="text-muted-foreground mt-2">Get a color-coded summary of guest behavior and allow staff to add private notes and tags to maintain a high-quality guest list.</p>
-                    <Button className="mt-6">Upgrade (£10/month)</Button>
-                </div>
-            </CardContent>
-        </Card>
-        <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Users /> Staff Role Management</CardTitle>
-              <CardDescription>Assign specific permissions to your staff members.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-8">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Activate Staff Roles</h3>
-                    <p className="text-muted-foreground mt-2">Create roles like 'Door', 'Security', and 'Admin' to control access to scanning, note-taking, and administrative functions.</p>
-                    <Button className="mt-6">Upgrade (£5/month)</Button>
-                </div>
-            </CardContent>
-        </Card>
-        <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Star /> Trust Ratings & Analytics</CardTitle>
-              <CardDescription>Allow venues and guests to rate each other and unlock powerful data.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-8">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Monetize Trust Data</h3>
-                    <p className="text-muted-foreground mt-2">Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</p>
-                    <Button className="mt-6">Activate this Feature</Button>
-                </div>
-            </CardContent>
-        </Card>
-      </div>
-
-       <div className="grid gap-6 md:grid-cols-1 pt-6">
-        <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Megaphone /> AI Event Promotion</CardTitle>
-              <CardDescription>Let our AI promote your events on social media to drive attendance.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-8">
-                <div className="max-w-lg mx-auto">
-                    <h3 className="text-xl font-semibold">Activate AI Social Media Promoter</h3>
-                    <p className="text-muted-foreground mt-2">Fill out a simple event profile and our AI will generate engaging social media posts to promote your event. This is a premium add-on after a 3-month free trial period to help you get started and show you the value.</p>
-                    <Button className="mt-6">Start Your Free Trial</Button>
-                </div>
-            </CardContent>
-        </Card>
+      
+      <div className="grid gap-8 md:grid-cols-3">
+        <div className="md:col-span-2 space-y-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><ShieldCheck /> Post-Event Review</CardTitle>
+                    <CardDescription>Log staff notes and review guest behavior after events.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center py-8">
+                      <div className="max-w-md mx-auto">
+                          <h3 className="text-xl font-semibold">Activate Event Reviews</h3>
+                          <p className="text-muted-foreground mt-2">Get a color-coded summary of guest behavior and allow staff to add private notes and tags to maintain a high-quality guest list.</p>
+                          <Button className="mt-6">Upgrade (£10/month)</Button>
+                      </div>
+                  </CardContent>
+              </Card>
+              <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Users /> Staff Role Management</CardTitle>
+                    <CardDescription>Assign specific permissions to your staff members.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center py-8">
+                      <div className="max-w-md mx-auto">
+                          <h3 className="text-xl font-semibold">Activate Staff Roles</h3>
+                          <p className="text-muted-foreground mt-2">Create roles like 'Door', 'Security', and 'Admin' to control access to scanning, note-taking, and administrative functions.</p>
+                          <Button className="mt-6">Upgrade (£5/month)</Button>
+                      </div>
+                  </CardContent>
+              </Card>
+              <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Star /> Trust Ratings & Analytics</CardTitle>
+                    <CardDescription>Allow venues and guests to rate each other and unlock powerful data.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center py-8">
+                      <div className="max-w-md mx-auto">
+                          <h3 className="text-xl font-semibold">Monetize Trust Data</h3>
+                          <p className="text-muted-foreground mt-2">Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</p>
+                          <Button className="mt-6">Activate this Feature</Button>
+                      </div>
+                  </CardContent>
+              </Card>
+              <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Megaphone /> AI Event Promotion</CardTitle>
+                    <CardDescription>Let our AI promote your events on social media to drive attendance.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center py-8">
+                      <div className="max-w-lg mx-auto">
+                          <h3 className="text-xl font-semibold">Activate AI Social Media Promoter</h3>
+                          <p className="text-muted-foreground mt-2">Fill out a simple event profile and our AI will generate engaging social media posts to promote your event. This is a premium add-on after a 3-month free trial period to help you get started and show you the value.</p>
+                          <Button className="mt-6">Start Your Free Trial</Button>
+                      </div>
+                  </CardContent>
+              </Card>
+            </div>
+        </div>
+        <div className="md:col-span-1">
+          <SocialFeed />
+        </div>
       </div>
     </div>
   );
 }
+
+    
