@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -27,7 +28,7 @@ import AdminDashboard from '@/components/admin-dashboard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
   const handleMenuClick = (view: string) => {
@@ -44,7 +45,7 @@ function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: st
           <div className="p-2 rounded-lg bg-primary text-primary-foreground">
             <ShieldCheck className="w-6 h-6" />
           </div>
-          <h1 className="text-xl font-semibold group-data-[collapsible=icon]:hidden">Event Traffic</h1>
+          <h1 className="text-xl font-semibold group-data-[collapsible=icon]:hidden">EventSafe</h1>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -63,10 +64,10 @@ function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: st
             <SidebarMenuButton
               onClick={() => handleMenuClick('admin')}
               isActive={activeView === 'admin'}
-              tooltip={{children: "Admin Tools"}}
+              tooltip={{children: "Host & Admin Tools"}}
             >
               <LayoutDashboard />
-              <span>Admin Tools</span>
+              <span>Host & Admin Tools</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -108,12 +109,23 @@ export default function Home() {
                 <Bell className="h-5 w-5" />
                 <span className="sr-only">Notifications</span>
               </Button>
-              <Button asChild variant="secondary">
-                <Link href="/signup">
-                  <UserPlus />
-                  Sign Up
-                </Link>
-              </Button>
+               <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="secondary">
+                      <UserPlus />
+                      Sign Up
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link href="/signup" className="flex items-center w-full">Guest Signup</Link>
+                  </DropdownMenuItem>
+                   <DropdownMenuItem>
+                    <Link href="/host-signup" className="flex items-center w-full">Host Signup</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
                <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button>
@@ -122,13 +134,17 @@ export default function Home() {
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent align="end">
                   <DropdownMenuItem>
                     <Link href="#" className="flex items-center w-full">Guest Login</Link>
                   </DropdownMenuItem>
                    <DropdownMenuItem>
                     <Link href="#" className="flex items-center w-full">Staff Login</Link>
                   </DropdownMenuItem>
+                   <DropdownMenuItem>
+                    <Link href="#" className="flex items-center w-full">Host Login</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <Link href="#" className="flex items-center w-full">Admin Login</Link>
                   </DropdownMenuItem>
