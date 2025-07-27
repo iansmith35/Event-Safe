@@ -11,3 +11,4 @@ import '@/ai/flows/get-contextual-reports.ts';
 import '@/ai/flows/get-seasonal-theme.ts';
 import '@/ai/flows/rebecca-chat.ts';
 import '@/ai/flows/diagnose-app-issue.ts';
+import '@/ai/flows/judge-demo-case.ts';

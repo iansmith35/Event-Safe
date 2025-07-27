@@ -1,13 +1,43 @@
 
 "use client";
 
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Gavel, Scale } from "lucide-react";
+import { Gavel, Scale, Loader2 } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Textarea } from './ui/textarea';
+import { Label } from './ui/label';
+import { useToast } from '@/hooks/use-toast';
+import { judgeDemoCase, type JudgeDemoCaseOutput } from '@/ai/flows/judge-demo-case';
 
 export default function FunCourt() {
+    const [complaint, setComplaint] = useState("A host alleges a venue failed to provide the agreed-upon number of security staff, leading to gate-crashers.");
+    const [isLoading, setIsLoading] = useState(false);
+    const [result, setResult] = useState<JudgeDemoCaseOutput | null>(null);
+    const { toast } = useToast();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setResult(null);
+
+        try {
+            const res = await judgeDemoCase({ complaint });
+            setResult(res);
+        } catch (error) {
+            console.error(error);
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Failed to get AI judgment. Please try again.",
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <Card>
             <CardHeader>
@@ -23,29 +53,56 @@ export default function FunCourt() {
                     </AlertDescription>
                 </Alert>
 
-                <div className="p-4 border rounded-lg space-y-4">
-                    <h4 className="font-semibold">Sample Case</h4>
+                <form onSubmit={handleSubmit} className="p-4 border rounded-lg space-y-4">
+                    <h4 className="font-semibold">Interactive Demo</h4>
                     <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                            <span className="font-mono text-xs">Case ID: ES-C24-001</span>
-                            <Badge variant="secondary">Judgment Rendered</Badge>
-                        </div>
-                        <p className="text-sm">
-                            <span className="font-semibold">Complaint:</span> A host alleges a venue failed to provide the agreed-upon number of security staff, leading to gate-crashers.
-                        </p>
-                        <p className="text-sm">
-                            <span className="font-semibold">Defense:</span> The venue argues the host's event marketing attracted a larger-than-expected crowd, exceeding the scope of the original agreement.
-                        </p>
-                        <div className="pt-2">
-                            <h5 className="font-semibold text-primary">AI Judge's Verdict (Summary):</h5>
-                            <p className="text-sm text-muted-foreground">
-                                "While the venue is responsible for staffing, the host has a duty to provide accurate attendance estimates. Judgment finds shared responsibility. Recommendation: Future agreements must include a 'surge capacity' clause, outlining procedures and costs if attendance exceeds projections by over 20%."
+                        <Label htmlFor="complaint">Enter a sample complaint:</Label>
+                        <Textarea 
+                            id="complaint" 
+                            value={complaint}
+                            onChange={(e) => setComplaint(e.target.value)}
+                            rows={3}
+                        />
+                    </div>
+                     <Button type="submit" disabled={isLoading}>
+                        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Gavel className="mr-2 h-4 w-4" />}
+                        Get Demo Judgment
+                    </Button>
+                </form>
+
+
+                {isLoading && (
+                    <div className="mt-4 pt-4 border-t flex items-center justify-center">
+                        <Loader2 className="mr-2 h-8 w-8 animate-spin text-primary" />
+                        <span className="text-muted-foreground">The AI Judge is deliberating...</span>
+                    </div>
+                )}
+
+
+                {result && (
+                     <div className="p-4 border rounded-lg space-y-4 animate-in fade-in-50">
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                                <span className="font-mono text-xs">Case ID: ES-DEMO-001</span>
+                                <Badge variant="secondary">Judgment Rendered</Badge>
+                            </div>
+                            <p className="text-sm">
+                                <span className="font-semibold">Your Complaint:</span> {complaint}
                             </p>
+                            <p className="text-sm">
+                                <span className="font-semibold">AI-Simulated Defense:</span> {result.defense}
+                            </p>
+                            <div className="pt-2">
+                                <h5 className="font-semibold text-primary">AI Judge's Verdict (Summary):</h5>
+                                <p className="text-sm text-muted-foreground">
+                                   {result.verdict}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <p className="text-sm text-muted-foreground">
+                )}
+               
+                <p className="text-sm text-muted-foreground pt-4">
                     This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements.
                 </p>
 
