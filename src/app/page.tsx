@@ -14,7 +14,6 @@ import {
 import { Button } from '@/components/ui/button';
 import {
   LayoutDashboard,
-  ShieldCheck,
   User,
   Menu,
   LogIn,
@@ -29,6 +28,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { Logo } from '@/components/logo';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
   const handleMenuClick = (view: string) => {
@@ -42,9 +42,7 @@ function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: st
     <>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-primary text-primary-foreground">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
+          <Logo className="w-auto h-8 text-primary" />
           <h1 className="text-xl font-semibold group-data-[collapsible=icon]:hidden">EventSafe</h1>
         </div>
       </SidebarHeader>
