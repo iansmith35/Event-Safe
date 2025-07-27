@@ -22,6 +22,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
+import { Switch } from "./ui/switch";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -117,15 +118,19 @@ export default function GuestView() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Heart /> Icebreaker</CardTitle>
+            <CardTitle className="flex items-center gap-2"><Lightbulb /> Premium Feature: Icebreaker</CardTitle>
             <CardDescription>Find and connect with other guests at an event.</CardDescription>
           </CardHeader>
-          <CardContent className="text-center py-8">
-            <div className="max-w-md mx-auto">
-              <h3 className="text-xl font-semibold">Coming Soon: Icebreaker</h3>
-              <p className="text-muted-foreground mt-2">Opt-in to use our geofenced facial matching feature. To prevent spam or harassment, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.</p>
-              <Button className="mt-6" disabled>Notify Me</Button>
+          <CardContent className="space-y-4">
+             <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <Label htmlFor="icebreaker-toggle" className="font-bold">
+                    Enable Icebreaker
+                </Label>
+                <Switch id="icebreaker-toggle" defaultChecked />
             </div>
+            <p className="text-xs text-muted-foreground">
+              Opt-in to use our geofenced facial matching feature. To prevent spam, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.
+            </p>
           </CardContent>
         </Card>
 
@@ -316,3 +321,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
