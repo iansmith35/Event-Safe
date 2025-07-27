@@ -76,6 +76,28 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 232 48% 54%;
   }
+  
+  .new-year {
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 224 71% 10%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 48 96% 58%;
+    --primary-foreground: 224 71% 4%;
+    --secondary: 210 40% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 15%;
+    --muted-foreground: 210 40% 60%;
+    --accent: 210 40% 45%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 210 40% 15%;
+    --input: 210 40% 15%;
+    --ring: 48 96% 58%;
+  }
 }
 
 @layer base {
