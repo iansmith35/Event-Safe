@@ -103,8 +103,6 @@ export default function DashboardPage() {
         }
       } else {
         // For demo purposes, we allow viewing without login.
-        // In a real app, you'd redirect.
-        // router.push('/login');
         setUser({ email: "demo@eventsafe.com" });
       }
       setIsLoading(false);
