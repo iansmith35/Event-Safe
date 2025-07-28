@@ -91,7 +91,7 @@ export default function GuestView() {
             <CardContent className="space-y-4">
                 <div className="flex items-center gap-4">
                     <Avatar className="w-16 h-16">
-                        <AvatarImage src="https://placehold.co/100x100.png" alt="@guest" data-ai-hint="profile picture" />
+                        <AvatarImage src="https://img.clerk.com/preview.png" alt="@guest" data-ai-hint="profile picture" />
                         <AvatarFallback>G</AvatarFallback>
                     </Avatar>
                     <div>
