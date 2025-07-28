@@ -89,10 +89,9 @@ export default function GuestView() {
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><MicVocal /> Host an Event</CardTitle>
-                <CardDescription>Host your own EventSafe events.</CardDescription>
+                <CardDescription>£5 per event, pay as you go.</CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">£5 per event, pay as you go.</p>
                 <Button className="w-full" disabled>Create an Event</Button>
             </CardContent>
         </Card>
