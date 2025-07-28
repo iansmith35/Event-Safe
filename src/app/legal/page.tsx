@@ -36,7 +36,7 @@ export default function LegalPage() {
                         A user who has filed a police report can notify us through their dashboard. We may then, with their explicit and re-authenticated consent, provide their contact information to the verified officer associated with their case number.
                     </p>
                     <p className="text-sm text-muted-foreground">
-                        This pathway is designed to be fast and transparent, but relies entirely on user consent. EventSafe does not compel any user to share their data through this method.
+                        This pathway is designed to be fast and transparent, but relies entirely on user consent. EventSafe does not compel any user to share their data through this method. If a user does not consent, the formal legal process must be followed.
                     </p>
                 </CardContent>
             </Card>
