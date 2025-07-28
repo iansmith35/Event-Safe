@@ -319,7 +319,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Ticket className="h-5 w-5" /> Find Events</CardTitle>
                     <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="space-y-4 pt-6">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -336,7 +336,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Map</CardTitle>
                     <CardDescription>Visually discover events and venues near you or in a specific location.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Interactive Event Map</h3>
@@ -368,5 +368,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
