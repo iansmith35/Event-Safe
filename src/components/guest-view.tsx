@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart, Award, MicVocal } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -94,7 +94,7 @@ export default function GuestView() {
                     </Avatar>
                     <div>
                         <p className="font-bold text-lg">AgentIndigo</p>
-                        <p className="text-sm text-muted-foreground">ESG-928301</p>
+                        <p className="text-sm text-muted-foreground">ESG-928301 (Score: 950)</p>
                     </div>
                 </div>
             </CardContent>
@@ -115,40 +115,32 @@ export default function GuestView() {
           </CardContent>
         </Card>
 
-        <RebeccaChatbot />
-
-        <Card className="border-destructive/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-destructive"><Siren /></CardTitle>
-            <CardDescription>Discreetly alert staff to an urgent issue.</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center py-4">
-            <p className="text-muted-foreground text-sm mb-4">Only use this in a genuine emergency. Misuse will result in a red status.</p>
-            <Button variant="destructive" className="w-full">Request Assistance</Button>
-          </CardContent>
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><MicVocal /> Host an Event</CardTitle>
+                <CardDescription>Upgrade your account to host your own EventSafe events.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Unlock powerful tools to manage guest lists, view safety scores, and promote your event securely. A one-time fee of £5 is required.</p>
+                <Button className="w-full" disabled>Upgrade to Host Account</Button>
+            </CardContent>
         </Card>
         
-        <SocialFeed />
-
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Lightbulb /> Icebreaker</CardTitle>
-            <CardDescription>Find and connect with other guests at an event.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-             <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <Label htmlFor="icebreaker-toggle" className="font-bold">
-                    Enable Icebreaker
-                </Label>
-                <Switch id="icebreaker-toggle" defaultChecked />
-            </div>
-            <p className="text-xs text-muted-foreground">
-              This premium feature allows you to use our geofenced facial matching. To prevent spam, you can send two messages which cannot be replied to. A third attempt to message without a reply will block you for 24 hours. Misuse will be flagged.
-            </p>
-          </CardContent>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Award /> Become a Volunteer</CardTitle>
+                <CardDescription>Join an event's team by entering a one-time code from the host.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+                <Label htmlFor="volunteer-code">Volunteer Code</Label>
+                <div className="flex gap-2">
+                    <Input id="volunteer-code" placeholder="Enter code..."/>
+                    <Button>Activate</Button>
+                </div>
+            </CardContent>
         </Card>
 
-        <SuggestionBox />
+        <SocialFeed />
 
       </div>
 
@@ -356,16 +348,20 @@ export default function GuestView() {
          <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><ShoppingCart /> EventSafe Merch</CardTitle>
-                <CardDescription>Get official gear, event-specific wear, or personalized items.</CardDescription>
+                <CardDescription>Get official gear, event-specific wear, or personalized items. Access is based on verified event history.</CardDescription>
             </CardHeader>
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
-                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event, or create your own personalized items. Access to certain collections is based on your verified event history to ensure community privacy and context.</p>
+                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event (for hosts), or create your own personalized items. Access to certain collections (e.g., Kinky Brizzle) requires verified attendance at specific event types to ensure community privacy and context.</p>
                     <Button className="mt-6" disabled>Notify Me</Button>
                 </div>
             </CardContent>
         </Card>
+
+        <RebeccaChatbot />
+        <SuggestionBox />
+
       </div>
     </div>
   );

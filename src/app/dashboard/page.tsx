@@ -18,6 +18,7 @@ import {
   Menu,
   UserPlus,
   Loader2,
+  Home,
 } from 'lucide-react';
 import GuestView from '@/components/guest-view';
 import AdminDashboard from '@/components/admin-dashboard';
@@ -133,21 +134,13 @@ export default function DashboardPage() {
         <div className="flex-1 flex flex-col">
            <header className="sticky top-0 z-10 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b h-[65px]">
             <Button asChild variant="outline">
-              <Link href="/">Back to Home</Link>
+              <Link href="/">
+                <Home /> Back to Home
+              </Link>
             </Button>
-             <div className="flex items-center gap-4">
-              <Button asChild variant="secondary">
-                  <Link href="/signup">
-                    <UserPlus />
-                    Guest Signup
-                  </Link>
-              </Button>
-               <Button asChild>
-                  <Link href="/host-signup">
-                    <UserPlus />
-                   Host Signup
-                  </Link>
-              </Button>
+            <div className="flex items-center gap-4">
+               <p className="text-sm text-muted-foreground">Logged in as: {user?.email}</p>
+                <Button onClick={() => auth.signOut()}>Sign Out</Button>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">
