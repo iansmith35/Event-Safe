@@ -120,49 +120,51 @@ export default function ProfileBadgeGenerator() {
   }
 
   return (
-    <Card>
-        {/* Hidden SVG logo for rendering to canvas */}
+    <>
+        {/* Hidden SVG logo for rendering to canvas, moved outside the card to prevent hydration issues */}
         <div className="hidden">
             <Logo ref={logoRef} className="text-white" />
         </div>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-            <Logo className="h-8 w-auto" /> Profile Badge Generator
-        </CardTitle>
-        <CardDescription>
-          This promotes you as verified and shows a clear intention to event safety and engaging with new people.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-            <Label htmlFor='badge-image'>1. Upload your picture</Label>
-            <Input id="badge-image" type="file" accept="image/*" onChange={handleFileChange} disabled={isLoading}/>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-            <Checkbox id="include-qr" checked={includeQrCode} onCheckedChange={(checked) => setIncludeQrCode(checked as boolean)} />
-            <Label htmlFor="include-qr" className="text-sm font-medium leading-none">Include QR Code</Label>
-        </div>
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Logo className="h-8 w-auto" /> Profile Badge Generator
+                </CardTitle>
+                <CardDescription>
+                This promotes you as verified and shows a clear intention to event safety and engaging with new people.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="space-y-2">
+                    <Label htmlFor='badge-image'>1. Upload your picture</Label>
+                    <Input id="badge-image" type="file" accept="image/*" onChange={handleFileChange} disabled={isLoading}/>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                    <Checkbox id="include-qr" checked={includeQrCode} onCheckedChange={(checked) => setIncludeQrCode(checked as boolean)} />
+                    <Label htmlFor="include-qr" className="text-sm font-medium leading-none">Include QR Code</Label>
+                </div>
 
-        <div>
-            <Button onClick={generateBadge} disabled={!baseImage || isLoading}>
-                {isLoading ? <Loader2 className="mr-2 animate-spin" /> : <Check className="mr-2" />}
-                Generate Preview
-            </Button>
-        </div>
+                <div>
+                    <Button onClick={generateBadge} disabled={!baseImage || isLoading}>
+                        {isLoading ? <Loader2 className="mr-2 animate-spin" /> : <Check className="mr-2" />}
+                        Generate Preview
+                    </Button>
+                </div>
 
-        <div className="space-y-2">
-            <Label>2. Preview & Download</Label>
-            <div className="w-full aspect-square bg-muted rounded-md overflow-hidden relative border">
-                <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="w-full h-full object-cover" />
-                {!baseImage && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm">Upload an image to see a preview</div>}
-            </div>
-        </div>
+                <div className="space-y-2">
+                    <Label>2. Preview & Download</Label>
+                    <div className="w-full aspect-square bg-muted rounded-md overflow-hidden relative border">
+                        <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="w-full h-full object-cover" />
+                        {!baseImage && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm">Upload an image to see a preview</div>}
+                    </div>
+                </div>
 
-        <Button onClick={downloadImage} disabled={!baseImage} className="w-full">
-            <Download className="mr-2" /> Download Badge
-        </Button>
-      </CardContent>
-    </Card>
+                <Button onClick={downloadImage} disabled={!baseImage} className="w-full">
+                    <Download className="mr-2" /> Download Badge
+                </Button>
+            </CardContent>
+        </Card>
+    </>
   );
 }
