@@ -3,10 +3,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart, Award, MicVocal, Map } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -22,11 +21,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
-import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
-import { Progress } from "./ui/progress";
-
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -76,7 +72,6 @@ const eventTeam = {
 
 export default function GuestView() {
   const [status] = useState<Status>('Green');
-  const currentStatus = statusConfig[status];
   const isAppealDisabled = status === 'Green';
 
   return (
@@ -167,12 +162,11 @@ export default function GuestView() {
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
             <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
-            <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Find Events</TabsTrigger>
             <TabsTrigger value="map" className="flex items-center gap-2"><Map className="h-4 w-4" /> Event Map</TabsTrigger>
           </TabsList>
           <TabsContent value="history">
@@ -294,23 +288,6 @@ export default function GuestView() {
                 </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="ticketing">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Ticket className="h-5 w-5" /> Find Events</CardTitle>
-                    <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
-                </Header>
-                <CardContent className="space-y-4 pt-6">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                        <Input placeholder="Search by event name, venue, or city..." className="pl-10"/>
-                    </div>
-                    <p className="text-xs text-muted-foreground text-center">
-                        See an event that isn't on EventSafe? Ask the host why they aren't part of the network.
-                    </p>
-                </CardContent>
-            </Card>
-          </TabsContent>
           <TabsContent value="map">
             <Card>
                 <CardHeader>
@@ -327,19 +304,6 @@ export default function GuestView() {
             </Card>
           </TabsContent>
         </Tabs>
-         <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2"><ShoppingCart /> EventSafe Merch</CardTitle>
-                <CardDescription>Get official gear, event-specific wear, or personalized items. Access is based on verified event history.</CardDescription>
-            </Header>
-            <CardContent className="text-center py-12">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
-                    <p className="text-muted-foreground mt-2">Order official EventSafe apparel, branded gear for your event (for hosts), or create your own personalized items. Access to certain collections (e.g., Kinky Brizzle) requires verified attendance at specific event types to ensure community privacy and context.</p>
-                    <Button className="mt-6" disabled>Notify Me</Button>
-                </div>
-            </CardContent>
-        </Card>
 
         <RebeccaChatbot />
         <SuggestionBox />
