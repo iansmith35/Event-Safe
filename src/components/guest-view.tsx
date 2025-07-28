@@ -164,7 +164,7 @@ export default function GuestView() {
         <Card>
           <CardHeader>
               <CardTitle>Your Event Pass</CardTitle>
-              <CardDescription>Present this for scanning at venue entry. This gives the venue access to your profile details as agreed in the T&Cs.</CardDescription>
+              <CardDescription>Present this for scanning at venue entry. This gives the venue access to your profile details as agreed in the T&amp;Cs.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col md:flex-row items-center justify-center gap-6 p-10">
             <div className="p-1 bg-white rounded-lg shadow-md">
@@ -397,3 +397,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
