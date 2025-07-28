@@ -102,8 +102,6 @@ export default function GuestView() {
             </CardContent>
         </Card>
         
-        <ProfileBadgeGenerator />
-        
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><MicVocal /> Host an Event</CardTitle>
@@ -135,31 +133,7 @@ export default function GuestView() {
 
       {/* Right Column */}
       <div className="md:col-span-2 space-y-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Status</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center gap-4 pt-2">
-            <div className="relative flex items-center justify-center w-40 h-40">
-              <div className="absolute w-full h-full rounded-full bg-muted/50 animate-pulse"></div>
-              <div className={`w-36 h-36 rounded-full flex items-center justify-center shadow-lg ${currentStatus.color}`}>
-                <span className="text-4xl font-bold text-white drop-shadow-md">{currentStatus.label}</span>
-              </div>
-            </div>
-            <div className="text-center w-full">
-                <p className="text-2xl font-bold">{currentStatus.score} / 1000</p>
-                <p className="text-sm text-muted-foreground">Your status is based on your EventSafe score.</p>
-                <div className="mt-4 space-y-2">
-                    <Progress value={currentStatus.score / 10} className="h-2 [&>div]:bg-gradient-to-r [&>div]:from-destructive [&>div]:via-chart-4 [&>div]:to-chart-2" />
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>Red</span>
-                        <span>Amber</span>
-                        <span>Green</span>
-                    </div>
-                </div>
-            </div>
-          </CardContent>
-        </Card>
+        <ProfileBadgeGenerator />
         
         <Card>
           <CardContent className="pt-6">
@@ -272,7 +246,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><ThumbsUp className="h-5 w-5" /> My Kudos</CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent>
                     {kudosHistory.length > 0 ? (
                          <Table>
