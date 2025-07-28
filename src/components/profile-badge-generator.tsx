@@ -20,18 +20,14 @@ export default function ProfileBadgeGenerator() {
     const [includeQrCode, setIncludeQrCode] = useState(true);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { toast } = useToast();
-
+    
     // Create a stable, hidden SVG element to use for canvas drawing
-    const [logoSvg, setLogoSvg] = useState('');
-    const logoRef = useRef<HTMLDivElement>(null);
-
-    useState(() => {
-        if (typeof window !== 'undefined') {
-            const div = document.createElement('div');
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" class="h-10 w-auto" fill="white"><g><path d="M20 0C8.95 0 0 8.95 0 20v14c0 3.31 2.69 6 6 6h28c3.31 0 6-2.69 6-6V20C40 8.95 31.05 0 20 0z" fill="#16A34A"></path><g fill="#27272A"><rect x="14" y="5" width="12" height="26" rx="4"></rect></g><circle cx="20" cy="11" r="3" fill="#EF4444"></circle><circle cx="20" cy="18" r="3" fill="#FBBF24"></circle><circle cx="20" cy="25" r="3" fill="#22C55E"></circle></g><text x="48" y="16" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Event</text><text x="48" y="35" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Safe</text></svg>`;
-            setLogoSvg(svg);
-        }
-    }, []);
+    const [logoSvg] = useState(() => {
+        if (typeof window === 'undefined') return '';
+        const div = document.createElement('div');
+        div.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" class="h-10 w-auto" fill="white"><g><path d="M20 0C8.95 0 0 8.95 0 20v14c0 3.31 2.69 6 6 6h28c3.31 0 6-2.69 6-6V20C40 8.95 31.05 0 20 0z" fill="#16A34A"></path><g fill="#27272A"><rect x="14" y="5" width="12" height="26" rx="4"></rect></g><circle cx="20" cy="11" r="3" fill="#EF4444"></circle><circle cx="20" cy="18" r="3" fill="#FBBF24"></circle><circle cx="20" cy="25" r="3" fill="#22C55E"></circle></g><text x="48" y="16" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Event</text><text x="48" y="35" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Safe</text></svg>`;
+        return div.innerHTML;
+    });
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -173,5 +169,3 @@ export default function ProfileBadgeGenerator() {
         </Card>
     );
 }
-
-    

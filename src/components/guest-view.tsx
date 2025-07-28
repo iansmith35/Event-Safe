@@ -91,7 +91,7 @@ export default function GuestView() {
             <CardContent className="space-y-4">
                 <div className="flex items-center gap-4">
                     <Avatar className="w-16 h-16">
-                        <AvatarImage src="https://img.clerk.com/preview.png" alt="@guest" data-ai-hint="profile picture" />
+                        <AvatarImage src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18yZDE2V25uOTlZSlpON1l5TTdmaDBaOGJDSWcifQ" alt="@guest" data-ai-hint="profile picture" />
                         <AvatarFallback>G</AvatarFallback>
                     </Avatar>
                     <div>
@@ -169,7 +169,7 @@ export default function GuestView() {
           <CardContent className="flex flex-col md:flex-row items-center justify-center gap-6 p-10">
             <div className="p-1 bg-white rounded-lg shadow-md">
               <Image
-                src="https://img.clerk.com/preview.png"
+                src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18yZDE2V25uOTlZSlpON1l5TTdmaDBaOGJDSWcifQ"
                 alt="Event Pass with QR code and avatar"
                 width={250}
                 height={250}
@@ -397,5 +397,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
