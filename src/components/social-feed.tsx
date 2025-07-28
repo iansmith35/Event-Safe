@@ -4,6 +4,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Rss, Users } from 'lucide-react';
 import Image from 'next/image';
+import { Badge } from "./ui/badge";
 
 const feedItems = [
     {
@@ -15,6 +16,7 @@ const feedItems = [
         image: "https://placehold.co/600x400.png",
         imageHint: "party rave",
         timestamp: "2h ago",
+        roles: ["Host", "Venue Security", "First Aider", "Welfare Officer", "Volunteers"]
     },
     {
         id: 2,
@@ -63,6 +65,16 @@ export default function SocialFeed() {
                                     data-ai-hint={item.imageHint}
                                 />
                              )}
+                             {item.roles && (
+                                <div className="mt-3 p-2 bg-muted/50 rounded-lg">
+                                    <h4 className="text-xs font-semibold flex items-center gap-1 mb-2"><Users className="h-3 w-3" /> Verified Roles for this Event:</h4>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {item.roles.map(role => (
+                                            <Badge variant="secondary" key={role}>{role}</Badge>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}
