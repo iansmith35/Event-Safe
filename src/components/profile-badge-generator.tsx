@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Download, Check, Loader2 } from 'lucide-react';
+import { Download, Check, Loader2, Apple, Wallet } from 'lucide-react';
 import { Checkbox } from './ui/checkbox';
 import { Logo } from './logo';
 
@@ -42,7 +42,7 @@ export default function ProfileBadgeGenerator() {
         // Pre-load the default badge image for the demo
         const loadDefaultBadge = async () => {
             try {
-                const defaultImage = await loadImage("https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400");
+                const defaultImage = await loadImage("https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500&h=500&fit=crop");
                 setBaseImage(defaultImage);
             } catch (error) {
                 console.error("Failed to load default badge image", error);
@@ -143,15 +143,43 @@ export default function ProfileBadgeGenerator() {
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Logo className="h-8 w-auto" /> Profile Badge Generator
+                    <Logo className="h-8 w-auto" /> Your Event Pass
                 </CardTitle>
                 <CardDescription>
-                Create a badge for social media. This only identifies your status, not your full profile details.
+                Present this for scanning at venue entry. This gives the venue access to your profile details as agreed in the T&Cs.
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
                 <div className="space-y-2">
-                    <Label htmlFor='badge-image'>1. Upload your picture</Label>
+                    <Label>Pass Preview</Label>
+                    <div className="w-full aspect-square bg-muted rounded-md overflow-hidden relative border">
+                        <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="w-full h-full object-cover" />
+                        {!baseImage && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm">Loading pass...</div>}
+                    </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                    <Button onClick={downloadImage} disabled={!baseImage} className="w-full">
+                        <Download className="mr-2" /> Download Pass
+                    </Button>
+                    <Button variant="outline">
+                        <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                        Save to Google Wallet
+                    </Button>
+                    <Button variant="outline">
+                        <Apple className="mr-2" />
+                        Save to Apple Wallet
+                    </Button>
+                </div>
+                 <hr/>
+                <div className="space-y-2 pt-2">
+                    <CardTitle>Create a Public Badge</CardTitle>
+                    <CardDescription>
+                    Create a badge for social media. This only identifies your status, not your full profile details.
+                    </CardDescription>
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor='badge-image'>Upload your picture</Label>
                     <Input id="badge-image" type="file" accept="image/*" onChange={handleFileChange} disabled={isLoading}/>
                 </div>
                 
@@ -159,25 +187,11 @@ export default function ProfileBadgeGenerator() {
                     <Checkbox id="include-qr" checked={includeQrCode} onCheckedChange={(checked) => setIncludeQrCode(checked as boolean)} />
                     <Label htmlFor="include-qr" className="text-sm font-medium leading-none">Include QR Code</Label>
                 </div>
-
-                <div>
-                    <Button onClick={generateBadge} disabled={!baseImage || isLoading}>
-                        {isLoading ? <Loader2 className="mr-2 animate-spin" /> : <Check className="mr-2" />}
-                        Generate Preview
-                    </Button>
-                </div>
-
-                <div className="space-y-2">
-                    <Label>2. Preview & Download</Label>
-                    <div className="w-full aspect-square bg-muted rounded-md overflow-hidden relative border">
-                        <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="w-full h-full object-cover" />
-                        {!baseImage && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm">Upload an image to see a preview</div>}
-                    </div>
-                </div>
-
-                <Button onClick={downloadImage} disabled={!baseImage} className="w-full">
-                    <Download className="mr-2" /> Download Badge
+                 <Button onClick={downloadImage} disabled={!baseImage} className="w-full">
+                    <Download className="mr-2" /> Download Public Badge
                 </Button>
+
+
             </CardContent>
         </Card>
     );
