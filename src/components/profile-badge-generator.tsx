@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Download, Image as ImageIcon, Check, Loader2 } from 'lucide-react';
+import { Download, Check, Loader2 } from 'lucide-react';
 import { Checkbox } from './ui/checkbox';
 import { Logo } from './logo';
 
@@ -127,10 +127,10 @@ export default function ProfileBadgeGenerator() {
         </div>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-            <ImageIcon /> Profile Badge Generator
+            <Logo className="h-8 w-auto" /> Profile Badge Generator
         </CardTitle>
         <CardDescription>
-          Create a verified badge to use on social media. This promotes you and EventSafe.
+          This promotes you as verified and shows a clear intention to event safety and engaging with new people.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
