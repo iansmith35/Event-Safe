@@ -25,6 +25,7 @@ import SuggestionBox from "./suggestion-box";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
+import ProfileBadgeGenerator from "./profile-badge-generator";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -114,6 +115,8 @@ export default function GuestView() {
             <p className="text-center text-muted-foreground px-4">{currentStatus.description}</p>
           </CardContent>
         </Card>
+
+        <ProfileBadgeGenerator />
 
         <Card>
             <CardHeader>
@@ -382,5 +385,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
