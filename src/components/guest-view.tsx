@@ -25,7 +25,6 @@ import SuggestionBox from "./suggestion-box";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
-import ProfileBadgeGenerator from "./profile-badge-generator";
 import { Progress } from "./ui/progress";
 
 
@@ -84,7 +83,15 @@ export default function GuestView() {
     <div className="grid gap-8 md:grid-cols-3 noselect">
       {/* Left Column */}
       <div className="md:col-span-1 space-y-8">
-        <ProfileBadgeGenerator />
+        <Card>
+            <CardHeader>
+                <CardTitle>Event Pass</CardTitle>
+                <CardDescription>This feature is temporarily unavailable while we perform maintenance.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground">Your event pass and badge generator will be back online shortly. Thank you for your patience.</p>
+            </CardContent>
+        </Card>
         
         <Card>
             <CardHeader>
