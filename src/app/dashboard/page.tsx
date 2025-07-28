@@ -28,7 +28,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
 
@@ -80,28 +80,38 @@ export default function DashboardPage() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const [user, setUser] = useState<FirebaseUser | null | {email: string}>({ email: "demo@eventsafe.com"});
   const isMobile = useIsMobile();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    const view = searchParams.get('view');
+    if (view === 'admin') {
+      setActiveView('admin');
+    } else {
+        setActiveView('guest');
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        if (user.email === ADMIN_EMAIL) {
+         if (view === 'admin' || user.email === ADMIN_EMAIL) {
           setActiveView('admin');
         } else {
           setActiveView('guest');
         }
       } else {
-        // If no user, redirect to login
-        router.push('/login');
+        // For demo purposes, we allow viewing without login.
+        // In a real app, you'd redirect.
+        // router.push('/login');
+        setUser({ email: "demo@eventsafe.com" });
       }
       setIsLoading(false);
     });
 
     return () => unsubscribe();
-  }, [router]);
+  }, [router, searchParams]);
 
   if (isLoading) {
     return (
