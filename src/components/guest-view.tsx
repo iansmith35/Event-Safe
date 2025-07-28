@@ -26,6 +26,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
 import ProfileBadgeGenerator from "./profile-badge-generator";
+import { Progress } from "./ui/progress";
 
 
 type Status = 'Green' | 'Amber' | 'Red';
@@ -34,14 +35,17 @@ const statusConfig = {
   Green: {
     color: 'bg-chart-2',
     label: 'Green',
+    score: 950,
   },
   Amber: {
     color: 'bg-chart-4',
     label: 'Amber',
+    score: 650,
   },
   Red: {
     color: 'bg-destructive',
     label: 'Red',
+    score: 300,
   },
 };
 
@@ -109,9 +113,17 @@ export default function GuestView() {
                 <span className="text-4xl font-bold text-white drop-shadow-md">{currentStatus.label}</span>
               </div>
             </div>
-            <div className="text-center">
-                <p className="text-2xl font-bold">950 / 1000</p>
+            <div className="text-center w-full">
+                <p className="text-2xl font-bold">{currentStatus.score} / 1000</p>
                 <p className="text-sm text-muted-foreground">Your status is based on your EventSafe score.</p>
+                <div className="mt-4 space-y-2">
+                    <Progress value={currentStatus.score / 10} className="h-2 [&>div]:bg-gradient-to-r [&>div]:from-destructive [&>div]:via-chart-4 [&>div]:to-chart-2" />
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                        <span>Red</span>
+                        <span>Amber</span>
+                        <span>Green</span>
+                    </div>
+                </div>
             </div>
           </CardContent>
         </Card>
