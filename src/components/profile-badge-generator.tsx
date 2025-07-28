@@ -131,7 +131,7 @@ export default function ProfileBadgeGenerator() {
                     <Logo className="h-8 w-auto" /> Profile Badge Generator
                 </CardTitle>
                 <CardDescription>
-                This promotes you as verified and shows a clear intention to event safety and engaging with new people.
+                Create a badge for social media. This only identifies your status, not your full profile details.
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
