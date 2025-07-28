@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Upload } from 'lucide-react';
+import { Loader2, Upload, ShieldQuestion } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Textarea } from './ui/textarea';
 import { Checkbox } from './ui/checkbox';
@@ -65,7 +65,9 @@ export default function HostSignupForm() {
                     <Input id="password" type="password" required />
                 </div>
                  <div className="space-y-2">
-                    <Label htmlFor="safeWord">Safe Word</Label>
+                    <Label htmlFor="safeWord" className="flex items-center gap-1">
+                        Safe Word <ShieldQuestion className="h-4 w-4 text-muted-foreground" />
+                    </Label>
                     <Input id="safeWord" type="text" required placeholder="For account recovery" />
                 </div>
             </div>
