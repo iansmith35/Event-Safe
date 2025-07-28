@@ -102,6 +102,39 @@ export default function GuestView() {
             </CardContent>
         </Card>
         
+        <ProfileBadgeGenerator />
+        
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><MicVocal /> Host an Event</CardTitle>
+                <CardDescription>Host your own EventSafe events.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">£5 per event, pay as you go.</p>
+                <Button className="w-full" disabled>Create an Event</Button>
+            </CardContent>
+        </Card>
+        
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Award /> Join an Event Team</CardTitle>
+                <CardDescription>Enter a code from a host/venue to get temporary, role-specific access for an event (e.g., Door Staff, Volunteer).</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+                <Label htmlFor="volunteer-code">Event Code</Label>
+                <div className="flex gap-2">
+                    <Input id="volunteer-code" placeholder="Enter code..."/>
+                    <Button>Activate Role</Button>
+                </div>
+            </CardContent>
+        </Card>
+
+        <SocialFeed />
+
+      </div>
+
+      {/* Right Column */}
+      <div className="md:col-span-2 space-y-8">
         <Card>
           <CardHeader>
             <CardTitle>Your Status</CardTitle>
@@ -127,41 +160,7 @@ export default function GuestView() {
             </div>
           </CardContent>
         </Card>
-
-        <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2"><MicVocal /> Host an Event</CardTitle>
-                <CardDescription>Upgrade your account to host your own EventSafe events.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">A one-time fee of £5 is required.</p>
-                <Button className="w-full" disabled>Upgrade to Host Account</Button>
-            </CardContent>
-        </Card>
         
-        <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Award /> Join an Event Team</CardTitle>
-                <CardDescription>Enter a code from a host/venue to get temporary, role-specific access for an event (e.g., Door Staff, Volunteer).</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-                <Label htmlFor="volunteer-code">Event Code</Label>
-                <div className="flex gap-2">
-                    <Input id="volunteer-code" placeholder="Enter code..."/>
-                    <Button>Activate Role</Button>
-                </div>
-            </CardContent>
-        </Card>
-
-        <SocialFeed />
-
-      </div>
-
-      {/* Right Column */}
-      <div className="md:col-span-2 space-y-8">
-        
-        <ProfileBadgeGenerator />
-
         <Card>
           <CardContent className="pt-6">
             <Separator className="mb-4" />
@@ -226,7 +225,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle>Linked Reports</CardTitle>
                     <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="space-y-6">
                     {accountReports.length > 0 ? (
                          <Table>
@@ -352,7 +351,7 @@ export default function GuestView() {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2"><ShoppingCart /> EventSafe Merch</CardTitle>
                 <CardDescription>Get official gear, event-specific wear, or personalized items. Access is based on verified event history.</CardDescription>
-            </CardHeader>
+            </Header>
             <CardContent className="text-center py-12">
                 <div className="max-w-md mx-auto">
                     <h3 className="text-xl font-semibold">Coming Soon: Merchandise Store</h3>
@@ -369,3 +368,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
