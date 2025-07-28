@@ -169,7 +169,7 @@ export default function GuestView() {
           <CardContent className="flex flex-col md:flex-row items-center justify-center gap-6 p-10">
             <div className="p-1 bg-white rounded-lg shadow-md">
               <Image
-                src="https://placehold.co/250x250.png"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400"
                 alt="Event Pass with QR code and avatar"
                 width={250}
                 height={250}

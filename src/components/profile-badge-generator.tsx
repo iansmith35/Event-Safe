@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -21,13 +21,35 @@ export default function ProfileBadgeGenerator() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { toast } = useToast();
     
-    // Create a stable, hidden SVG element to use for canvas drawing
     const [logoSvg] = useState(() => {
         if (typeof window === 'undefined') return '';
         const div = document.createElement('div');
         div.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" class="h-10 w-auto" fill="white"><g><path d="M20 0C8.95 0 0 8.95 0 20v14c0 3.31 2.69 6 6 6h28c3.31 0 6-2.69 6-6V20C40 8.95 31.05 0 20 0z" fill="#16A34A"></path><g fill="#27272A"><rect x="14" y="5" width="12" height="26" rx="4"></rect></g><circle cx="20" cy="11" r="3" fill="#EF4444"></circle><circle cx="20" cy="18" r="3" fill="#FBBF24"></circle><circle cx="20" cy="25" r="3" fill="#22C55E"></circle></g><text x="48" y="16" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Event</text><text x="48" y="35" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="currentColor">Safe</text></svg>`;
         return div.innerHTML;
     });
+
+    const loadImage = (src: string): Promise<HTMLImageElement> => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = () => resolve(img);
+            img.onerror = (err) => reject(err);
+            img.src = src;
+        });
+    };
+    
+    useEffect(() => {
+        // Pre-load the default badge image for the demo
+        const loadDefaultBadge = async () => {
+            try {
+                const defaultImage = await loadImage("https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400");
+                setBaseImage(defaultImage);
+            } catch (error) {
+                console.error("Failed to load default badge image", error);
+            }
+        };
+        loadDefaultBadge();
+    }, []);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -36,7 +58,7 @@ export default function ProfileBadgeGenerator() {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = new Image();
-                img.crossOrigin = "anonymous"; // Handle potential CORS issues
+                img.crossOrigin = "anonymous";
                 img.onload = () => {
                     setBaseImage(img);
                     setIsLoading(false);
@@ -52,16 +74,6 @@ export default function ProfileBadgeGenerator() {
         }
     };
 
-    const loadImage = (src: string): Promise<HTMLImageElement> => {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.crossOrigin = "anonymous";
-            img.onload = () => resolve(img);
-            img.onerror = (err) => reject(err);
-            img.src = src;
-        });
-    };
-
     const generateBadge = async () => {
         if (!baseImage || !canvasRef.current) {
             toast({ variant: "destructive", title: "No image loaded", description: "Please upload an image first." });
@@ -74,32 +86,26 @@ export default function ProfileBadgeGenerator() {
         
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         
-        // 1. Draw base image (cropped to a square)
         const size = Math.min(baseImage.width, baseImage.height);
         const sx = (baseImage.width - size) / 2;
         const sy = (baseImage.height - size) / 2;
         ctx.drawImage(baseImage, sx, sy, size, size, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         
-        // 2. Create a semi-transparent overlay at the bottom
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fillRect(0, CANVAS_HEIGHT - 60, CANVAS_WIDTH, 60);
 
         try {
-            // 3. Draw Logo
             const logoImage = await loadImage('data:image/svg+xml;base64,' + btoa(logoSvg));
             ctx.drawImage(logoImage, 10, CANVAS_HEIGHT - 50, 100, 40);
 
-            // 4. Draw QR Code if selected
             if (includeQrCode) {
                 const qrCodeImage = await loadImage('https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=Example');
                 const qrSize = 100;
-                 // White background for QR code
                 ctx.fillStyle = 'white';
                 ctx.fillRect(CANVAS_WIDTH - qrSize - 15, CANVAS_HEIGHT - qrSize - 25, qrSize + 10, qrSize + 10);
                 ctx.drawImage(qrCodeImage, CANVAS_WIDTH - qrSize - 10, CANVAS_HEIGHT - qrSize - 20, qrSize, qrSize);
             }
 
-            // 5. Draw verified text
             ctx.font = 'bold 16px Inter';
             ctx.fillStyle = '#fff';
             ctx.textAlign = 'left';
@@ -110,6 +116,13 @@ export default function ProfileBadgeGenerator() {
         }
     };
   
+    useEffect(() => {
+        if(baseImage) {
+            generateBadge();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [baseImage, includeQrCode]);
+
     const downloadImage = () => {
         generateBadge().then(() => {
             setTimeout(() => {
@@ -122,7 +135,7 @@ export default function ProfileBadgeGenerator() {
                     link.click();
                     document.body.removeChild(link);
                 }
-            }, 200) // Small delay to ensure canvas is painted
+            }, 200)
         })
     }
 
