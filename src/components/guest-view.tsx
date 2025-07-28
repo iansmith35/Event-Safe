@@ -78,7 +78,7 @@ export default function GuestView() {
     <div className="grid gap-8 md:grid-cols-3 noselect">
       {/* Left Column */}
       <div className="md:col-span-1 space-y-8">
-        <Card>
+         <Card>
             <CardHeader>
                 <CardTitle>Event Pass</CardTitle>
                 <CardDescription>This feature is temporarily unavailable while we perform maintenance.</CardDescription>
