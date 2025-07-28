@@ -104,7 +104,7 @@ export default function AdminDashboard() {
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
                           <h3 className="text-xl font-semibold">Scalable Staffing Tiers</h3>
-                          <p className="text-muted-foreground mt-2">Each host receives 5 free single-use volunteer codes per event. If a venue is also linked, the pool increases to 10 codes. As your events grow, you can add more volunteers in increments of 5 for a small fee.</p>
+                          <p className="text-muted-foreground mt-2">Each host receives 5 free single-use volunteer codes per event. If a venue is also linked, the pool increases to 10 codes. Additional codes can be purchased for £1 each per event.</p>
                           <Button className="mt-6" disabled>Manage Staff & Plan</Button>
                       </div>
                   </CardContent>
