@@ -34,17 +34,14 @@ const statusConfig = {
   Green: {
     color: 'bg-chart-2',
     label: 'Green',
-    description: 'All clear. You have a good standing.',
   },
   Amber: {
     color: 'bg-chart-4',
     label: 'Amber',
-    description: 'Caution. There are some reports on your profile.',
   },
   Red: {
     color: 'bg-destructive',
     label: 'Red',
-    description: 'Blocked. You are not permitted entry.',
   },
 };
 
@@ -105,14 +102,17 @@ export default function GuestView() {
           <CardHeader>
             <CardTitle>Your Status</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col items-center gap-6 pt-2">
+          <CardContent className="flex flex-col items-center gap-4 pt-2">
             <div className="relative flex items-center justify-center w-40 h-40">
               <div className="absolute w-full h-full rounded-full bg-muted/50 animate-pulse"></div>
               <div className={`w-36 h-36 rounded-full flex items-center justify-center shadow-lg ${currentStatus.color}`}>
                 <span className="text-4xl font-bold text-white drop-shadow-md">{currentStatus.label}</span>
               </div>
             </div>
-            <p className="text-center text-muted-foreground px-4">{currentStatus.description}</p>
+            <div className="text-center">
+                <p className="text-2xl font-bold">950 / 1000</p>
+                <p className="text-sm text-muted-foreground">Your status is based on your EventSafe score.</p>
+            </div>
           </CardContent>
         </Card>
 
@@ -170,7 +170,7 @@ export default function GuestView() {
                     <Download className="mr-2" /> Download Pass
                 </Button>
                  <Button variant="outline">
-                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55,.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
                     Save to Google Wallet
                 </Button>
                 <Button variant="outline">
