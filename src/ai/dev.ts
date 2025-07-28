@@ -13,3 +13,4 @@ import '@/ai/flows/rebecca-chat.ts';
 import '@/ai/flows/diagnose-app-issue.ts';
 import '@/ai/flows/judge-demo-case.ts';
 import '@/ai/flows/suspend-guest.ts';
+import '@/ai/flows/verify-le-request.ts';

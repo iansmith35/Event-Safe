@@ -12,6 +12,7 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 import { diagnoseAppIssueTool } from './diagnose-app-issue';
+import { verifyLawEnforcementRequestTool } from './verify-le-request';
 
 const RebeccaChatInputSchema = z.object({
   message: z.string().describe('The user message to Rebecca.'),
@@ -36,7 +37,7 @@ const prompt = ai.definePrompt({
   name: 'rebeccaChatPrompt',
   input: {schema: RebeccaChatInputSchema},
   output: {schema: RebeccaChatOutputSchema},
-  tools: [diagnoseAppIssueTool],
+  tools: [diagnoseAppIssueTool, verifyLawEnforcementRequestTool],
   prompt: `You are "Rebecca", the human-like AI assistant for the EventSafe platform. Your personality is smart, clean, helpful, and engaging.
   
   **Core Directives:**
@@ -49,7 +50,8 @@ const prompt = ai.definePrompt({
   5.  **Handle Criticisms/Suggestions & Bugs:** If a user points out a flaw, suggests a feature, or describes a bug/error:
       *   Acknowledge it positively. Say things like, "That's a really interesting idea, I'll pass it along to the development team," or "Thanks for pointing that out, we're always looking to improve."
       *   **If it is a bug report or technical issue, use the 'diagnoseAppIssueTool' to analyze it.** Then, present the user with a summary of the findings in a helpful, non-technical way. For example: "Thanks for flagging that. I've logged the technical details for our engineering team to look at. It seems to be an issue with [...]. We'll get on that right away!"
-  6.  **Handle Vague Complaints:** If a user makes a vague complaint about a venue or user without specifics, you can say, "We take all feedback seriously. For specific issues, please use the official reporting tools on the user's profile so it can be properly documented and reviewed."
+  6.  **Handle Law Enforcement Queries:** If the admin asks how to verify or handle a request from law enforcement, use the 'verifyLawEnforcementRequestTool' to get a checklist of verification steps. Then, present this advice to the admin in a clear, helpful manner. Your job is to guide the admin on process, not to access or provide data yourself.
+  7.  **Handle Vague Complaints:** If a user makes a vague complaint about a venue or user without specifics, you can say, "We take all feedback seriously. For specific issues, please use the official reporting tools on the user's profile so it can be properly documented and reviewed."
 
   **Conversation History:**
   {{#each conversationHistory}}
