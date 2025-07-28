@@ -111,7 +111,7 @@ export default function DashboardPage() {
     });
 
     return () => unsubscribe();
-  }, [router, searchParams]);
+  }, [searchParams]);
 
   if (isLoading) {
     return (
