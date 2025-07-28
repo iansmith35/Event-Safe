@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Textarea } from "./ui/textarea";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -167,7 +167,7 @@ export default function GuestView() {
                     <Download className="mr-2" /> Download Pass
                 </Button>
                  <Button variant="outline">
-                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55,.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6,5.21c.59-.58,1.55-.58,2.14,0l3.12,3.12c.59,.58,.59,1.54,0,2.12s-1.55,.58-2.14,0l-3.12-3.12c-.59-.58-.59-1.54,0-2.12m-11.47,4.23l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59-1.54,0-2.12s-1.55-.58-2.14,0m7.29-1.42l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0,2.12m2.84-2.83l-7.79,7.79c-.59,.58-1.55,.58-2.14,0s-.59-1.54,0-2.12l7.79-7.79c.59-.58,1.55-.58,2.14,0s.59,1.54,0-2.12M18.05,2.37l-3.12,3.12c-.59,.58-.59,1.54,0,2.12s1.55,.58,2.14,0l3.12-3.12c.59-.58,.59,1.54,0-2.12s-1.55-.58-2.14,0m-14.16,7.05c-.59-.58-1.55-.58-2.14,0s-.59,1.54,0,2.12l7.79,7.79c.59,.58,1.55,.58,2.14,0s.59-1.54,0-2.12l-7.79-7.79Z"/></svg>
                     Save to Google Wallet
                 </Button>
                 <Button variant="outline">
@@ -239,7 +239,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle>Linked Reports</CardTitle>
                     <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="space-y-6">
                     {accountReports.length > 0 ? (
                          <Table>
@@ -286,7 +286,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><ThumbsUp className="h-5 w-5" /> My Kudos</CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent>
                     {kudosHistory.length > 0 ? (
                          <Table>
@@ -318,7 +318,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star className="h-5 w-5" /> Ratings & Analytics</CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
@@ -333,7 +333,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Ticket className="h-5 w-5" /> Find Events</CardTitle>
                     <CardDescription>Find events and see their EventSafe status and rating.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="space-y-4 pt-6">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -350,7 +350,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Map</CardTitle>
                     <CardDescription>Visually discover events and venues near you or in a specific location.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Interactive Event Map</h3>
@@ -382,3 +382,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
