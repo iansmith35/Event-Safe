@@ -13,8 +13,8 @@ const feedItems = [
         handle: "@eventsafe",
         avatar: "https://placehold.co/40x40.png",
         content: "<p>🎉 Announcing our biggest event yet! The <b>Summer Safety Rave</b> is coming this August. Early bird tickets with EventSafe Pay are now available. Don't miss out! #EventSafe #SummerRave</p>",
-        image: "https://placehold.co/600x400.png",
-        imageHint: "party rave",
+        image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=600",
+        imageHint: "party festival",
         timestamp: "2h ago",
         roles: ["Host", "Venue Security", "First Aider", "Welfare Officer", "Volunteers"]
     },
