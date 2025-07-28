@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart, Award, MicVocal } from "lucide-react";
+import { Download, Apple, Wallet, Ticket, ShieldCheck, ThumbsUp, Star, Heart, Siren, Search, Lightbulb, Users, ShoppingCart, Award, MicVocal, Map } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -201,12 +201,13 @@ export default function GuestView() {
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
             <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
             <TabsTrigger value="ticketing" className="flex items-center gap-2"><Ticket className="h-4 w-4" /> Find Events</TabsTrigger>
+            <TabsTrigger value="map" className="flex items-center gap-2"><Map className="h-4 w-4" /> Event Map</TabsTrigger>
           </TabsList>
           <TabsContent value="history">
             <Card>
@@ -341,6 +342,21 @@ export default function GuestView() {
                     <p className="text-xs text-muted-foreground text-center">
                         See an event that isn't on EventSafe? Ask the host why they aren't part of the network.
                     </p>
+                </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="map">
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Map</CardTitle>
+                    <CardDescription>Visually discover events and venues near you or in a specific location.</CardDescription>
+                </Header>
+                <CardContent className="text-center py-12">
+                    <div className="max-w-md mx-auto">
+                        <h3 className="text-xl font-semibold">Coming Soon: Interactive Event Map</h3>
+                        <p className="text-muted-foreground mt-2">Once more venues are on board, this map will become your go-to tool for finding EventSafe-verified events. Check back soon!</p>
+                        <Button className="mt-6" disabled>Notify Me</Button>
+                    </div>
                 </CardContent>
             </Card>
           </TabsContent>
