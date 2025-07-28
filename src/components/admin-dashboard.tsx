@@ -104,7 +104,7 @@ export default function AdminDashboard() {
                   <CardContent className="text-center py-8">
                       <div className="max-w-md mx-auto">
                           <h3 className="text-xl font-semibold">Scalable Staffing Tiers</h3>
-                          <p className="text-muted-foreground mt-2">Our Pro Safety Package starts with a foundation of 5 volunteers. As your events grow, you can add more volunteers in increments of 5 for just £1 per block.</p>
+                          <p className="text-muted-foreground mt-2">Our Pro Safety Package starts with a foundation of 5 volunteers. As your events grow, you can add more volunteers (e.g., Door Staff, Medics) in increments of 5 for just £1 per block.</p>
                           <Button className="mt-6" disabled>Manage Staff & Plan</Button>
                       </div>
                   </CardContent>

@@ -128,14 +128,14 @@ export default function GuestView() {
         
         <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Award /> Become a Volunteer</CardTitle>
-                <CardDescription>Join an event's team by entering a one-time code from the host.</CardDescription>
+                <CardTitle className="flex items-center gap-2"><Award /> Join an Event Team</CardTitle>
+                <CardDescription>Enter a code from a host/venue to get temporary, role-specific access for an event (e.g., Door Staff, Volunteer).</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-                <Label htmlFor="volunteer-code">Volunteer Code</Label>
+                <Label htmlFor="volunteer-code">Event Code</Label>
                 <div className="flex gap-2">
                     <Input id="volunteer-code" placeholder="Enter code..."/>
-                    <Button>Activate</Button>
+                    <Button>Activate Role</Button>
                 </div>
             </CardContent>
         </Card>
@@ -238,7 +238,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle>Linked Reports</CardTitle>
                     <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="space-y-6">
                     {accountReports.length > 0 ? (
                          <Table>
@@ -285,7 +285,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><ThumbsUp className="h-5 w-5" /> My Kudos</CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent>
                     {kudosHistory.length > 0 ? (
                          <Table>
