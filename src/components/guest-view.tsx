@@ -277,7 +277,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star className="h-5 w-5" /> Ratings & Analytics</CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
@@ -341,5 +341,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
