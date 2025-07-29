@@ -1,13 +1,13 @@
-
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Gavel, Scale, Upload } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay"
 
 const demoCases = [
     {
@@ -39,11 +39,33 @@ const demoCases = [
         complaint: "A venue charged a host an unexpected 'deep cleaning' fee after an art event that used glitter.",
         defense: "The venue states that the use of 'excessive materials' like glitter requires specialized cleaning, which is covered by a clause in their standard rental agreement.",
         verdict: "The AI Judge found the venue's claim to be reasonable but noted the clause was vague. It recommended the venue create a clear schedule of additional fees for specific materials (like glitter, smoke machines, etc.) to ensure transparency for future hosts."
+    },
+    {
+        id: 'CASE-006',
+        complaint: "A DJ claims the venue's sound system was faulty and did not meet the technical specifications promised.",
+        defense: "The venue provided a report from a sound technician from earlier that day showing the equipment was fully functional. They suggest the issue might have been with the DJ's own equipment or software.",
+        verdict: "The AI Judge suggested a shared responsibility. While the venue showed due diligence, the issue still impacted the event. The verdict recommended a joint sound check before the next event and a small partial refund of the DJ's fee as a gesture of partnership."
+    },
+    {
+        id: 'CASE-007',
+        complaint: "A guest with a valid ticket was denied entry because they arrived 10 minutes after the 'last entry' time stated on the event page.",
+        defense: "The host states the 'last entry' time is a strict rule to ensure the safety and flow of the event and to respect attendees who arrived on time.",
+        verdict: "The AI Judge upheld the host's decision. The 'last entry' time is a clear and binding condition of the ticket. While unfortunate for the guest, enforcing such rules is critical for event management. No refund was recommended."
+    },
+    {
+        id: 'CASE-008',
+        complaint: "An event photographer complains that the host used their photos in promotional material without credit.",
+        defense: "The host's contract with the photographer stipulated a flat fee for 'unrestricted use' of all event photos.",
+        verdict: "The AI Judge sided with the host, as the contract was clear. However, it added that crediting photographers is a professional courtesy that builds good relationships and recommended the host do so in the future, even if not contractually required."
     }
 ];
 
 
 export default function FunCourt() {
+    const plugin = useRef(
+        Autoplay({ delay: 8000, stopOnInteraction: true })
+    );
+
     return (
         <Card>
             <CardHeader>
@@ -53,20 +75,26 @@ export default function FunCourt() {
             <CardContent className="space-y-4">
                 <Alert variant="destructive">
                     <Gavel className="h-4 w-4" />
-                    <AlertTitle>Legal Disclaimer</AlertTitle>
+                    <AlertTitle>Legal Disclaimer & User Responsibility</AlertTitle>
                     <AlertDescription>
-                       This feature is for educational and entertainment purposes only and is not legally binding. It does not constitute real legal advice. EventSafe is not a party to any disputes.
+                       This feature is for educational and entertainment purposes only and is **not legally binding**. It does not constitute real legal advice. EventSafe is a neutral facilitator and not a party to any disputes. All case details are anonymized. Users who choose to share case results publicly do so at their own risk and are responsible for any consequences of de-anonymizing themselves or others.
                     </AlertDescription>
                 </Alert>
 
                 <div className="p-4 border rounded-lg space-y-4">
                     <h4 className="font-semibold text-center">How It Works: Demo Carousel</h4>
-                     <Carousel className="w-full max-w-lg mx-auto" opts={{ loop: true }}>
+                     <Carousel 
+                        className="w-full max-w-lg mx-auto" 
+                        plugins={[plugin.current]}
+                        onMouseEnter={plugin.current.stop}
+                        onMouseLeave={plugin.current.reset}
+                        opts={{ loop: true }}
+                    >
                         <CarouselContent>
                             {demoCases.map((demoCase) => (
                                 <CarouselItem key={demoCase.id}>
                                     <div className="p-1">
-                                        <div className="p-4 bg-muted/50 rounded-lg space-y-3">
+                                        <div className="p-4 bg-muted/50 rounded-lg space-y-3 h-[320px] overflow-y-auto">
                                              <div className="flex justify-between items-center">
                                                 <span className="font-mono text-xs">{demoCase.id}</span>
                                                 <Badge variant="secondary">Judgment Rendered</Badge>
