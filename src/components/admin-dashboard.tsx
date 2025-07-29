@@ -42,7 +42,7 @@ export default function AdminDashboard() {
         </Alert>
       )}
 
-      <Tabs defaultValue="report-analysis" className="w-full">
+      <Tabs defaultValue="verification" className="w-full">
         <TabsList className="grid w-full grid-cols-1 sm:grid-cols-6 h-auto sm:h-12">
           <TabsTrigger value="verification"><div className="flex items-center gap-2"><UserCheck className="h-4 w-4" /> Verification</div></TabsTrigger>
           <TabsTrigger value="report-analysis">AI Report Analysis</TabsTrigger>
