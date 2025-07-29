@@ -40,7 +40,7 @@ export default function AdminVerificationHandler() {
         setCases(cases.filter(c => c.id !== caseId));
         toast({
             title: `Case ${decision}`,
-            description: `The guest signup has been ${decision}.`,
+            description: `The guest signup has been ${decision}. This action has been logged for review.`,
         });
     };
     
