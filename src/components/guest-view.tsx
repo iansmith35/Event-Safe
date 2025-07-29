@@ -217,12 +217,12 @@ export default function GuestView() {
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Bot /> Premium AI Companions</CardTitle>
-                    <CardDescription>Enhance your experience with a dedicated AI role-play companion. Monthly subscription.</CardDescription>
+                    <CardDescription>Enhance your experience with a dedicated AI role-play companion for a monthly subscription of £7.</CardDescription>
                 </CardHeader>
                 <CardContent className="text-center py-12">
                      <div className="max-w-md mx-auto">
-                        <h3 className="text-xl font-semibold">Coming Soon: Virtual AI Personalities</h3>
-                        <p className="text-muted-foreground mt-2">Unlock specialized AI companions like 'Virtual Partner', 'Virtual Dom', or 'Virtual Submissive'. Choose your companion, give them a name, and explore new interactions privately and securely.</p>
+                        <h3 className="text-xl font-semibold">Coming Soon: Truly Interactive AI Personalities</h3>
+                        <p className="text-muted-foreground mt-2">Choose a 'Virtual Partner', 'Virtual Dom', or 'Virtual Submissive'. Give them a name and explore interactions privately and securely. Our AIs are designed for deep immersion, with usage limits that feel like real-life interactions, not technical cut-offs.</p>
                         <Button className="mt-6" disabled>Notify Me</Button>
                     </div>
                 </CardContent>
