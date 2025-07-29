@@ -81,11 +81,12 @@ export default function WelcomePage() {
                 </Carousel>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-                 <div className="flex flex-col gap-6">
+            <div className="grid md:grid-cols-2 gap-8 items-stretch">
+                {/* Left Column */}
+                <div className="flex flex-col gap-8">
                      <Card>
                         <CardHeader className="flex flex-row items-center gap-4">
-                           <div className="p-3 rounded-full bg-destructive text-white"><Ban className="h-8 w-8" /></div>
+                           <div className="p-3 rounded-full bg-destructive/80 text-white"><Ban className="h-8 w-8" /></div>
                             <div>
                                <CardTitle>Prevent Abuse</CardTitle>
                                 <CardDescription>Stop problem individuals from moving between venues.</CardDescription>
@@ -94,7 +95,7 @@ export default function WelcomePage() {
                     </Card>
                      <Card>
                         <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="p-3 rounded-full bg-chart-4 text-white"><Scale className="h-8 w-8" /></div>
+                            <div className="p-3 rounded-full bg-chart-4/80 text-white"><Scale className="h-8 w-8" /></div>
                             <div>
                                 <CardTitle>Resolve Disputes</CardTitle>
                                 <CardDescription>Handle disagreements fairly and privately with our AI tools.</CardDescription>
@@ -103,100 +104,105 @@ export default function WelcomePage() {
                     </Card>
                     <Card>
                         <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="p-3 rounded-full bg-chart-2 text-white"><CheckCircle className="h-8 w-8" /></div>
+                            <div className="p-3 rounded-full bg-chart-2/80 text-white"><CheckCircle className="h-8 w-8" /></div>
                             <div>
                                <CardTitle>Build Trust</CardTitle>
                                <CardDescription>Create a community built on transparency and respect.</CardDescription>
                             </div>
                         </CardHeader>
                     </Card>
+
+                    <Card className="flex flex-col">
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-3">
+                                <UserIcon className="w-8 h-8 text-primary" />
+                                <span className="text-2xl">For Guests</span>
+                            </CardTitle>
+                            <CardDescription>
+                                Your secure, universal pass to the UK's best events. Attend with confidence, knowing every event is EventSafe verified.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex-1 flex flex-col justify-end">
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Button asChild className="flex-1" size="lg">
+                                    <Link href="/dashboard?view=guest">Explore Guest Features</Link>
+                                </Button>
+                                <Button asChild className="flex-1" size="lg" variant="secondary">
+                                    <Link href="/signup">Create Your Event Pass</Link>
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="flex flex-col">
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-3">
+                                <Users className="w-8 h-8 text-primary" />
+                                <span className="text-2xl">For Hosts & Venues</span>
+                            </CardTitle>
+                            <CardDescription>
+                               Protect your reputation, staff, and attendees with powerful AI tools to vet guests, manage reports, and reduce risk.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex-1 flex flex-col justify-end">
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                 <Button asChild className="flex-1" size="lg">
+                                    <Link href="/dashboard?view=admin">Explore Admin Tools</Link>
+                                </Button>
+                                <Button asChild className="flex-1" size="lg" variant="secondary">
+                                    <Link href="/host-signup">Onboard Your Venue</Link>
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
-                <div className="space-y-8">
+
+                 {/* Right Column */}
+                <div className="flex flex-col gap-8">
                     <FunCourt />
                     
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold tracking-tight">What Our Community Says</h2>
-                        <p className="mt-2 text-muted-foreground">Real feedback from real users.</p>
-                    </div>
-                     <Carousel
-                        className="w-full max-w-4xl mx-auto"
-                        plugins={[testimonialPlugin.current]}
-                        opts={{ loop: true }}
-                    >
-                        <CarouselContent>
-                            {testimonials.map((testimonial, index) => (
-                                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/1">
-                                    <div className="p-1 h-full">
-                                        <Card className="h-full flex flex-col">
-                                            <CardContent className="pt-6 flex-1 flex flex-col justify-between">
-                                                <p className="italic">"{testimonial.comment}"</p>
-                                                <div className="flex items-center gap-3 pt-4 mt-auto">
-                                                    <Avatar>
-                                                        <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
-                                                        <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                                                    </Avatar>
-                                                    <div>
-                                                        <p className="font-semibold">{testimonial.name}</p>
-                                                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                                                    </div>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                            <CarouselPrevious className="-left-4 hidden md:flex" />
-                            <CarouselNext className="-right-4 hidden md:flex"/>
-                    </Carousel>
+                    <Card className="flex flex-col flex-1">
+                        <CardHeader>
+                            <CardTitle>What Our Community Says</CardTitle>
+                            <CardDescription>Real feedback from real users.</CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex-1 flex items-center justify-center">
+                             <Carousel
+                                className="w-full max-w-md mx-auto"
+                                plugins={[testimonialPlugin.current]}
+                                opts={{ loop: true }}
+                            >
+                                <CarouselContent>
+                                    {testimonials.map((testimonial, index) => (
+                                        <CarouselItem key={index} className="md:basis-1/1 lg:basis-1/1">
+                                            <div className="p-1 h-full">
+                                                <Card className="h-full flex flex-col shadow-none border-0">
+                                                    <CardContent className="pt-0 flex-1 flex flex-col justify-center">
+                                                        <p className="italic text-center text-lg">"{testimonial.comment}"</p>
+                                                        <div className="flex items-center gap-3 pt-4 justify-center mt-4">
+                                                            <Avatar>
+                                                                <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
+                                                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                                            </Avatar>
+                                                            <div>
+                                                                <p className="font-semibold">{testimonial.name}</p>
+                                                                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                                                            </div>
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                                <CarouselPrevious className="-left-4 hidden md:flex" />
+                                <CarouselNext className="-right-4 hidden md:flex"/>
+                            </Carousel>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-                <Card className="flex flex-col">
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-3">
-                            <UserIcon className="w-8 h-8 text-primary" />
-                            <span className="text-2xl">For Guests</span>
-                        </CardTitle>
-                        <CardDescription>
-                            Your secure, universal pass to the UK's best events. Attend with confidence, knowing every event is EventSafe verified.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col justify-end">
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Button asChild className="flex-1" size="lg">
-                                <Link href="/dashboard?view=guest">Explore Guest Features</Link>
-                            </Button>
-                            <Button asChild className="flex-1" size="lg" variant="secondary">
-                                <Link href="/signup">Create Your Event Pass</Link>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card className="flex flex-col">
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-3">
-                            <Users className="w-8 h-8 text-primary" />
-                            <span className="text-2xl">For Hosts & Venues</span>
-                        </CardTitle>
-                        <CardDescription>
-                           Protect your reputation, staff, and attendees with powerful AI tools to vet guests, manage reports, and reduce risk.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col justify-end">
-                        <div className="flex flex-col sm:flex-row gap-4">
-                             <Button asChild className="flex-1" size="lg">
-                                <Link href="/dashboard?view=admin">Explore Admin Tools</Link>
-                            </Button>
-                            <Button asChild className="flex-1" size="lg" variant="secondary">
-                                <Link href="/host-signup">Onboard Your Venue</Link>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
 
             <div className="max-w-4xl mx-auto w-full flex justify-center">
               <div className="w-full lg:w-2/3">
@@ -216,6 +222,5 @@ export default function WelcomePage() {
       </footer>
     </div>
   );
-}
 
     
