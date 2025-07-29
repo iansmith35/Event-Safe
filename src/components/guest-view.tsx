@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -24,6 +24,7 @@ import SuggestionBox from "./suggestion-box";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
 import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -92,6 +93,16 @@ export default function GuestView() {
   const [status] = useState<Status>('Green');
   const [activeProfileId, setActiveProfileId] = useState('vanilla-male');
   const isAppealDisabled = status === 'Green';
+  const { toast } = useToast();
+
+  const handleKudosSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+        title: "Feedback Submitted!",
+        description: "Thank you! Your positive feedback helps build a better community.",
+    });
+    (e.target as HTMLFormElement).reset();
+  }
 
   const activeProfile = profileVariants.find(p => p.id === activeProfileId) || profileVariants[0];
 
@@ -356,6 +367,23 @@ export default function GuestView() {
             </Card>
           </TabsContent>
         </Tabs>
+        
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Heart /> Leave a Public Comment</CardTitle>
+                <CardDescription>Love using EventSafe? Share your thoughts! Your comment might be featured on our homepage.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <form onSubmit={handleKudosSubmit} className="space-y-4">
+                    <Textarea 
+                        name="public-kudos"
+                        placeholder="e.g., EventSafe is a game-changer for event safety! I feel so much more secure knowing venues are verified."
+                        rows={4}
+                    />
+                    <Button type="submit">Submit Feedback</Button>
+                </form>
+            </CardContent>
+        </Card>
 
         <RebeccaChatbot />
         <SuggestionBox />
@@ -364,3 +392,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
