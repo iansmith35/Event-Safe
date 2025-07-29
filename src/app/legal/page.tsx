@@ -42,18 +42,18 @@ export default function LegalPage() {
             </Card>
              <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Gavel /> Formal Law Enforcement Requests</CardTitle>
-                    <CardDescription>Our process for handling official legal requests for data.</CardDescription>
+                    <CardTitle className="flex items-center gap-2"><Gavel /> Formal Law Enforcement & Data Requests</CardTitle>
+                    <CardDescription>Our process for handling official legal and data subject access requests.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <p className="text-sm">
-                        EventSafe is committed to user privacy and will only disclose user data when required by law.
+                        EventSafe is committed to user privacy and will only disclose user data when required by law, such as through a Data Subject Access Request (SAR) or a valid court order.
                     </p>
                     <p className="text-sm">
-                       All official requests for user data must be directed to our legal department and be accompanied by a valid court order, warrant, or other legally-binding instrument.
+                       All official requests for user data must be directed to our legal department. Requests from law enforcement must be accompanied by a valid court order, warrant, or other legally-binding instrument.
                     </p>
                      <p className="text-sm">
-                        Requests must be sent from an official, verifiable law enforcement email domain. We will not respond to requests from public email providers (e.g., gmail.com, outlook.com).
+                        Requests must be sent from an official, verifiable email domain (e.g., '.police.uk' for law enforcement). We will not respond to requests from public email providers (e.g., gmail.com). Where legally permissible, a reasonable administrative fee may be charged to process data access requests.
                     </p>
                      <p className="font-semibold text-sm">
                         Please direct all inquiries to: <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a>
@@ -65,7 +65,7 @@ export default function LegalPage() {
         <Card className="border-destructive">
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-destructive"><ShieldCheck /> Our Commitment to Data Protection</CardTitle>
-            </CardHeader>
+            </Header>
             <CardContent>
                 <p className="text-sm text-destructive/90">
                     We will not release any user data without either explicit, verified user consent or a formal, legally-binding request. We will challenge any requests that are overly broad or do not adhere to the correct legal procedures to protect our users' privacy. The safety and trust of our community is paramount.

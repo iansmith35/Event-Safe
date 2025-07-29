@@ -89,7 +89,7 @@ export default function WelcomePage() {
       <footer className="p-4 text-center text-xs text-muted-foreground border-t">
           <div className="flex justify-center gap-4">
             <p>&copy; {new Date().getFullYear()} EventSafe. All rights reserved.</p>
-            <Link href="/legal" className="underline hover:text-primary">Legal & Law Enforcement</Link>
+            <Link href="/legal" className="underline hover:text-primary">Legal & Data Requests</Link>
           </div>
           <p className="mt-1">EventSafe is a facilitation tool. Users are responsible for their own legal and tax compliance.</p>
       </footer>
