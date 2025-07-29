@@ -132,10 +132,10 @@ export default function HostSignupForm() {
                     htmlFor="host-consent"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                    I agree to the EventSafe Host <Link href="#" className="underline">terms and conditions</Link>.
+                    I agree to the EventSafe <Link href="/legal" className="underline">terms and conditions</Link>.
                 </label>
                 <p className="text-sm text-muted-foreground">
-                    I understand I am responsible for legal compliance, including venue licensing for adult events, and that EventSafe is a facilitation tool only.
+                    By creating an account, I acknowledge and agree that EventSafe is a facilitation tool. I confirm that I am responsible for my own legal, tax, and licensing compliance, including any specific requirements for hosting adult or sex-positive events in my jurisdiction.
                 </p>
                 </div>
             </div>

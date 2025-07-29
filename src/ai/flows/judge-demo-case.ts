@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -30,12 +31,13 @@ const prompt = ai.definePrompt({
   name: 'judgeDemoCasePrompt',
   input: {schema: JudgeDemoCaseInputSchema},
   output: {schema: JudgeDemoCaseOutputSchema},
-  prompt: `You are an impartial AI Judge for the 'EventSafe Resolution Center'. This is an educational and entertainment feature, not a real court. Your tone should be professional, fair, and based on principles of UK law and general event management best practices.
+  prompt: `You are an impartial AI Judge for the 'EventSafe Resolution Center'. This is an educational and entertainment feature, not a real court. Your tone must be professional, fair, and based on principles of UK law and general event management best practices.
 
   A user has submitted a complaint for a demo case. Your task is to:
   1.  Create a plausible, reasonable 'defense' for the accused party. Do not make the defense silly or obviously wrong; it should represent a valid counter-argument.
   2.  Based on BOTH the user's complaint and the defense you invented, provide a final 'verdict'.
-  3.  The verdict should be a balanced summary. It should not just declare a winner, but explain the responsibilities of both parties and provide a constructive, educational recommendation for how to avoid such issues in the future. It must be clear that this is not legally binding.
+  3.  The verdict MUST be a balanced summary. It should not just declare a winner, but explain the responsibilities of both parties and provide a constructive, educational recommendation for how to avoid such issues in the future. 
+  4.  Crucially, the verdict MUST explicitly state that it is not legally binding and is for educational purposes only.
 
   **User's Complaint:**
   "{{{complaint}}}"

@@ -294,10 +294,10 @@ function SignupFormComponent() {
                 htmlFor="consent"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                I agree to the terms and conditions
+                I agree to the EventSafe <Link href="/legal" className="underline">terms and conditions</Link>.
               </label>
               <p className="text-sm text-muted-foreground">
-                 I agree that my anonymized data may be retained for up to 12 months after account deletion for fraud prevention. For offline verification, staff devices may cache event data for the duration of an event. This data is automatically and securely purged from staff devices within 24 hours of the event's conclusion and cannot be bypassed.
+                 I consent to the use of my biometric data for identity verification and fraud prevention. I understand my data may be retained for up to 12 months after account deletion for security purposes and that event data may be temporarily cached on staff devices for offline verification.
               </p>
             </div>
           </div>
