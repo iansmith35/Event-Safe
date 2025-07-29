@@ -15,6 +15,7 @@ import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
 import FunCourt from "./fun-court";
 import AdminVerificationHandler from "./admin-verification-handler";
+import FinancialDashboard from "./financial-dashboard";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -49,7 +50,7 @@ export default function AdminDashboard() {
           <TabsTrigger value="status-suggester">Status Change Suggester</TabsTrigger>
           <TabsTrigger value="appeal-handler">Appeal Request Handler</TabsTrigger>
           <TabsTrigger value="kudos-analyzer"><div className="flex items-center gap-2"><ThumbsUp className="h-4 w-4" /> Kudos Analyzer</div></TabsTrigger>
-          <TabsTrigger value="ticketing" className="flex items-center gap-2">
+          <TabsTrigger value="financials" className="flex items-center gap-2">
             <Ticket className="h-4 w-4" /> EventSafe Pay
           </TabsTrigger>
         </TabsList>
@@ -68,20 +69,8 @@ export default function AdminDashboard() {
         <TabsContent value="kudos-analyzer">
             <AdminKudosAnalyzer />
         </TabsContent>
-         <TabsContent value="ticketing">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Ticket /> EventSafe Pay & Ticketing</CardTitle>
-              <CardDescription>Manage ticket sales, track revenue, and log payments with an embedded Stripe solution.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center py-12">
-                <div className="max-w-md mx-auto">
-                    <h3 className="text-xl font-semibold">Coming Soon: Pro Safety Package</h3>
-                    <p className="text-muted-foreground mt-2">This feature is part of the upcoming Pro Safety Package. Unlock score-based access control, ticket tracking, staff fraud detection, fire logs, and guest GPS.</p>
-                    <Button className="mt-6" disabled>Notify Me</Button>
-                </div>
-            </CardContent>
-          </Card>
+         <TabsContent value="financials">
+          <FinancialDashboard />
         </TabsContent>
       </Tabs>
       
