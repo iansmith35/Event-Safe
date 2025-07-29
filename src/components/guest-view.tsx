@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -23,6 +23,7 @@ import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
 import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
+import Image from "next/image";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -43,6 +44,23 @@ const statusConfig = {
     score: 300,
   },
 };
+
+const profileVariants = [
+    {
+        id: 'vanilla-male',
+        pseudonym: 'AgentIndigo',
+        photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400',
+        photoHint: 'female person',
+        type: 'Vanilla'
+    },
+    {
+        id: 'adult-female',
+        pseudonym: 'Vixen',
+        photo: 'https://images.unsplash.com/photo-1596644230693-bdfc6f50531b?q=80&w=400',
+        photoHint: 'woman intense',
+        type: 'Adult'
+    }
+]
 
 const eventHistory = [
   { event: "Summer Fest '24", date: "2024-07-20", status: "Attended" },
@@ -72,7 +90,10 @@ const eventTeam = {
 
 export default function GuestView() {
   const [status] = useState<Status>('Green');
+  const [activeProfileId, setActiveProfileId] = useState('vanilla-male');
   const isAppealDisabled = status === 'Green';
+
+  const activeProfile = profileVariants.find(p => p.id === activeProfileId) || profileVariants[0];
 
   return (
     <div className="grid gap-8 md:grid-cols-3 noselect">
@@ -125,14 +146,45 @@ export default function GuestView() {
             <CardContent className="space-y-4">
                 <div className="flex items-center gap-4">
                     <Avatar className="w-16 h-16">
-                        <AvatarImage src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400" alt="@guest" data-ai-hint="female person" />
+                        <AvatarImage src={activeProfile.photo} alt={activeProfile.pseudonym} data-ai-hint={activeProfile.photoHint} />
                         <AvatarFallback>G</AvatarFallback>
                     </Avatar>
                     <div>
-                        <p className="font-bold text-lg">AgentIndigo</p>
+                        <p className="font-bold text-lg">{activeProfile.pseudonym}</p>
                         <p className="text-sm text-muted-foreground">ESG-928301 (Score: 950)</p>
                     </div>
                 </div>
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><RefreshCw /> Profile Variants</CardTitle>
+                <CardDescription>Switch your appearance for different event types. Your core identity and score remain the same.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {profileVariants.map(variant => (
+                        <button key={variant.id} onClick={() => setActiveProfileId(variant.id)} className={`p-2 border-2 rounded-lg flex flex-col items-center gap-2 text-center transition-all ${activeProfileId === variant.id ? 'border-primary ring-2 ring-primary' : 'border-transparent hover:border-muted-foreground'}`}>
+                             <Image src={variant.photo} alt={variant.pseudonym} width={80} height={80} className="w-20 h-20 object-cover rounded-full" data-ai-hint={variant.photoHint}/>
+                             <div className="text-sm">
+                                <p className="font-semibold">{variant.pseudonym}</p>
+                                <p className="text-xs text-muted-foreground">{variant.type}</p>
+                             </div>
+                        </button>
+                    ))}
+                    <button className="p-2 border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-2 text-center transition-all hover:border-primary hover:text-primary">
+                        <UserPlus className="h-10 w-10 text-muted-foreground" />
+                        <span className="text-sm font-semibold">Add Variant</span>
+                    </button>
+                </div>
+                <Alert>
+                    <ShieldCheck className="h-4 w-4"/>
+                    <AlertTitle>Safety Notice</AlertTitle>
+                    <AlertDescription>
+                        Creating a new variant requires AI-biometric comparison to your master photo to prevent fraud. All reports and ratings are tied to your single, core account.
+                    </AlertDescription>
+                </Alert>
             </CardContent>
         </Card>
         
@@ -312,5 +364,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
