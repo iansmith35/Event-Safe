@@ -53,7 +53,7 @@ export default function LegalPage() {
                        All official requests for user data must be directed to our legal department. Requests from law enforcement must be accompanied by a valid court order, warrant, or other legally-binding instrument.
                     </p>
                      <p className="text-sm">
-                        Requests must be sent from an official, verifiable email domain (e.g., '.police.uk' for law enforcement). We will not respond to requests from public email providers (e.g., gmail.com). Where legally permissible, a reasonable administrative fee may be charged to process data access requests.
+                        Requests must be sent from an official, verifiable email domain (e.g., '.police.uk' for law enforcement). We will not respond to requests from public email providers (e.g., gmail.com). Where legally permissible for requests that are manifestly unfounded, excessive, or for further copies of data already provided, a reasonable administrative fee may be charged to cover processing costs.
                     </p>
                      <p className="font-semibold text-sm">
                         Please direct all inquiries to: <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a>
