@@ -221,8 +221,8 @@ export default function GuestView() {
                 </CardHeader>
                 <CardContent className="text-center py-12">
                      <div className="max-w-md mx-auto">
-                        <h3 className="text-xl font-semibold">Coming Soon: AI Personalities</h3>
-                        <p className="text-muted-foreground mt-2">Unlock specialized AI companions like 'AI Dom', 'AI Submissive', and more. Each with a unique personality, ready to engage based on your preferences. Choose your companion, give them a name, and explore new interactions.</p>
+                        <h3 className="text-xl font-semibold">Coming Soon: Virtual AI Personalities</h3>
+                        <p className="text-muted-foreground mt-2">Unlock specialized AI companions like 'Virtual Partner', 'Virtual Dom', or 'Virtual Submissive'. Choose your companion, give them a name, and explore new interactions privately and securely.</p>
                         <Button className="mt-6" disabled>Notify Me</Button>
                     </div>
                 </CardContent>
@@ -443,5 +443,3 @@ export default function GuestView() {
     </div>
   );
 }
-
-    
