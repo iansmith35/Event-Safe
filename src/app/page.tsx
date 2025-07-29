@@ -54,7 +54,7 @@ export default function GlobalPage() {
                     <CardDescription>Our live network is growing in the UK. International expansion starts in 2026.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Image src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" width={1200} height={675} className="rounded-lg border object-cover w-full h-auto" data-ai-hint="world map lights" />
+                    <img src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" className="rounded-lg border object-cover w-full h-auto" data-ai-hint="world map lights" />
                 </CardContent>
             </Card>
 
