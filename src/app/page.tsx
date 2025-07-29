@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
-import { Globe, MapPin, Users as UsersIcon } from "lucide-react";
+import { Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
@@ -55,7 +55,7 @@ export default function GlobalPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="relative aspect-video w-full bg-muted rounded-lg border">
-                         <Image src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" layout="fill" objectFit="cover" data-ai-hint="world map lights" />
+                         <Image src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" fill={true} style={{objectFit: 'cover'}} data-ai-hint="world map lights" />
                          <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
                             <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
                                 <h4 className="font-bold text-xl">Put Your Scene on the Map</h4>

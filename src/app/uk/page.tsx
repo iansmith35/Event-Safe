@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
-import { CheckCircle, Ban, Scale, Users as UsersIcon, Users } from "lucide-react";
+import { CheckCircle, Ban, Scale, Users as UsersIcon, Users, MapPin } from "lucide-react";
 import Link from "next/link";
 import RebeccaChatbot from "@/components/rebecca-chatbot";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -12,6 +12,11 @@ import Autoplay from "embla-carousel-autoplay"
 import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FunCourt from "@/components/fun-court";
+import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -75,6 +80,16 @@ const carouselMessages = [
 export default function WelcomePage() {
     const autoplayPlugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
     const testimonialPlugin = useRef(Autoplay({ delay: 10000, stopOnInteraction: true }));
+    const { toast } = useToast();
+
+    const handleInterestSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        toast({
+            title: "Interest Registered!",
+            description: "Thank you! We'll keep you updated on new venues and events in your area.",
+        });
+        (e.target as HTMLFormElement).reset();
+    }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -242,9 +257,61 @@ export default function WelcomePage() {
                 </div>
             </div>
 
-
             <div className="max-w-4xl mx-auto w-full">
                 <RebeccaChatbot />
+            </div>
+
+             <div className="max-w-6xl mx-auto w-full space-y-12">
+                <Card className="overflow-hidden">
+                    <CardHeader>
+                        <CardTitle className="flex items-center justify-center gap-2 text-2xl"><MapPin /> Put Your UK Scene on the Map</CardTitle>
+                        <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="relative aspect-video w-full bg-muted rounded-lg border">
+                             <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" fill={true} style={{objectFit: 'cover'}} data-ai-hint="UK map lights" />
+                             <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
+                                <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
+                                    <h4 className="font-bold text-xl">Nominate Your Local Venues</h4>
+                                    <p className="text-sm text-muted-foreground">The more demand we see, the faster we grow.</p>
+                                </div>
+                             </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Register Your Local Interest</CardTitle>
+                        <CardDescription>Let us know you want EventSafe in your city.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleInterestSubmit} className="max-w-xl mx-auto text-left space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="city-uk">Your City</Label>
+                                <Input id="city-uk" placeholder="e.g., Manchester, Bristol, Glasgow" required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="email-uk">Your Email</Label>
+                                <Input id="email-uk" type="email" placeholder="you@example.com" required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="user-type-uk">I am a...</Label>
+                                <Select required name="user-type-uk">
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select your role..." />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="guest">Guest</SelectItem>
+                                        <SelectItem value="host">Event Host</SelectItem>
+                                        <SelectItem value="venue">Venue Owner</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <Button type="submit" className="w-full">Register Interest</Button>
+                        </form>
+                    </CardContent>
+                </Card>
             </div>
 
         </div>
