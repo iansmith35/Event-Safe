@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Gavel, Scale, Loader2 } from "lucide-react";
+import { Gavel, Scale, Loader2, Upload } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Textarea } from './ui/textarea';
@@ -63,6 +63,18 @@ export default function FunCourt() {
                             onChange={(e) => setComplaint(e.target.value)}
                             rows={3}
                         />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="evidence-upload">Upload Evidence (Optional)</Label>
+                        <Button asChild variant="outline" className="w-full">
+                            <label htmlFor="evidence-upload-input">
+                                <Upload className="mr-2" /> Upload Photos or Documents
+                                <input id="evidence-upload-input" type="file" multiple className="sr-only" />
+                            </label>
+                        </Button>
+                        <p className="text-xs text-muted-foreground">
+                            Evidence is used for this case and securely logged against your profile for internal safety review. It is not publicly visible.
+                        </p>
                     </div>
                      <Button type="submit" disabled={isLoading}>
                         {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Gavel className="mr-2 h-4 w-4" />}
