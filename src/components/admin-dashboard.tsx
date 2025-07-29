@@ -7,13 +7,14 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, Scale } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, Scale, UserCheck } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
 import FunCourt from "./fun-court";
+import AdminVerificationHandler from "./admin-verification-handler";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -36,13 +37,14 @@ export default function AdminDashboard() {
             </Button>
           </AlertTitle>
           <AlertDescription>
-            A new guest signup has been flagged as a possible duplicate. Reason: {flaggedUser.reason}
+            A new guest signup has been flagged as a possible duplicate. Reason: {flaggedUser.reason}. Please review in the <strong className="font-semibold">Verification</strong> tab.
           </AlertDescription>
         </Alert>
       )}
 
       <Tabs defaultValue="report-analysis" className="w-full">
-        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-5 h-auto sm:h-12">
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-6 h-auto sm:h-12">
+          <TabsTrigger value="verification"><div className="flex items-center gap-2"><UserCheck className="h-4 w-4" /> Verification</div></TabsTrigger>
           <TabsTrigger value="report-analysis">AI Report Analysis</TabsTrigger>
           <TabsTrigger value="status-suggester">Status Change Suggester</TabsTrigger>
           <TabsTrigger value="appeal-handler">Appeal Request Handler</TabsTrigger>
@@ -51,6 +53,9 @@ export default function AdminDashboard() {
             <Ticket className="h-4 w-4" /> EventSafe Pay
           </TabsTrigger>
         </TabsList>
+        <TabsContent value="verification">
+          <AdminVerificationHandler />
+        </TabsContent>
         <TabsContent value="report-analysis">
           <AdminReportAnalysis />
         </TabsContent>
