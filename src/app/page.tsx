@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
-import { ShieldCheck, User, Users, CheckCircle, Ban, Scale, ArrowRight, Heart, Handshake, Lock, Group } from "lucide-react";
+import { CheckCircle, Ban, Scale, User as UserIcon, Users } from "lucide-react";
 import Link from "next/link";
 import RebeccaChatbot from "@/components/rebecca-chatbot";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -156,7 +156,7 @@ export default function WelcomePage() {
                 <Card className="flex flex-col">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-3">
-                            <User className="w-8 h-8 text-primary" />
+                            <UserIcon className="w-8 h-8 text-primary" />
                             <span className="text-2xl">For Guests</span>
                         </CardTitle>
                         <CardDescription>
@@ -198,8 +198,10 @@ export default function WelcomePage() {
                 </Card>
             </div>
 
-            <div className="max-w-xl mx-auto w-full">
-              <RebeccaChatbot />
+            <div className="max-w-4xl mx-auto w-full flex justify-center">
+              <div className="w-full lg:w-2/3">
+                 <RebeccaChatbot />
+              </div>
             </div>
 
         </div>
@@ -215,3 +217,5 @@ export default function WelcomePage() {
     </div>
   );
 }
+
+    

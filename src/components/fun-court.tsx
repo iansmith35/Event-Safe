@@ -73,70 +73,46 @@ export default function FunCourt() {
                 <CardTitle className="flex items-center gap-2"><Scale /> EventSafe Resolution Center</CardTitle>
                 <CardDescription>Anonymized, AI-driven dispute resolution for educational purposes, based on UK law principles.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-                <Alert variant="destructive">
-                    <Gavel className="h-4 w-4" />
-                    <AlertTitle>Legal Disclaimer & User Responsibility Agreement</AlertTitle>
-                    <AlertDescription>
-                       This feature is for educational and entertainment purposes only and is **not legally binding**. Real cases are entirely private. By using this service, both the complainant (who pays the fee) and the respondent (who participates by clicking the case link) agree to these terms. EventSafe is a neutral facilitator; users who de-anonymize themselves or others publicly do so at their own risk and are responsible for any legal consequences.
-                    </AlertDescription>
-                </Alert>
-
-                <div className="p-4 border rounded-lg space-y-4">
-                    <h4 className="font-semibold text-center">How It Works: Demo Carousel</h4>
-                     <Carousel 
-                        className="w-full max-w-lg mx-auto" 
-                        plugins={[plugin.current]}
-                        onMouseEnter={plugin.current.stop}
-                        onMouseLeave={plugin.current.reset}
-                        opts={{ loop: true }}
-                    >
-                        <CarouselContent>
-                            {demoCases.map((demoCase) => (
-                                <CarouselItem key={demoCase.id}>
-                                    <div className="p-1">
-                                        <div className="p-4 bg-muted/50 rounded-lg space-y-3 h-[320px] overflow-y-auto">
-                                             <div className="flex justify-between items-center">
-                                                <span className="font-mono text-xs">{demoCase.id}</span>
-                                                <Badge variant="secondary">Judgment Rendered</Badge>
-                                            </div>
-                                             <p className="text-sm">
-                                                <span className="font-semibold text-primary">Complaint:</span> {demoCase.complaint}
+            <CardContent>
+                 <Carousel 
+                    className="w-full max-w-lg mx-auto" 
+                    plugins={[plugin.current]}
+                    onMouseEnter={plugin.current.stop}
+                    onMouseLeave={plugin.current.reset}
+                    opts={{ loop: true }}
+                >
+                    <CarouselContent>
+                        {demoCases.map((demoCase) => (
+                            <CarouselItem key={demoCase.id}>
+                                <div className="p-1">
+                                    <div className="p-4 bg-muted/50 rounded-lg space-y-3 h-[320px] overflow-y-auto">
+                                         <div className="flex justify-between items-center">
+                                            <span className="font-mono text-xs">{demoCase.id}</span>
+                                            <Badge variant="secondary">Judgment Rendered</Badge>
+                                        </div>
+                                         <p className="text-sm">
+                                            <span className="font-semibold text-primary">Complaint:</span> {demoCase.complaint}
+                                        </p>
+                                         <p className="text-sm">
+                                            <span className="font-semibold text-primary">AI-Simulated Defense:</span> {demoCase.defense}
+                                        </p>
+                                        <div className="pt-2">
+                                            <h5 className="font-semibold text-chart-2">AI Judge's Verdict:</h5>
+                                            <p className="text-sm text-muted-foreground">
+                                               {demoCase.verdict}
                                             </p>
-                                             <p className="text-sm">
-                                                <span className="font-semibold text-primary">AI-Simulated Defense:</span> {demoCase.defense}
-                                            </p>
-                                            <div className="pt-2">
-                                                <h5 className="font-semibold text-chart-2">AI Judge's Verdict:</h5>
-                                                <p className="text-sm text-muted-foreground">
-                                                   {demoCase.verdict}
-                                                </p>
-                                            </div>
                                         </div>
                                     </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="-left-4" />
-                        <CarouselNext className="-right-4" />
-                    </Carousel>
-                </div>
-               
-                <div className="p-4 border rounded-lg space-y-4">
-                     <h4 className="font-semibold">Ready to File a Real Case? (Private & Secure)</h4>
-                     <p className="text-sm text-muted-foreground">
-                        This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements and evidence (limited to 2 image uploads). This fee prevents abuse and covers AI processing costs. Real cases are completely private and never made public. The system will automatically redact personal information to protect all parties.
-                    </p>
-                     <div className="flex flex-col sm:flex-row gap-2">
-                        <Button disabled className="flex-1">
-                            <Gavel /> File a Private Case (£1)
-                        </Button>
-                         <Button disabled variant="outline" className="flex-1">
-                            <Upload /> Upload Evidence (Images Only)
-                        </Button>
-                     </div>
-                </div>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="-left-4" />
+                    <CarouselNext className="-right-4" />
+                </Carousel>
             </CardContent>
         </Card>
     );
 }
+
+    
