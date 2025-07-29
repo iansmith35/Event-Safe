@@ -40,14 +40,14 @@ const prompt = ai.definePrompt({
   "{{{reason}}}"
 
   **Your Tasks:**
-  1.  **Generate `guestNotification`**:
+  1.  **Generate \`guestNotification\`**:
       *   This message is for the guest.
       *   It must clearly state that the suspension is for this specific event only and does not affect their overall EventSafe status.
       *   It should explain the reason politely and constructively, focusing on the behavior, not the person.
       *   It should offer a path to reconciliation, suggesting they can attend future events if they adhere to the rules.
       *   Do NOT be accusatory. Frame it as a measure to ensure a safe and enjoyable event for everyone.
 
-  2.  **Generate `logEntry`**:
+  2.  **Generate \`logEntry\`**:
       *   This is for the host's private event log.
       *   It should be a brief, factual summary of the reason for the event-specific suspension.
       *   Example: "Guest suspended from this event due to intoxication at previous event."
