@@ -10,7 +10,7 @@ export default function LegalPage() {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
         <div className="absolute top-4 left-4">
             <Button asChild variant="outline">
-                <Link href="/">Back to Home</Link>
+                <Link href="/uk">Back to Home</Link>
             </Button>
         </div>
       <div className="w-full max-w-4xl space-y-8">

@@ -147,7 +147,7 @@ export default function DashboardPage() {
         <div className="flex-1 flex flex-col">
            <header className="sticky top-0 z-10 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm border-b h-[65px]">
             <Button asChild variant="outline">
-              <Link href="/">
+              <Link href="/uk">
                 <Home /> Back to Home
               </Link>
             </Button>
