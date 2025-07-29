@@ -102,10 +102,10 @@ export default function GuestView() {
          <Card>
             <CardHeader>
                 <CardTitle>Event Pass</CardTitle>
-                <CardDescription>This feature is temporarily unavailable while we perform maintenance.</CardDescription>
+                <CardDescription>This feature is temporarily unavailable while we perform maintenance or due to connectivity issues.</CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">Your event pass and badge generator will be back online shortly. Thank you for your patience.</p>
+                <p className="text-sm text-muted-foreground">Your event pass and badge generator will be back online shortly. If you are at an event, please use your distinguishing mark for verification.</p>
             </CardContent>
         </Card>
         
