@@ -114,12 +114,12 @@ export default function FunCourt() {
                     </div>
                 )}
                
-                <p className="text-sm text-muted-foreground pt-4">
-                    This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements.
+                <p className="text-sm text-muted-foreground pt-4 border-t">
+                    This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements. This fee prevents abuse and covers AI processing costs.
                 </p>
 
                 <Button disabled className="w-full">
-                    Coming Soon: File a Case
+                    File a Case (£1)
                 </Button>
             </CardContent>
         </Card>
