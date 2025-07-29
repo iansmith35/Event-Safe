@@ -27,6 +27,18 @@ const demoCases = [
         complaint: "A volunteer staff member complains they were dismissed from their post mid-event without a clear reason.",
         defense: "The host claims the volunteer was not following instructions and was creating a negative atmosphere, which is a breach of the volunteer agreement.",
         verdict: "The AI Judge advised that while hosts have the right to manage their teams, feedback should be given clearly before dismissal, unless it's a serious safety issue. It recommended the host provide a specific reason to the volunteer post-event."
+    },
+    {
+        id: 'CASE-004',
+        complaint: "A guest was removed for violating the 'no phone cameras' rule at a private event.",
+        defense: "The guest claims they were only checking a message and were not taking photos, arguing the removal was an overreaction.",
+        verdict: "The AI Judge ruled in favor of the host. At private events with strict no-camera policies, even the appearance of using a phone can disrupt the safety and privacy of others. The verdict emphasized the importance of respecting house rules for the comfort of all guests."
+    },
+    {
+        id: 'CASE-005',
+        complaint: "A venue charged a host an unexpected 'deep cleaning' fee after an art event that used glitter.",
+        defense: "The venue states that the use of 'excessive materials' like glitter requires specialized cleaning, which is covered by a clause in their standard rental agreement.",
+        verdict: "The AI Judge found the venue's claim to be reasonable but noted the clause was vague. It recommended the venue create a clear schedule of additional fees for specific materials (like glitter, smoke machines, etc.) to ensure transparency for future hosts."
     }
 ];
 
@@ -82,13 +94,13 @@ export default function FunCourt() {
                 </div>
                
                 <div className="p-4 border rounded-lg space-y-4">
-                     <h4 className="font-semibold">Ready to File a Real Case?</h4>
+                     <h4 className="font-semibold">Ready to File a Real Case? (Private & Secure)</h4>
                      <p className="text-sm text-muted-foreground">
-                        This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements and evidence (limited to 2 image uploads). This fee prevents abuse and covers AI processing costs.
+                        This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements and evidence (limited to 2 image uploads). This fee prevents abuse and covers AI processing costs. Real cases are completely private and never made public.
                     </p>
                      <div className="flex flex-col sm:flex-row gap-2">
                         <Button disabled className="flex-1">
-                            <Gavel /> File a Case (£1)
+                            <Gavel /> File a Private Case (£1)
                         </Button>
                          <Button disabled variant="outline" className="flex-1">
                             <Upload /> Upload Evidence (Images Only)
