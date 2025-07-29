@@ -334,7 +334,7 @@ export default function GuestView() {
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
-                        <p className="text-muted-foreground mt-2">Unlock the ability to rate venues and view detailed analytics on your own ratings. This feature enhances community trust and transparency.</p>
+                        <p className="text-muted-foreground mt-2">Unlock the ability to rate venues and view detailed analytics on your own ratings. This enhances community trust and transparency.</p>
                         <Button className="mt-6" disabled>Notify Me</Button>
                     </div>
                 </CardContent>
