@@ -199,7 +199,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle>Linked Reports</CardTitle>
                     <CardDescription>This is a read-only log of reports linked to your account.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="space-y-6">
                     {accountReports.length > 0 ? (
                          <Table>
@@ -246,7 +246,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><ThumbsUp className="h-5 w-5" /> My Kudos</CardTitle>
                     <CardDescription>This is a log of positive feedback you've received. Keep up the great work!</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent>
                     {kudosHistory.length > 0 ? (
                          <Table>
@@ -278,7 +278,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star className="h-5 w-5" /> Ratings & Analytics</CardTitle>
                     <CardDescription>Rate venues you attend and build your reputation in the community.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Ratings & Analytics</h3>
@@ -293,7 +293,7 @@ export default function GuestView() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Map</CardTitle>
                     <CardDescription>Visually discover events and venues near you or in a specific location.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent className="text-center py-12">
                     <div className="max-w-md mx-auto">
                         <h3 className="text-xl font-semibold">Coming Soon: Interactive Event Map</h3>
@@ -312,3 +312,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
