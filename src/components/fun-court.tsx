@@ -84,11 +84,16 @@ export default function FunCourt() {
                 <div className="p-4 border rounded-lg space-y-4">
                      <h4 className="font-semibold">Ready to File a Real Case?</h4>
                      <p className="text-sm text-muted-foreground">
-                        This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements. This fee prevents abuse and covers AI processing costs.
+                        This premium feature allows a complainant to file a case for £1. The accused party is invited to reply for free. Both sides are represented by an AI lawyer to argue their case based on provided statements and evidence (limited to 2 image uploads). This fee prevents abuse and covers AI processing costs.
                     </p>
-                     <Button disabled className="w-full">
-                        File a Case (£1)
-                    </Button>
+                     <div className="flex flex-col sm:flex-row gap-2">
+                        <Button disabled className="flex-1">
+                            <Gavel /> File a Case (£1)
+                        </Button>
+                         <Button disabled variant="outline" className="flex-1">
+                            <Upload /> Upload Evidence (Images Only)
+                        </Button>
+                     </div>
                 </div>
             </CardContent>
         </Card>
