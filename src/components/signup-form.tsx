@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Camera, Upload, Check, AlertCircle, CalendarIcon, ShieldQuestion, UserCheck } from 'lucide-react';
+import { Loader2, Camera, Upload, Check, AlertCircle, CalendarIcon, ShieldQuestion, UserCheck, Info } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar } from './ui/calendar';
@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
 import { checkDuplicateGuest, type CheckDuplicateGuestOutput } from '@/ai/flows/check-duplicate-guest';
+import { Textarea } from './ui/textarea';
 
 function SignupFormComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -261,6 +262,30 @@ function SignupFormComponent() {
               <Input id="safeWord" type="text" required placeholder="For account recovery"/>
             </div>
           </div>
+
+           <div className="space-y-4 p-4 border rounded-lg">
+                <div className='space-y-2'>
+                    <Label className='flex items-center gap-2'><Info className="h-4 w-4" /> Distinguishing Mark (Optional, High Security)</Label>
+                    <p className='text-xs text-muted-foreground'>For high-security verification in edge cases (e.g., identical twins), you can register a non-facial mark like a tattoo or birthmark.</p>
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="mark-description">Mark Description</Label>
+                    <Input id="mark-description" placeholder="e.g., Rose tattoo, Small mole" />
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="mark-location">Mark Location</Label>
+                    <Input id="mark-location" placeholder="e.g., Left forearm, Right shoulder blade" />
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="mark-photo">Photo of Mark (Optional)</Label>
+                    <Button asChild variant="outline" className="w-full">
+                        <label htmlFor="mark-upload">
+                            <Upload className="mr-2" /> Upload Photo
+                            <input id="mark-upload" type="file" accept="image/*" className="sr-only" />
+                        </label>
+                    </Button>
+                </div>
+            </div>
           
           <div className="flex items-start space-x-3 pt-2">
             <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked as boolean)} className="mt-1" />
