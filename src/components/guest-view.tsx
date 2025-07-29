@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -25,6 +25,7 @@ import { Separator } from "@/components/ui/separator";
 import RebeccaChatbot from "./rebecca-chatbot";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -102,6 +103,19 @@ export default function GuestView() {
         description: "Thank you! Your positive feedback helps build a better community.",
     });
     (e.target as HTMLFormElement).reset();
+  }
+
+  const handleNomination = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const input = form.elements.namedItem('venue-nomination') as HTMLInputElement;
+    if (input && input.value) {
+        toast({
+            title: "Venue Nominated!",
+            description: `Thank you for nominating ${input.value}. We'll reach out to them about joining EventSafe.`,
+        });
+        input.value = '';
+    }
   }
 
   const activeProfile = profileVariants.find(p => p.id === activeProfileId) || profileVariants[0];
@@ -354,14 +368,35 @@ export default function GuestView() {
           <TabsContent value="map">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Map</CardTitle>
-                    <CardDescription>Visually discover events and venues near you or in a specific location.</CardDescription>
+                    <CardTitle className="flex items-center gap-2"><Map className="h-5 w-5" /> Event Venue Map & Wishlist</CardTitle>
+                    <CardDescription>Discover EventSafe venues or nominate your favorite spots to join the network.</CardDescription>
                 </CardHeader>
-                <CardContent className="text-center py-12">
-                    <div className="max-w-md mx-auto">
-                        <h3 className="text-xl font-semibold">Coming Soon: Interactive Event Map</h3>
-                        <p className="text-muted-foreground mt-2">Once more venues are on board, this map will become your go-to tool for finding EventSafe-verified events. Check back soon!</p>
-                        <Button className="mt-6" disabled>Notify Me</Button>
+                <CardContent className="space-y-6">
+                    <div>
+                        <form onSubmit={handleNomination} className="flex gap-2">
+                            <Input name="venue-nomination" placeholder="Search for a venue to nominate..." />
+                            <Button type="submit"><Search className="mr-2 h-4 w-4" /> Nominate</Button>
+                        </form>
+                         <p className="text-xs text-muted-foreground mt-2">Help us grow! By nominating venues, you show them their customers want a safer event experience.</p>
+                    </div>
+                    <div className="relative aspect-video w-full bg-muted rounded-lg overflow-hidden border">
+                         <Image src="https://placehold.co/800x450.png" alt="Map of venues" layout="fill" objectFit="cover" data-ai-hint="map city" />
+                         <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
+                            <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
+                                <h4 className="font-bold">Interactive Map Coming Soon</h4>
+                                <p className="text-sm text-muted-foreground">This map will show Verified and Community Suggested venues.</p>
+                            </div>
+                         </div>
+                    </div>
+                    <div className="flex justify-center gap-6 text-sm">
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-primary" />
+                            <span>EventSafe Verified</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                             <div className="w-3 h-3 rounded-full bg-muted-foreground" />
+                            <span>Community Suggested</span>
+                        </div>
                     </div>
                 </CardContent>
             </Card>
