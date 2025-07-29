@@ -24,8 +24,8 @@ const testimonials = [
 ];
 
 export default function WelcomePage() {
-    const autoplayPlugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
-    const testimonialPlugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+    const autoplayPlugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
+    const testimonialPlugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -80,60 +80,62 @@ export default function WelcomePage() {
                 </Carousel>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
-                    <div className="p-3 rounded-full bg-chart-2 text-white"><CheckCircle className="h-8 w-8" /></div>
-                    <h3 className="text-xl font-semibold">Build Trust</h3>
-                    <p className="text-muted-foreground">Verify hosts, staff, and guests to create a community built on transparency and respect.</p>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+                 <div className="flex flex-col gap-6">
+                     <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800">
+                        <div className="p-3 rounded-full bg-destructive text-white"><Ban className="h-8 w-8" /></div>
+                        <h3 className="text-xl font-semibold text-center">Prevent Abuse</h3>
+                        <p className="text-muted-foreground text-center">Share anonymized, contextual data to stop problem individuals from moving between venues.</p>
+                    </div>
+                     <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-amber-100 dark:bg-yellow-900/30 border border-amber-200 dark:border-yellow-800">
+                        <div className="p-3 rounded-full bg-chart-4 text-white"><Scale className="h-8 w-8" /></div>
+                        <h3 className="text-xl font-semibold text-center">Resolve Disputes</h3>
+                        <p className="text-muted-foreground text-center">Use our AI-driven resolution center to handle disagreements fairly and privately.</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
+                        <div className="p-3 rounded-full bg-chart-2 text-white"><CheckCircle className="h-8 w-8" /></div>
+                        <h3 className="text-xl font-semibold text-center">Build Trust</h3>
+                        <p className="text-muted-foreground text-center">Verify hosts, staff, and guests to create a community built on transparency and respect.</p>
+                    </div>
                 </div>
-                <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-amber-100 dark:bg-yellow-900/30 border border-amber-200 dark:border-yellow-800">
-                    <div className="p-3 rounded-full bg-chart-4 text-white"><Ban className="h-8 w-8" /></div>
-                    <h3 className="text-xl font-semibold">Prevent Abuse</h3>
-                    <p className="text-muted-foreground">Share anonymized, contextual data to stop problem individuals from moving between venues.</p>
-                </div>
-                <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800">
-                     <div className="p-3 rounded-full bg-destructive text-white"><Scale className="h-8 w-8" /></div>
-                    <h3 className="text-xl font-semibold">Resolve Disputes</h3>
-                    <p className="text-muted-foreground">Use our AI-driven resolution center to handle disagreements fairly and privately.</p>
+                <div>
+                     <div className="text-center mb-6">
+                        <h2 className="text-3xl font-bold tracking-tight">What Our Community Says</h2>
+                        <p className="mt-2 text-muted-foreground">Real feedback from real users.</p>
+                    </div>
+                     <Carousel
+                        className="w-full max-w-md mx-auto"
+                        plugins={[testimonialPlugin.current]}
+                        opts={{ loop: true }}
+                    >
+                        <CarouselContent>
+                            {testimonials.map((testimonial, index) => (
+                                <CarouselItem key={index}>
+                                    <div className="p-1 h-full">
+                                        <Card className="h-full flex flex-col">
+                                            <CardContent className="pt-6 flex-1 flex flex-col justify-between">
+                                                <p className="italic">"{testimonial.comment}"</p>
+                                                <div className="flex items-center gap-3 pt-4 mt-auto">
+                                                    <Avatar>
+                                                        <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
+                                                        <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                                    </Avatar>
+                                                    <div>
+                                                        <p className="font-semibold">{testimonial.name}</p>
+                                                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                         <CarouselPrevious className="-left-4 hidden md:flex" />
+                         <CarouselNext className="-right-4 hidden md:flex"/>
+                    </Carousel>
                 </div>
             </div>
-
-             <div className="text-center">
-                <h2 className="text-3xl font-bold tracking-tight">What Our Community Says</h2>
-                <p className="mt-2 text-muted-foreground">Real feedback from real users.</p>
-            </div>
-
-            <Carousel
-                className="w-full max-w-4xl mx-auto"
-                plugins={[testimonialPlugin.current]}
-                opts={{ loop: true }}
-            >
-                <CarouselContent>
-                    {testimonials.map((testimonial, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                            <div className="p-1 h-full">
-                                <Card className="h-full flex flex-col">
-                                    <CardContent className="pt-6 flex-1 flex flex-col justify-between">
-                                        <p className="italic">"{testimonial.comment}"</p>
-                                        <div className="flex items-center gap-3 pt-4 mt-auto">
-                                            <Avatar>
-                                                <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
-                                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <div>
-                                                <p className="font-semibold">{testimonial.name}</p>
-                                                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                 <CarouselPrevious className="-left-4 hidden md:flex" />
-                 <CarouselNext className="-right-4 hidden md:flex"/>
-            </Carousel>
 
             <div className="grid md:grid-cols-2 gap-8">
                 <Card className="flex flex-col">
