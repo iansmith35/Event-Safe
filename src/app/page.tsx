@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
-import { CheckCircle, Ban, Scale, Users as UserIcon, Users } from "lucide-react";
+import { CheckCircle, Ban, Scale, Users as UsersIcon, Users } from "lucide-react";
 import Link from "next/link";
 import RebeccaChatbot from "@/components/rebecca-chatbot";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -23,6 +23,50 @@ const testimonials = [
   { name: 'Community Hall', role: 'Venue', comment: "We've seen a huge improvement in guest behavior since requiring EventSafe passes." },
   { name: 'Anonymous', role: 'Guest', comment: "This is what the events scene has needed for years. So grateful for this platform." },
 ];
+
+const carouselMessages = [
+    {
+        title: "Stop Bad Actors. Start Great Events.",
+        description: "EventSafe is the UK's first unified safety platform for the live events scene. We give hosts the tools to manage risk and guests the confidence to enjoy themselves."
+    },
+    {
+        title: "For Guests: Your Passport to Safer Events.",
+        description: "Attend with confidence. Your EventSafe pass shows you respect the community and unlocks access to the best, most secure events in the UK."
+    },
+    {
+        title: "For Hosts: Protect Your Reputation & Attendees.",
+        description: "Use powerful AI tools to vet guests, manage reports, and reduce risk. Build a reputation for safe, well-run events that people trust."
+    },
+    {
+        title: "For Venues: The New Standard in Safety.",
+        description: "Adopt EventSafe to reduce incidents, protect your staff, and attract a higher quality of events and clientele. Become a leader in venue safety."
+    },
+    {
+        title: "Accountability for Everyone.",
+        description: "By creating a shared, secure network, we make the entire events ecosystem safer and more transparent for guests, hosts, and venues alike."
+    },
+    {
+        title: "AI-Powered Resolution. Fair & Private.",
+        description: "Our unique 'Fun Court' feature helps resolve disputes privately and constructively, using AI to find common ground. See the demo below!"
+    },
+    {
+        title: "Privacy is Paramount. Your Data is Yours.",
+        description: "We are a tool for safety, not a data broker. Your identity is protected with pseudonyms and robust privacy controls. We will never share your data without your consent."
+    },
+    {
+        title: "Verified Staff & Volunteers.",
+        description: "Hosts can issue temporary, verifiable digital ID cards to their event staff, so you always know who is officially part of the team."
+    },
+    {
+        title: "A Community Built on Trust.",
+        description: "Leave kudos for great guests, rate venues, and help us build a community where respect and good behaviour are the norm."
+    },
+    {
+        title: "The Future of Live Events is Here.",
+        description: "Join the movement. Whether you're a guest, host, or venue, EventSafe is your partner in creating unforgettable—and safe—experiences."
+    }
+];
+
 
 export default function WelcomePage() {
     const autoplayPlugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
@@ -45,36 +89,22 @@ export default function WelcomePage() {
       <main className="flex-1 flex items-center justify-center p-4 md:p-8">
         <div className="container max-w-6xl space-y-16">
             <div className="text-center">
-                <Carousel 
+                <Carousel
                     className="w-full max-w-4xl mx-auto"
                     plugins={[autoplayPlugin.current]}
                     opts={{ loop: true }}
                 >
                     <CarouselContent>
-                        <CarouselItem>
-                             <div className="space-y-4 py-8">
-                                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Stop Bad Actors. Start Great Events.</h1>
-                                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                                    EventSafe is the UK's first unified safety platform for the live events scene. We give hosts the tools to manage risk and guests the confidence to enjoy events.
-                                </p>
-                            </div>
-                        </CarouselItem>
-                         <CarouselItem>
-                            <div className="space-y-4 py-8">
-                                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Accountability for Everyone.</h1>
-                                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                                   By creating a shared, secure network for venues, hosts, and guests, we make the entire events ecosystem safer and more transparent.
-                                </p>
-                            </div>
-                        </CarouselItem>
-                         <CarouselItem>
-                             <div className="space-y-4 py-8">
-                                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Featuring the AI-Powered Resolution Center.</h1>
-                                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                                    Fairly and privately resolve disputes with our unique "Fun Court" feature, where AI lawyers argue your case before an impartial AI judge.
-                                </p>
-                            </div>
-                        </CarouselItem>
+                        {carouselMessages.map((msg, index) => (
+                             <CarouselItem key={index}>
+                                 <div className="space-y-4 py-8">
+                                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{msg.title}</h1>
+                                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+                                        {msg.description}
+                                    </p>
+                                </div>
+                            </CarouselItem>
+                        ))}
                     </CarouselContent>
                     <CarouselPrevious className="hidden md:flex" />
                     <CarouselNext className="hidden md:flex"/>
@@ -84,38 +114,40 @@ export default function WelcomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-stretch">
                 {/* Left Column */}
                 <div className="flex flex-col gap-8">
-                     <Card>
-                        <CardHeader className="flex flex-row items-center gap-4">
-                           <div className="p-3 rounded-full bg-destructive/80 text-white"><Ban className="h-8 w-8" /></div>
-                            <div>
-                               <CardTitle>Prevent Abuse</CardTitle>
-                                <CardDescription>Stop problem individuals from moving between venues.</CardDescription>
-                            </div>
-                        </CardHeader>
-                    </Card>
-                     <Card>
-                        <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="p-3 rounded-full bg-chart-4/80 text-white"><Scale className="h-8 w-8" /></div>
-                            <div>
-                                <CardTitle>Resolve Disputes</CardTitle>
-                                <CardDescription>Handle disagreements fairly and privately with our AI tools.</CardDescription>
-                            </div>
-                        </CardHeader>
-                    </Card>
-                    <Card>
-                        <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="p-3 rounded-full bg-chart-2/80 text-white"><CheckCircle className="h-8 w-8" /></div>
-                            <div>
-                               <CardTitle>Build Trust</CardTitle>
-                               <CardDescription>Create a community built on transparency and respect.</CardDescription>
-                            </div>
-                        </CardHeader>
-                    </Card>
+                    <div className="flex flex-col gap-8">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                            <div className="p-3 rounded-full bg-destructive/80 text-white"><Ban className="h-8 w-8" /></div>
+                                <div>
+                                <CardTitle>Prevent Abuse</CardTitle>
+                                    <CardDescription>Stop problem individuals from moving between venues.</CardDescription>
+                                </div>
+                            </CardHeader>
+                        </Card>
+                        <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <div className="p-3 rounded-full bg-chart-4/80 text-white"><Scale className="h-8 w-8" /></div>
+                                <div>
+                                    <CardTitle>Resolve Disputes</CardTitle>
+                                    <CardDescription>Handle disagreements fairly and privately with our AI tools.</CardDescription>
+                                </div>
+                            </CardHeader>
+                        </Card>
+                        <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <div className="p-3 rounded-full bg-chart-2/80 text-white"><CheckCircle className="h-8 w-8" /></div>
+                                <div>
+                                <CardTitle>Build Trust</CardTitle>
+                                <CardDescription>Create a community built on transparency and respect.</CardDescription>
+                                </div>
+                            </CardHeader>
+                        </Card>
+                    </div>
 
                     <Card className="flex flex-col">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-3">
-                                <UserIcon className="w-8 h-8 text-primary" />
+                                <UsersIcon className="w-8 h-8 text-primary" />
                                 <span className="text-2xl">For Guests</span>
                             </CardTitle>
                             <CardDescription>
