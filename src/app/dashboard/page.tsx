@@ -32,7 +32,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
 
-function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void }) {
+function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void, isAdmin: boolean }) {
   const handleMenuClick = (view: string) => {
     setActiveView(view);
     if (onLinkClick) {
@@ -60,16 +60,18 @@ function AppSidebar({ activeView, setActiveView, onLinkClick }: { activeView: st
               <span>Guest Dashboard</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={() => handleMenuClick('admin')}
-              isActive={activeView === 'admin'}
-              tooltip={{children: "Host & Admin Tools"}}
-            >
-              <LayoutDashboard />
-              <span>Host & Admin Tools</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          {isAdmin && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                onClick={() => handleMenuClick('admin')}
+                isActive={activeView === 'admin'}
+                tooltip={{children: "Host & Admin Tools"}}
+              >
+                <LayoutDashboard />
+                <span>Host & Admin Tools</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
         </SidebarMenu>
       </SidebarContent>
     </>
@@ -81,29 +83,29 @@ export default function DashboardPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<FirebaseUser | null | {email: string}>({ email: "demo@eventsafe.com"});
+  const [isAdmin, setIsAdmin] = useState(false);
   const isMobile = useIsMobile();
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const view = searchParams.get('view');
-    if (view === 'admin') {
-      setActiveView('admin');
-    } else {
-        setActiveView('guest');
-    }
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-         if (view === 'admin' || user.email === ADMIN_EMAIL) {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        const isAdminUser = currentUser.email === ADMIN_EMAIL;
+        setIsAdmin(isAdminUser);
+        
+        const view = searchParams.get('view');
+        if (isAdminUser && view === 'admin') {
           setActiveView('admin');
         } else {
           setActiveView('guest');
         }
       } else {
-        // For demo purposes, we allow viewing without login.
+        // For demo purposes, allow viewing without login.
         setUser({ email: "demo@eventsafe.com" });
+        setIsAdmin(false); // Demo user is not an admin
+        setActiveView('guest');
       }
       setIsLoading(false);
     });
@@ -118,6 +120,9 @@ export default function DashboardPage() {
       </div>
     );
   }
+  
+  const currentView = isAdmin && activeView === 'admin' ? <AdminDashboard /> : <GuestView />;
+
 
   return (
     <SidebarProvider>
@@ -131,12 +136,12 @@ export default function DashboardPage() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72 bg-sidebar text-sidebar-foreground border-r-0">
-                <AppSidebar activeView={activeView} setActiveView={setActiveView} onLinkClick={() => setMobileMenuOpen(false)} />
+                <AppSidebar activeView={activeView} setActiveView={setActiveView} onLinkClick={() => setMobileMenuOpen(false)} isAdmin={isAdmin} />
             </SheetContent>
           </Sheet>
         ) : (
           <Sidebar collapsible="icon" className="border-r">
-            <AppSidebar activeView={activeView} setActiveView={setActiveView} />
+            <AppSidebar activeView={activeView} setActiveView={setActiveView} isAdmin={isAdmin} />
           </Sidebar>
         )}
         <div className="flex-1 flex flex-col">
@@ -152,8 +157,7 @@ export default function DashboardPage() {
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">
-            {activeView === 'guest' && <GuestView />}
-            {activeView === 'admin' && <AdminDashboard />}
+            {currentView}
           </main>
         </div>
       </div>
