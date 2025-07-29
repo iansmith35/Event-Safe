@@ -268,9 +268,9 @@ export default function WelcomePage() {
                         <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex justify-center items-center">
-                        <div className="relative w-full max-w-4xl rounded-lg border overflow-hidden">
-                             <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" width={1200} height={800} className="object-cover w-full h-auto" data-ai-hint="UK map lights" />
-                             <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
+                        <div className="relative w-full max-w-4xl">
+                             <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" width={1200} height={800} className="w-full h-auto rounded-lg border object-cover" data-ai-hint="UK map lights" />
+                             <div className="absolute inset-0 bg-background/30 flex items-center justify-center rounded-lg">
                                 <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
                                     <h4 className="font-bold text-xl">Nominate Your Local Venues</h4>
                                     <p className="text-sm text-muted-foreground">The more demand we see, the faster we grow.</p>
