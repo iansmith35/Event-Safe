@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -212,6 +212,22 @@ export default function GuestView() {
                 </Alert>
             </CardContent>
         </Card>
+
+        {activeProfile.type === 'Adult' && (
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2"><Bot /> Premium AI Companions</CardTitle>
+                    <CardDescription>Enhance your experience with a dedicated AI role-play companion. Monthly subscription.</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center py-12">
+                     <div className="max-w-md mx-auto">
+                        <h3 className="text-xl font-semibold">Coming Soon: AI Personalities</h3>
+                        <p className="text-muted-foreground mt-2">Unlock specialized AI companions like 'AI Dom', 'AI Submissive', and more. Each with a unique personality, ready to engage based on your preferences. Choose your companion, give them a name, and explore new interactions.</p>
+                        <Button className="mt-6" disabled>Notify Me</Button>
+                    </div>
+                </CardContent>
+            </Card>
+        )}
         
         <Card>
           <CardContent className="pt-6">
