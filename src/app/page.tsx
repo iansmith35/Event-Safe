@@ -37,6 +37,10 @@ const carouselMessages = [
         title: "For Hosts: Protect Your Reputation & Attendees.",
         description: "Use powerful AI tools to vet guests, manage reports, and reduce risk. Build a reputation for safe, well-run events that people trust."
     },
+     {
+        title: "Build the Network. Nominate Your Favourite Venues.",
+        description: "Don't see your favorite spot on EventSafe? Nominate them through the app! Help us build a safer event community, one venue at a time."
+    },
     {
         title: "For Venues: The New Standard in Safety.",
         description: "Adopt EventSafe to reduce incidents, protect your staff, and attract a higher quality of events and clientele. Become a leader in venue safety."
@@ -86,7 +90,7 @@ export default function WelcomePage() {
          </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center p-4 md:p-8">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
         <div className="container max-w-6xl space-y-16">
             <div className="text-center">
                 <Carousel
@@ -111,7 +115,7 @@ export default function WelcomePage() {
                 </Carousel>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 items-stretch">
+            <div className="grid md:grid-cols-2 gap-8 items-start">
                 {/* Left Column */}
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-8">
@@ -236,7 +240,7 @@ export default function WelcomePage() {
             </div>
 
 
-            <div className="max-w-6xl mx-auto w-full">
+            <div className="max-w-4xl mx-auto w-full">
                 <RebeccaChatbot />
             </div>
 
