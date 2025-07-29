@@ -82,21 +82,33 @@ export default function WelcomePage() {
             
             <div className="grid md:grid-cols-2 gap-8 items-center">
                  <div className="flex flex-col gap-6">
-                     <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800">
-                        <div className="p-3 rounded-full bg-destructive text-white"><Ban className="h-8 w-8" /></div>
-                        <h3 className="text-xl font-semibold text-center">Prevent Abuse</h3>
-                        <p className="text-muted-foreground text-center">Share anonymized, contextual data to stop problem individuals from moving between venues.</p>
-                    </div>
-                     <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-amber-100 dark:bg-yellow-900/30 border border-amber-200 dark:border-yellow-800">
-                        <div className="p-3 rounded-full bg-chart-4 text-white"><Scale className="h-8 w-8" /></div>
-                        <h3 className="text-xl font-semibold text-center">Resolve Disputes</h3>
-                        <p className="text-muted-foreground text-center">Use our AI-driven resolution center to handle disagreements fairly and privately.</p>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 p-6 rounded-lg bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
-                        <div className="p-3 rounded-full bg-chart-2 text-white"><CheckCircle className="h-8 w-8" /></div>
-                        <h3 className="text-xl font-semibold text-center">Build Trust</h3>
-                        <p className="text-muted-foreground text-center">Verify hosts, staff, and guests to create a community built on transparency and respect.</p>
-                    </div>
+                     <Card>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                           <div className="p-3 rounded-full bg-destructive text-white"><Ban className="h-8 w-8" /></div>
+                            <div>
+                               <CardTitle>Prevent Abuse</CardTitle>
+                                <CardDescription>Stop problem individuals from moving between venues.</CardDescription>
+                            </div>
+                        </CardHeader>
+                    </Card>
+                     <Card>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                            <div className="p-3 rounded-full bg-chart-4 text-white"><Scale className="h-8 w-8" /></div>
+                            <div>
+                                <CardTitle>Resolve Disputes</CardTitle>
+                                <CardDescription>Handle disagreements fairly and privately with our AI tools.</CardDescription>
+                            </div>
+                        </CardHeader>
+                    </Card>
+                    <Card>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                            <div className="p-3 rounded-full bg-chart-2 text-white"><CheckCircle className="h-8 w-8" /></div>
+                            <div>
+                               <CardTitle>Build Trust</CardTitle>
+                               <CardDescription>Create a community built on transparency and respect.</CardDescription>
+                            </div>
+                        </CardHeader>
+                    </Card>
                 </div>
                 <div>
                      <div className="text-center mb-6">
