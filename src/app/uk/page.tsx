@@ -268,7 +268,7 @@ export default function WelcomePage() {
                         <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                         <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" width={1200} height={800} className="rounded-lg border object-cover w-full h-auto" data-ai-hint="UK map lights" />
+                         <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" width={1200} height={800} className="rounded-lg border" data-ai-hint="UK map lights" />
                     </CardContent>
                 </Card>
 
