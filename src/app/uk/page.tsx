@@ -81,6 +81,9 @@ export default function WelcomePage() {
       <header className="p-4 flex justify-between items-center border-b">
          <Logo className="w-auto h-10" />
          <div className="flex items-center gap-4">
+            <Button asChild variant="outline">
+                <Link href="/">View Global Site</Link>
+            </Button>
             <Button asChild variant="ghost">
                 <Link href="/dashboard">Dashboard Demo</Link>
             </Button>
