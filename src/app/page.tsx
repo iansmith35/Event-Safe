@@ -48,14 +48,14 @@ export default function GlobalPage() {
                 </p>
             </div>
 
-            <Card className="overflow-hidden">
+            <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center justify-center gap-2 text-2xl"><Globe /> The Global EventSafe Network</CardTitle>
                     <CardDescription>Our live network is growing in the UK. International expansion starts in 2026.</CardDescription>
                 </CardHeader>
-                <CardContent className="flex justify-center">
-                    <div className="relative w-full max-w-4xl aspect-video rounded-lg border overflow-hidden">
-                         <Image src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" fill={true} className="object-cover" data-ai-hint="world map lights" />
+                <CardContent className="flex justify-center items-center">
+                    <div className="relative w-full max-w-4xl rounded-lg border overflow-hidden">
+                         <Image src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" alt="World map with glowing points" width={1200} height={675} className="object-cover w-full h-auto" data-ai-hint="world map lights" />
                          <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
                             <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
                                 <h4 className="font-bold text-xl">Put Your Scene on the Map</h4>
