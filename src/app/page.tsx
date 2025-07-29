@@ -11,6 +11,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Autoplay from "embla-carousel-autoplay"
 import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FunCourt from "@/components/fun-court";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -111,73 +112,45 @@ export default function WelcomePage() {
                     </Card>
                 </div>
                 <div className="space-y-8">
-                     <Card className="bg-muted/50">
-                        <CardHeader>
-                            <CardTitle className="text-center">Our Commitment</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                             <div className="flex items-start gap-4">
-                                <Lock className="h-8 w-8 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-semibold">Privacy by Design</h3>
-                                    <p className="text-sm text-muted-foreground">Your data is yours. We are a facilitation tool, not a data broker. Your privacy is paramount.</p>
-                                </div>
-                            </div>
-                             <div className="flex items-start gap-4">
-                                <ShieldCheck className="h-8 w-8 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-semibold">Safety First</h3>
-                                    <p className="text-sm text-muted-foreground">We build tools to empower hosts and protect guests, creating a secure environment for everyone.</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <Handshake className="h-8 w-8 text-primary flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-semibold">Community Trust</h3>
-                                    <p className="text-sm text-muted-foreground">We believe in accountability and transparency to build a better, more respectful events scene.</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <FunCourt />
+                    
+                    <div className="text-center">
+                        <h2 className="text-3xl font-bold tracking-tight">What Our Community Says</h2>
+                        <p className="mt-2 text-muted-foreground">Real feedback from real users.</p>
+                    </div>
+                     <Carousel
+                        className="w-full max-w-4xl mx-auto"
+                        plugins={[testimonialPlugin.current]}
+                        opts={{ loop: true }}
+                    >
+                        <CarouselContent>
+                            {testimonials.map((testimonial, index) => (
+                                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/1">
+                                    <div className="p-1 h-full">
+                                        <Card className="h-full flex flex-col">
+                                            <CardContent className="pt-6 flex-1 flex flex-col justify-between">
+                                                <p className="italic">"{testimonial.comment}"</p>
+                                                <div className="flex items-center gap-3 pt-4 mt-auto">
+                                                    <Avatar>
+                                                        <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
+                                                        <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                                    </Avatar>
+                                                    <div>
+                                                        <p className="font-semibold">{testimonial.name}</p>
+                                                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                            <CarouselPrevious className="-left-4 hidden md:flex" />
+                            <CarouselNext className="-right-4 hidden md:flex"/>
+                    </Carousel>
                 </div>
             </div>
-
-            <div className="text-center">
-                <h2 className="text-3xl font-bold tracking-tight">What Our Community Says</h2>
-                <p className="mt-2 text-muted-foreground">Real feedback from real users.</p>
-            </div>
-             <Carousel
-                className="w-full max-w-4xl mx-auto"
-                plugins={[testimonialPlugin.current]}
-                opts={{ loop: true }}
-            >
-                <CarouselContent>
-                    {testimonials.map((testimonial, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                            <div className="p-1 h-full">
-                                <Card className="h-full flex flex-col">
-                                    <CardContent className="pt-6 flex-1 flex flex-col justify-between">
-                                        <p className="italic">"{testimonial.comment}"</p>
-                                        <div className="flex items-center gap-3 pt-4 mt-auto">
-                                            <Avatar>
-                                                <AvatarImage src={`https://placehold.co/40x40.png?text=${testimonial.name.charAt(0)}`} />
-                                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <div>
-                                                <p className="font-semibold">{testimonial.name}</p>
-                                                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                    <CarouselPrevious className="-left-4 hidden md:flex" />
-                    <CarouselNext className="-right-4 hidden md:flex"/>
-            </Carousel>
-
 
             <div className="grid md:grid-cols-2 gap-8">
                 <Card className="flex flex-col">
@@ -242,5 +215,3 @@ export default function WelcomePage() {
     </div>
   );
 }
-
-    
