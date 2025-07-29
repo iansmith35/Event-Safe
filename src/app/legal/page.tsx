@@ -2,7 +2,7 @@
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Gavel, ShieldCheck, UserCheck } from "lucide-react";
+import { Gavel, ShieldCheck, UserCheck, Gift } from "lucide-react";
 import Link from "next/link";
 
 export default function LegalPage() {
@@ -61,6 +61,28 @@ export default function LegalPage() {
                 </CardContent>
             </Card>
         </div>
+
+         <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Gift /> Host & Venue Promotional Terms</CardTitle>
+                <CardDescription>A summary of our launch offers for early adopters.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <p className="text-sm">
+                   All new host or venue accounts are eligible for a **one-month free trial** to experience the full benefits of the EventSafe platform. To reward our pioneering early adopters, we offer extended free periods for the first venues to sign up:
+                </p>
+                <ul className="list-disc list-inside text-sm space-y-2 pl-2">
+                    <li>The **first 20 venues** to sign up will receive **6 months free**.</li>
+                    <li>The **next 30 venues** to sign up will receive **3 months free**.</li>
+                </ul>
+                <p className="text-sm">
+                    **Billing Process:** Your first month is always free. At the start of your second month, your first subscription payment will be taken. For promotional offer recipients, billing will then be suspended for the remainder of your offer period (e.g., 5 months for the 6-month offer) and will resume automatically on a monthly basis thereafter.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                    The first payment is non-refundable. You may cancel your subscription at any time. These terms are subject to change and are part of the full terms and conditions agreed to upon signup.
+                </p>
+            </CardContent>
+        </Card>
 
         <Card className="border-destructive">
             <CardHeader>
