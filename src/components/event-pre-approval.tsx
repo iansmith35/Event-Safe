@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { KeyRound, User, Check, X, Eye, ThumbsUp } from 'lucide-react';
+import { KeyRound, User, Check, X, Eye, ThumbsUp, Ban } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -20,6 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from './ui/badge';
+import { suspendGuestFromEvent } from '@/ai/flows/suspend-guest';
 
 type RequestStatus = 'Pending' | 'Approved' | 'Declined';
 
@@ -49,7 +50,6 @@ export default function EventPreApproval() {
         
         let toastDescription = `The guest has been notified of your decision.`;
         if (decision === 'Declined') {
-            // In a real app, this message could be customized by the host.
             toastDescription = `The guest has been politely informed that numbers are limited and they have been placed on a waitlist.`;
         }
 
@@ -57,6 +57,24 @@ export default function EventPreApproval() {
             title: `Request ${decision}`,
             description: toastDescription
         });
+    }
+
+    const handleSuspend = async (guestId: string) => {
+        // In a real app, you'd have the eventId.
+        const eventId = 'EVENT-123';
+        const suspensionReason = 'Guest has expressed interest in multiple limited-capacity events without attending.';
+
+        // This is a simulation. In a real app, you'd get the result and use it.
+        // const { guestNotification, logEntry } = await suspendGuestFromEvent({ guestId, eventId, reason: suspensionReason });
+        
+        toast({
+            title: "Guest Suspended from Event",
+            description: `${guestId} has been suspended from this event only. A polite notification has been sent. Reason logged: "${suspensionReason}"`,
+            duration: 7000,
+        });
+        
+        // Remove the request from the list
+        setRequests(requests.filter(req => req.id !== guestId));
     }
 
     return (
@@ -131,12 +149,13 @@ export default function EventPreApproval() {
                                                         'secondary'
                                                     }>{req.status}</Badge>
                                                 </TableCell>
-                                                <TableCell className="text-right">
+                                                <TableCell>
                                                     {req.status === 'Pending' ? (
-                                                        <div className="flex gap-2 justify-end">
-                                                            <Button size="icon" variant="outline" className="h-8 w-8 bg-background hover:bg-chart-2/10 border-chart-2/50 text-chart-2" onClick={() => handleRequest(req.id, 'Approved')}><Check className="h-4 w-4" /></Button>
-                                                            <Button size="icon" variant="outline" className="h-8 w-8 bg-background hover:bg-destructive/10 border-destructive/50 text-destructive" onClick={() => handleRequest(req.id, 'Declined')}><X className="h-4 w-4"/></Button>
-                                                            <Button size="icon" variant="outline" className="h-8 w-8"><User className="h-4 w-4" /></Button>
+                                                        <div className="flex gap-1 justify-end">
+                                                            <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => handleRequest(req.id, 'Approved')}><Check className="h-4 w-4 text-chart-2" /></Button>
+                                                            <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => handleRequest(req.id, 'Declined')}><X className="h-4 w-4 text-destructive"/></Button>
+                                                            <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => handleSuspend(req.id)}><Ban className="h-4 w-4 text-muted-foreground" /></Button>
+                                                            <Button size="icon" variant="ghost" className="h-8 w-8"><User className="h-4 w-4" /></Button>
                                                         </div>
                                                     ) : (
                                                         <span className="text-xs text-muted-foreground">Actioned</span>
