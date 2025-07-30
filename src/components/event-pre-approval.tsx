@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { KeyRound, User, Check, X, Eye } from 'lucide-react';
+import { KeyRound, User, Check, X, Eye, ThumbsUp } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -23,7 +23,7 @@ import { Badge } from './ui/badge';
 
 type RequestStatus = 'Pending' | 'Approved' | 'Declined';
 
-interface ApprovalRequest {
+interface InterestRequest {
     id: string;
     guestName: string;
     guestAvatar: string;
@@ -31,7 +31,7 @@ interface ApprovalRequest {
     status: RequestStatus;
 }
 
-const initialRequests: ApprovalRequest[] = [
+const initialRequests: InterestRequest[] = [
     { id: 'req-001', guestName: 'Vixen', guestAvatar: 'https://images.unsplash.com/photo-1596644230693-bdfc6f50531b?q=80&w=400', guestAvatarHint: 'woman intense', status: 'Pending' },
     { id: 'req-002', guestName: 'AgentIndigo', guestAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400', guestAvatarHint: 'female person', status: 'Pending' },
     { id: 'req-003', guestName: 'ShadowBanned', guestAvatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400', guestAvatarHint: 'man face', status: 'Pending' },
@@ -39,57 +39,64 @@ const initialRequests: ApprovalRequest[] = [
 
 
 export default function EventPreApproval() {
-    const [preApprovalEnabled, setPreApprovalEnabled] = useState(false);
-    const [reason, setReason] = useState("To maintain a balanced ratio, all single gentlemen are required to seek pre-approval for this event.");
-    const [requests, setRequests] = useState<ApprovalRequest[]>(initialRequests);
+    const [interestEnabled, setInterestEnabled] = useState(false);
+    const [reason, setReason] = useState("To maintain a balanced ratio, all single gentlemen are required to express interest for this event.");
+    const [requests, setRequests] = useState<InterestRequest[]>(initialRequests);
     const { toast } = useToast();
 
     const handleRequest = (id: string, decision: 'Approved' | 'Declined') => {
         setRequests(requests.map(req => req.id === id ? {...req, status: decision} : req));
+        
+        let toastDescription = `The guest has been notified of your decision.`;
+        if (decision === 'Declined') {
+            // In a real app, this message could be customized by the host.
+            toastDescription = `The guest has been politely informed that numbers are limited and they have been placed on a waitlist.`;
+        }
+
         toast({
             title: `Request ${decision}`,
-            description: `The guest has been notified of your decision.`
+            description: toastDescription
         });
     }
 
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><KeyRound /> Event Pre-Approval</CardTitle>
-                <CardDescription>Optionally require guests to request approval before they can purchase tickets. Useful for managing demographics or for exclusive events.</CardDescription>
+                <CardTitle className="flex items-center gap-2"><ThumbsUp /> Expression of Interest</CardTitle>
+                <CardDescription>Optionally require guests to express interest before they can access an event. Useful for gauging interest, managing demographics, creating waitlists, or for exclusive events.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex items-center space-x-2">
                     <Switch
-                        id="pre-approval-switch"
-                        checked={preApprovalEnabled}
-                        onCheckedChange={setPreApprovalEnabled}
+                        id="interest-switch"
+                        checked={interestEnabled}
+                        onCheckedChange={setInterestEnabled}
                     />
-                    <Label htmlFor="pre-approval-switch">Enable Pre-Approval for this Event</Label>
+                    <Label htmlFor="interest-switch">Enable "Expression of Interest" for this Event</Label>
                 </div>
 
-                {preApprovalEnabled && (
+                {interestEnabled && (
                     <div className="space-y-6">
                         <div className="space-y-2">
-                            <Label htmlFor="approval-reason">Reason for Pre-Approval</Label>
+                            <Label htmlFor="interest-reason">Message to Guests</Label>
                             <Textarea
-                                id="approval-reason"
+                                id="interest-reason"
                                 value={reason}
                                 onChange={(e) => setReason(e.target.value)}
-                                placeholder="Explain why guests need to be pre-approved..."
+                                placeholder="Explain why guests need to express interest..."
                                 rows={3}
                             />
-                            <p className="text-xs text-muted-foreground">This text will be shown to guests when they try to access the event.</p>
+                            <p className="text-xs text-muted-foreground">This text will be shown to guests when they try to access the event page.</p>
                         </div>
                         
                         <div className="space-y-4">
                             <Label>Guest Preview</Label>
                             <Alert>
                                 <Eye className="h-4 w-4" />
-                                <AlertTitle>Pre-Approval Required</AlertTitle>
+                                <AlertTitle>Expression of Interest Required</AlertTitle>
                                 <AlertDescription>
                                     <p className="mb-4">{reason}</p>
-                                    <Button disabled>Request Approval</Button>
+                                    <Button disabled>Express Interest</Button>
                                 </AlertDescription>
                             </Alert>
                         </div>
