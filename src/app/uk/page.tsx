@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import Image from "next/image";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -94,15 +95,15 @@ export default function WelcomePage() {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="p-4 flex justify-between items-center border-b">
          <Logo className="w-auto h-10" />
-         <div className="flex items-center gap-4">
+         <div className="flex items-center gap-2">
             <Button asChild variant="outline">
-                <Link href="/">View Global Site</Link>
+                <Link href="/">Global Site</Link>
             </Button>
-            <Button asChild variant="ghost">
-                <Link href="/dashboard">Dashboard Demo</Link>
-            </Button>
-             <Button asChild>
+             <Button asChild variant="ghost">
                 <Link href="/login">Login</Link>
+            </Button>
+            <Button asChild>
+                <Link href="/signup">Sign Up</Link>
             </Button>
          </div>
       </header>
@@ -261,19 +262,19 @@ export default function WelcomePage() {
             </div>
 
              <div className="max-w-6xl mx-auto w-full space-y-12">
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center justify-center gap-2 text-2xl"><MapPin /> Put Your UK Scene on the Map</CardTitle>
-                        <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex justify-center">
-                         <img 
-                            src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
-                            alt="UK map with glowing points" 
-                            className="rounded-lg border max-w-full h-auto"
-                            data-ai-hint="UK map lights" />
-                    </CardContent>
-                </Card>
+                <div className="w-full">
+                    <div className="text-center mb-4">
+                        <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
+                        <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
+                    </div>
+                     <Image 
+                        src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
+                        alt="UK map with glowing points"
+                        width={1200}
+                        height={675}
+                        className="rounded-lg border max-w-full h-auto mx-auto"
+                        data-ai-hint="UK map lights" />
+                </div>
 
                 <Card>
                     <CardHeader>
