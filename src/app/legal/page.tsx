@@ -2,7 +2,7 @@
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Gavel, ShieldCheck, UserCheck, Gift, CheckSquare } from "lucide-react";
+import { Gavel, ShieldCheck, UserCheck, Gift, CheckSquare, History } from "lucide-react";
 import Link from "next/link";
 
 export default function LegalPage() {
@@ -30,18 +30,27 @@ export default function LegalPage() {
                 <p><strong>3. User Accounts:</strong> You are responsible for maintaining the confidentiality of your account credentials, including your password and Safe Word. You are responsible for all activities that occur under your account. You agree to notify EventSafe immediately of any unauthorized use of your account.</p>
                 <p><strong>4. User Conduct:</strong> You agree to use the Service in a manner that is lawful, respectful, and in accordance with the community standards of the events you attend. EventSafe is not responsible for the conduct of any user, host, or venue. We reserve the right to suspend or terminate accounts that violate our policies or are deemed to pose a risk to the community.</p>
                 <p><strong>5. Host & Venue Compliance:</strong> Hosts and Venues agree that a condition of using the Service is that all guests and attendees at their events must be registered and verified members of EventSafe. The first month of service is provided free of charge to serve as a grace period to facilitate the onboarding of existing patrons. EventSafe reserves the right to monitor compliance by checking event listings and attendance logs.</p>
-                <div className="p-4 border rounded-lg bg-muted/50 mt-4">
-                    <h3 className="font-semibold text-base flex items-center gap-2"><CheckSquare /> Venue Rule Acceptance via QR Scan</h3>
-                    <p className="mt-2">For enhanced legal protection, EventSafe provides a mechanism for venues to log guest acceptance of their specific house rules. The process is as follows:</p>
-                    <ul className="list-decimal list-inside pl-4 mt-2 space-y-1">
-                        <li>The Host/Venue uploads their specific rules and terms of entry to their EventSafe profile.</li>
-                        <li>When a guest first attends this venue, they are prompted within their EventSafe app to read and accept these rules before they can check in.</li>
-                        <li>The first successful QR code scan at the venue acts as a timestamped, digital signature, confirming the guest's acceptance of the rules.</li>
-                        <li>This acceptance is logged in the guest's profile for that specific venue and does not need to be repeated on subsequent visits.</li>
-                        <li>If a guest has not yet accepted the rules, the door staff's scanner will be alerted, and they will be instructed to ask the guest to accept the rules on their phone before rescanning.</li>
-                    </ul>
-                    <p className="mt-2 text-xs italic">This feature provides venues with a verifiable record of rule acceptance, offering a layer of legal protection that is often missing from traditional entry procedures.</p>
+                
+                <div className="p-4 border rounded-lg bg-muted/50 mt-4 space-y-4">
+                    <div>
+                        <h3 className="font-semibold text-base flex items-center gap-2"><CheckSquare /> Venue Rule Acceptance via QR Scan</h3>
+                        <p className="mt-2">For enhanced legal protection, EventSafe provides a mechanism for venues to log guest acceptance of their specific house rules. The process is as follows:</p>
+                        <ul className="list-decimal list-inside pl-4 mt-2 space-y-1">
+                            <li>The Host/Venue uploads their specific rules and terms of entry to their EventSafe profile.</li>
+                            <li>When a guest first attends this venue, they are prompted within their EventSafe app to read and accept these rules before they can check in.</li>
+                            <li>The first successful QR code scan at the venue acts as a timestamped, digital signature, confirming the guest's acceptance of the rules.</li>
+                            <li>This acceptance is logged in the guest's profile for that specific venue and does not need to be repeated on subsequent visits.</li>
+                            <li>If a guest has not yet accepted the rules, the door staff's scanner will be alerted, and they will be instructed to ask the guest to accept the rules on their phone before rescanning.</li>
+                        </ul>
+                        <p className="mt-2 text-xs italic">This feature provides venues with a verifiable record of rule acceptance, offering a layer of legal protection that is often missing from traditional entry procedures.</p>
+                    </div>
+
+                    <div className="pt-4 border-t">
+                        <h3 className="font-semibold text-base flex items-center gap-2"><History /> Document Version Control</h3>
+                        <p className="mt-2">To protect all parties, any amendments made by a Host or Venue to these default legal templates or their own uploaded house rules are version-controlled. Each change is logged with a timestamp. This ensures a clear audit trail of which version of the terms a guest agreed to and when, providing clarity in the event of a dispute.</p>
+                    </div>
                 </div>
+                
                 <p className="mt-4"><strong>6. Disclaimers:</strong> The Service is provided on an "as is" and "as available" basis. EventSafe makes no warranties, express or implied, regarding the operation or availability of the Service. We are a facilitation tool and are not a party to any agreement between guests, hosts, or venues. All users are responsible for their own legal and tax compliance.</p>
             </div>
         </section>
