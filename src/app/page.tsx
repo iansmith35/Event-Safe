@@ -53,11 +53,9 @@ export default function GlobalPage() {
                     <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><Globe /> The Global EventSafe Network</h2>
                     <p className="text-muted-foreground">Our live network is growing in the UK. International expansion starts in 2026.</p>
                 </div>
-                 <Image 
+                 <img 
                     src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" 
                     alt="World map with glowing points" 
-                    width={1200}
-                    height={675}
                     className="rounded-lg border max-w-full h-auto mx-auto" 
                     data-ai-hint="world map lights" 
                 />

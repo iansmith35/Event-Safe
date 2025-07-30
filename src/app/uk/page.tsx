@@ -178,9 +178,6 @@ export default function WelcomePage() {
                         </CardHeader>
                         <CardContent className="flex-1 flex flex-col justify-end">
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button asChild className="flex-1" size="lg">
-                                    <Link href="/dashboard?view=guest">Explore Guest Features</Link>
-                                </Button>
                                 <Button asChild className="flex-1" size="lg" variant="secondary">
                                     <Link href="/signup">Create Your Event Pass</Link>
                                 </Button>
@@ -200,9 +197,6 @@ export default function WelcomePage() {
                         </CardHeader>
                         <CardContent className="flex-1 flex flex-col justify-end">
                             <div className="flex flex-col sm:flex-row gap-4">
-                                 <Button asChild className="flex-1" size="lg">
-                                    <Link href="/dashboard?view=admin">Explore Admin Tools</Link>
-                                </Button>
                                 <Button asChild className="flex-1" size="lg" variant="secondary">
                                     <Link href="/host-signup">Onboard Your Venue</Link>
                                 </Button>
@@ -262,19 +256,16 @@ export default function WelcomePage() {
             </div>
 
              <div className="max-w-6xl mx-auto w-full space-y-12">
-                <div className="w-full">
-                    <div className="text-center mb-4">
-                        <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
-                        <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
-                    </div>
-                     <Image 
-                        src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
-                        alt="UK map with glowing points"
-                        width={1200}
-                        height={675}
-                        className="rounded-lg border max-w-full h-auto mx-auto"
-                        data-ai-hint="UK map lights" />
+                 <div className="text-center mb-4">
+                    <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
+                    <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
+                <img 
+                    src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
+                    alt="UK map with glowing points"
+                    className="rounded-lg border max-w-full h-auto mx-auto"
+                    data-ai-hint="UK map lights" 
+                />
 
                 <Card>
                     <CardHeader>
