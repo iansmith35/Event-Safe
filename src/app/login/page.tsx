@@ -63,8 +63,8 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-6">
           <Logo className="w-auto h-12 text-primary mb-4" />
-          <h1 className="text-3xl font-bold">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">Sign in to your account</p>
+          <h1 className="text-3xl font-bold">Login to EventSafe</h1>
+          <p className="text-muted-foreground mt-2">Enter your credentials to access your account.</p>
         </div>
         <Card>
           <CardContent className="pt-6">
