@@ -267,8 +267,14 @@ export default function WelcomePage() {
                         <CardTitle className="flex items-center justify-center gap-2 text-2xl"><MapPin /> Put Your UK Scene on the Map</CardTitle>
                         <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                         <Image src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" alt="UK map with glowing points" width={1200} height={800} className="rounded-lg border" data-ai-hint="UK map lights" />
+                    <CardContent className="flex justify-center">
+                         <Image 
+                            src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
+                            alt="UK map with glowing points" 
+                            width={1200} 
+                            height={800} 
+                            className="rounded-lg border" 
+                            data-ai-hint="UK map lights" />
                     </CardContent>
                 </Card>
 
