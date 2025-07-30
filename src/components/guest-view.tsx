@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot, CheckSquare } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -87,6 +87,12 @@ const eventTeam = {
     { id: 'vol-1', pseudonym: 'SafetyFirst', role: 'Safety Officer' },
     { id: 'vol-2', pseudonym: 'GateKeeper', role: 'Door Staff' },
     { id: 'vol-3', pseudonym: 'VibeSetter', role: 'Ambiance' },
+  ],
+  venueRules: [
+    "No photography or videography.",
+    "Respect personal boundaries and consent.",
+    "No outside food or drink permitted.",
+    "Management reserves the right to refuse entry.",
   ]
 }
 
@@ -230,24 +236,37 @@ export default function GuestView() {
         )}
         
         <Card>
-          <CardContent className="pt-6">
-            <Separator className="mb-4" />
+          <CardHeader>
+            <CardTitle>Live Event Info: Summer Fest '24</CardTitle>
+          </CardHeader>
+          <CardContent>
             <div className="space-y-4">
-                <h3 className="font-semibold flex items-center gap-2"><Users /> Event Team</h3>
-                <div className="p-4 bg-muted/50 rounded-lg space-y-3">
-                    <p className="text-sm"><strong>Host:</strong> {eventTeam.host}</p>
-                    <p className="text-sm"><strong>Venue:</strong> {eventTeam.venue}</p>
+                <h3 className="font-semibold flex items-center gap-2"><Users /> Event Team & Venue Rules</h3>
+                <div className="p-4 bg-muted/50 rounded-lg space-y-4">
+                    <div>
+                      <p className="text-sm"><strong>Host:</strong> {eventTeam.host}</p>
+                      <p className="text-sm"><strong>Venue:</strong> {eventTeam.venue}</p>
+                    </div>
                     <div>
                         <p className="text-sm font-semibold">Verified Volunteers:</p>
-                        <ul className="list-disc list-inside text-sm text-muted-foreground pl-2">
+                        <ul className="list-disc list-inside text-sm text-muted-foreground pl-4">
                             {eventTeam.volunteers.map(v => (
                                 <li key={v.id}>{v.pseudonym} ({v.role})</li>
                             ))}
                         </ul>
                     </div>
-                    <div className="flex items-center gap-2 pt-2 text-xs text-chart-2 font-medium">
-                        <ShieldCheck className="h-4 w-4" />
-                        <span>This event has verified staff/volunteers on record.</span>
+                     <Separator />
+                     <div>
+                        <p className="text-sm font-semibold">Venue Rules:</p>
+                        <ul className="list-disc list-inside text-sm text-muted-foreground pl-4">
+                            {eventTeam.venueRules.map((rule, i) => (
+                                <li key={i}>{rule}</li>
+                            ))}
+                        </ul>
+                        <div className="mt-4 flex items-center gap-2 p-2 rounded-md bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-800">
+                           <CheckSquare className="h-5 w-5 text-green-600 dark:text-green-400" />
+                           <p className="text-xs text-green-800 dark:text-green-200">You accepted these rules on 2024-07-20. Your entry is streamlined.</p>
+                        </div>
                     </div>
                 </div>
             </div>
