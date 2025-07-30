@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Logo } from "@/components/logo";
 import { Globe } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -54,12 +53,10 @@ export default function GlobalPage() {
                     <CardDescription>Our live network is growing in the UK. International expansion starts in 2026.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex justify-center">
-                    <Image 
+                    <img 
                         src="https://images.unsplash.com/photo-1572455024142-3db3115a76b5?q=80&w=1200" 
                         alt="World map with glowing points" 
-                        width={1200} 
-                        height={675} 
-                        className="rounded-lg border" 
+                        className="rounded-lg border max-w-full h-auto" 
                         data-ai-hint="world map lights" 
                     />
                 </CardContent>

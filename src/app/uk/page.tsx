@@ -12,7 +12,6 @@ import Autoplay from "embla-carousel-autoplay"
 import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FunCourt from "@/components/fun-court";
-import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -268,12 +267,10 @@ export default function WelcomePage() {
                         <CardDescription>Tell us where you are. Help us bring EventSafe to your favorite local venues.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex justify-center">
-                         <Image 
+                         <img 
                             src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
                             alt="UK map with glowing points" 
-                            width={1200} 
-                            height={800} 
-                            className="rounded-lg border" 
+                            className="rounded-lg border max-w-full h-auto"
                             data-ai-hint="UK map lights" />
                     </CardContent>
                 </Card>
