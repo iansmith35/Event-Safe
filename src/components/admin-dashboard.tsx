@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, Scale, UserCheck, KeyRound } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, Scale, UserCheck, KeyRound, Annoyed } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -17,6 +17,7 @@ import FunCourt from "./fun-court";
 import AdminVerificationHandler from "./admin-verification-handler";
 import FinancialDashboard from "./financial-dashboard";
 import EventPreApproval from "./event-pre-approval";
+import GuestAlerts from "./guest-alerts";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -77,6 +78,7 @@ export default function AdminDashboard() {
       
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2 space-y-6">
+            <GuestAlerts />
             <EventPreApproval />
             <div className="grid gap-6 md:grid-cols-2">
               <Card>
