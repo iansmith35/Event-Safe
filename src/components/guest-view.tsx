@@ -103,6 +103,7 @@ const eventTeam = {
 export default function GuestView() {
   const [status] = useState<Status>('Green');
   const [activeProfileId, setActiveProfileId] = useState('vanilla-male');
+  const [venueNomination, setVenueNomination] = useState('');
   const isAppealDisabled = status === 'Green';
   const { toast } = useToast();
 
@@ -117,14 +118,12 @@ export default function GuestView() {
 
   const handleNomination = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const input = form.elements.namedItem('venue-nomination') as HTMLInputElement;
-    if (input && input.value) {
+    if (venueNomination) {
         toast({
             title: "Venue Nominated!",
-            description: `Thank you for nominating ${input.value}. We'll reach out to them about joining EventSafe.`,
+            description: `Thank you for nominating ${venueNomination}. We'll reach out to them about joining EventSafe.`,
         });
-        input.value = '';
+        setVenueNomination('');
     }
   }
 
@@ -428,7 +427,7 @@ export default function GuestView() {
                 <CardContent className="space-y-6">
                     <div>
                         <form onSubmit={handleNomination} className="flex gap-2">
-                            <Input name="venue-nomination" placeholder="Search for a venue to nominate..." />
+                            <Input name="venue-nomination" placeholder="Search for a venue to nominate..." value={venueNomination} onChange={(e) => setVenueNomination(e.target.value)} />
                             <Button type="submit"><Search className="mr-2 h-4 w-4" /> Nominate</Button>
                         </form>
                          <p className="text-xs text-muted-foreground mt-2">Help us grow! By nominating venues, you show them their customers want a safer event experience.</p>
