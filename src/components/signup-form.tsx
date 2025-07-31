@@ -33,6 +33,7 @@ function SignupFormComponent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // This part is now less critical but good to keep for when real payments are added
     if (searchParams.get('status') === 'success') {
       setIsPaid(true);
       toast({
@@ -132,12 +133,31 @@ function SignupFormComponent() {
     }
   };
 
+  const handleSignup = (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsLoading(true);
+      toast({
+          title: "Processing Signup...",
+          description: "Finalizing your account details.",
+      });
+
+      // Simulate network request
+      setTimeout(() => {
+          setIsLoading(false);
+          setIsPaid(true); // This state now means "signup complete"
+          toast({
+              title: "Signup Complete!",
+              description: "Your account is now pending verification.",
+          });
+      }, 1500)
+  }
+
   if (isPaid) {
     return (
         <Card>
             <CardHeader>
                 <CardTitle>Verification Pending</CardTitle>
-                <CardDescription>Your payment was successful and your ID is being verified.</CardDescription>
+                <CardDescription>Your signup was successful and your ID is being verified.</CardDescription>
             </CardHeader>
             <CardContent className='text-center space-y-4'>
                  {duplicateCheckResult?.isPotentialDuplicate && (
@@ -165,7 +185,7 @@ function SignupFormComponent() {
         <CardDescription>All fields are required to create your secure event pass.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+        <form onSubmit={handleSignup} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="selfie">Your Selfie</Label>
             <div className="w-full p-2 border-dashed border-2 rounded-lg flex flex-col items-center justify-center gap-4">
@@ -311,10 +331,8 @@ function SignupFormComponent() {
               <Input id="promo-code" placeholder="Enter discount code" />
           </div>
 
-          <Button asChild disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
-            <a href="https://buy.stripe.com/test_7sI5kgeN2d4i5gYfZ0" rel="noopener noreferrer">
-              Proceed to Payment
-            </a>
+          <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Complete Signup (Simulate Payment)'}
           </Button>
         </form>
       </CardContent>
