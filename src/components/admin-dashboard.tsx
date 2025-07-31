@@ -126,7 +126,6 @@ export default function AdminDashboard() {
               </Card>
             </div>
              <SuggestionBox />
-             <FunCourt />
         </div>
         <div className="md:col-span-1">
           <SocialFeed />

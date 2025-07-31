@@ -254,6 +254,7 @@ export default function WelcomePage() {
                             </Carousel>
                         </CardContent>
                     </Card>
+                    <FunCourt />
                 </div>
             </div>
 
@@ -320,5 +321,3 @@ export default function WelcomePage() {
     </div>
   );
 }
-
-    
