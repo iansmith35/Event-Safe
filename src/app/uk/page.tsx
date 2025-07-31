@@ -207,7 +207,6 @@ export default function WelcomePage() {
 
                  {/* Right Column */}
                 <div className="flex flex-col gap-8">
-                    <FunCourt />
                     
                     <Card className="flex flex-col flex-1">
                         <CardHeader>
@@ -314,3 +313,5 @@ export default function WelcomePage() {
     </div>
   );
 }
+
+    
