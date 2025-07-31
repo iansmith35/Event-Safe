@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, Scale, UserCheck, KeyRound, Annoyed } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, UserCheck, Annoyed } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -98,17 +98,17 @@ export default function AdminDashboard() {
               <StaffRoleManager />
 
               <Card>
-                  <CardHeader>
+                <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star /> Trust Ratings & Analytics</CardTitle>
-                    <CardDescription>Allow venues and guests to rate each other and unlock powerful data.</CardDescription>
-                  </CardHeader>
-                  <CardContent className="text-center py-8">
-                      <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Coming Soon: Trust Data</h3>
-                          <p className="text-muted-foreground mt-2">Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</p>
-                          <Button className="mt-6" disabled>Notify Me</Button>
-                      </div>
-                  </CardContent>
+                    <CardDescription>Enable TrustPilot-style ratings and offer enhanced visibility and analytics as a premium feature for venues.</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center py-8">
+                    <div className="max-w-md mx-auto">
+                        <h3 className="text-xl font-semibold">Premium Feature: Trust Data</h3>
+                        <p className="text-muted-foreground mt-2">Unlock powerful guest and venue analytics to understand your audience and build a stellar reputation. Contact us for enterprise pricing.</p>
+                        <Button className="mt-6" disabled>Request a Demo</Button>
+                    </div>
+                </CardContent>
               </Card>
               <Card>
                   <CardHeader>
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
                   </CardHeader>
                   <CardContent className="text-center py-8">
                       <div className="max-w-lg mx-auto">
-                          <h3 className="text-xl font-semibold">Coming Soon: AI Social Media Promoter</h3>
+                          <h3 className="text-xl font-semibold">Feature: AI Social Media Promoter</h3>
                           <p className="text-muted-foreground mt-2">Our promoter has two tiers. The basic tier allows you to post your event on the EventSafe feed. The premium tier unlocks continuous, AI-driven social media promotion that creates trendy, engaging posts up until your event date to maximize visibility.</p>
                           <Button className="mt-6" disabled>Notify Me</Button>
                       </div>
