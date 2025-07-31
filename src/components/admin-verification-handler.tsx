@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -11,6 +10,7 @@ import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { verifyDistinguishingMark, VerifyDistinguishingMarkOutput } from '@/ai/flows/verify-distinguishing-mark';
 import { Separator } from './ui/separator';
+import StripeIdentityVerification from './stripe-identity-verification';
 
 // In a real app, this would be fetched from your database
 const flaggedCases = [
@@ -53,14 +53,6 @@ export default function AdminVerificationHandler() {
             title: `Case ${decision}`,
             description: `The guest signup has been ${decision}. This action has been logged for review.`,
         });
-    };
-    
-    const handleLiveVerification = (caseId: string) => {
-        toast({
-            title: "Live Verification Requested",
-            description: "The user has been notified to complete a live video verification.",
-        });
-        // Here you would trigger a notification to the user
     };
     
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,6 +122,10 @@ export default function AdminVerificationHandler() {
                         </div>
 
                         <Separator />
+                        
+                        <StripeIdentityVerification caseId={c.id} guestName={c.newGuest.name} />
+
+                        <Separator />
 
                         {/* Distinguishing Mark Verification Section */}
                         <div className="space-y-4">
@@ -181,7 +177,6 @@ export default function AdminVerificationHandler() {
                         <Separator />
 
                         <div className="flex flex-wrap gap-2 justify-end pt-4 border-t">
-                            <Button variant="outline" onClick={() => handleLiveVerification(c.id)}><Video /> Request Facial Liveness Check</Button>
                             <Button variant="destructive" onClick={() => handleDecision(c.id, 'rejected')}><X /> Reject Signup</Button>
                             <Button className="bg-chart-2 hover:bg-chart-2/90" onClick={() => handleDecision(c.id, 'approved')}><Check /> Approve Signup</Button>
                         </div>
