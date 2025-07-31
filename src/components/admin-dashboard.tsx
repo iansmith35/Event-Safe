@@ -13,7 +13,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
-import FunCourt from "./fun-court";
 import AdminVerificationHandler from "./admin-verification-handler";
 import FinancialDashboard from "./financial-dashboard";
 import EventPreApproval from "./event-pre-approval";

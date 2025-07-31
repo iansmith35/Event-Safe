@@ -15,10 +15,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Textarea } from "./ui/textarea";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Input } from "./ui/input";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
 import { Separator } from "@/components/ui/separator";
