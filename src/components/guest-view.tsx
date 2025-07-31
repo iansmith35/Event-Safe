@@ -26,22 +26,26 @@ import RebeccaChatbot from "./rebecca-chatbot";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { cn } from "@/lib/utils";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
 const statusConfig = {
   Green: {
-    color: 'bg-chart-2',
+    color: 'bg-green-500',
+    borderColor: 'border-green-600',
     label: 'Green',
     score: 950,
   },
   Amber: {
-    color: 'bg-chart-4',
+    color: 'bg-amber-500',
+    borderColor: 'border-amber-600',
     label: 'Amber',
     score: 650,
   },
   Red: {
-    color: 'bg-destructive',
+    color: 'bg-red-500',
+    borderColor: 'border-red-600',
     label: 'Red',
     score: 300,
   },
@@ -125,18 +129,33 @@ export default function GuestView() {
   }
 
   const activeProfile = profileVariants.find(p => p.id === activeProfileId) || profileVariants[0];
+  const currentStatus = statusConfig[status];
+  const qrData = encodeURIComponent(`${activeProfile.pseudonym}:ESG-928301`);
 
   return (
     <div className="grid gap-8 md:grid-cols-3 noselect">
       {/* Left Column */}
       <div className="md:col-span-1 space-y-8">
-         <Card>
-            <CardHeader>
-                <CardTitle>Event Pass</CardTitle>
-                <CardDescription>This feature is temporarily unavailable while we perform maintenance or due to connectivity issues.</CardDescription>
+        <Card className={cn("border-2 shadow-lg", currentStatus.borderColor)}>
+            <CardHeader className={cn("p-4 text-white rounded-t-md", currentStatus.color)}>
+                <div className="flex justify-between items-center">
+                    <CardTitle className="text-2xl">{activeProfile.pseudonym}</CardTitle>
+                    <div className="text-right">
+                        <p className="font-bold text-lg">{currentStatus.label}</p>
+                        <p className="text-xs opacity-80">Score: {currentStatus.score}</p>
+                    </div>
+                </div>
             </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground">Your event pass and badge generator will be back online shortly. If you are at an event, please use your distinguishing mark for verification.</p>
+            <CardContent className="p-4 bg-background flex flex-col items-center justify-center">
+                <div className="bg-white p-2 rounded-lg border">
+                     <Image 
+                        src={`https://api.qrserver.com/v1/create-qr-code/?data=${qrData}&size=200x200&bgcolor=ffffff`}
+                        alt="Event Pass QR Code"
+                        width={200}
+                        height={200}
+                     />
+                </div>
+                 <p className="text-xs text-muted-foreground mt-3 text-center">Present this code to event staff for scanning.</p>
             </CardContent>
         </Card>
         
@@ -462,3 +481,5 @@ export default function GuestView() {
     </div>
   );
 }
+
+    
