@@ -93,15 +93,19 @@ export default function WelcomePage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="p-4 flex justify-between items-center border-b">
-         <div className="flex items-center gap-4">
+      <header className="p-4 grid grid-cols-3 items-center border-b">
+         <div className="flex items-center gap-4 justify-start">
            <Logo className="w-auto h-10" />
-           <p className="text-sm text-muted-foreground hidden md:block">The UK's unified safety platform for live events.</p>
-         </div>
-         <div className="flex items-center gap-2">
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="hidden md:flex">
                 <Link href="/">Global Site</Link>
             </Button>
+         </div>
+        <div className="text-center">
+            <h2 className="font-bold text-foreground text-sm md:text-base whitespace-nowrap">
+                EventSafe: Connecting Guests & Venues With a Safety Score
+            </h2>
+        </div>
+         <div className="flex items-center gap-2 justify-end">
              <Button asChild variant="ghost">
                 <Link href="/login">Login</Link>
             </Button>
@@ -316,3 +320,5 @@ export default function WelcomePage() {
     </div>
   );
 }
+
+    
