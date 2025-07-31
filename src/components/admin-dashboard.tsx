@@ -18,6 +18,7 @@ import AdminVerificationHandler from "./admin-verification-handler";
 import FinancialDashboard from "./financial-dashboard";
 import EventPreApproval from "./event-pre-approval";
 import GuestAlerts from "./guest-alerts";
+import StaffRoleManager from "./staff-role-manager";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -94,19 +95,9 @@ export default function AdminDashboard() {
                       </div>
                   </CardContent>
               </Card>
-              <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Users /> Staff Role Management</CardTitle>
-                    <CardDescription>Build your event team with flexible, tiered role management.</CardDescription>
-                  </CardHeader>
-                  <CardContent className="text-center py-8">
-                      <div className="max-w-md mx-auto">
-                          <h3 className="text-xl font-semibold">Scalable Staffing Tiers</h3>
-                          <p className="text-muted-foreground mt-2">Each host receives 5 free single-use volunteer codes per event. If a venue is also linked, the pool increases to 10 codes. Additional codes can be purchased for £1 each per event.</p>
-                          <Button className="mt-6" disabled>Manage Staff & Plan</Button>
-                      </div>
-                  </CardContent>
-              </Card>
+             
+              <StaffRoleManager />
+
               <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Star /> Trust Ratings & Analytics</CardTitle>
