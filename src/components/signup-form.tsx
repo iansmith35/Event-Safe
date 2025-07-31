@@ -330,6 +330,11 @@ function SignupFormComponent() {
               <Label htmlFor="promo-code">Promo Code</Label>
               <Input id="promo-code" placeholder="Enter discount code" />
           </div>
+          
+          <div className="space-y-2">
+              <Label htmlFor="referral-code">Referred by (Pseudonym)</Label>
+              <Input id="referral-code" placeholder="Enter the pseudonym of the person who referred you" />
+          </div>
 
           <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Complete Signup (Simulate Payment)'}

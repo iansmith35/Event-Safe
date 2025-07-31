@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot, CheckSquare } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot, CheckSquare, Share2, Copy } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -27,6 +27,7 @@ import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { cn } from "@/lib/utils";
+import { Progress } from "./ui/progress";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -104,6 +105,7 @@ export default function GuestView() {
   const [status] = useState<Status>('Green');
   const [activeProfileId, setActiveProfileId] = useState('vanilla-male');
   const [venueNomination, setVenueNomination] = useState('');
+  const [referralCount, setReferralCount] = useState(4);
   const isAppealDisabled = status === 'Green';
   const { toast } = useToast();
 
@@ -126,6 +128,14 @@ export default function GuestView() {
         setVenueNomination('');
     }
   }
+  
+  const copyReferralCode = () => {
+    navigator.clipboard.writeText(activeProfile.pseudonym);
+    toast({
+      title: "Referral ID Copied!",
+      description: "Your pseudonym has been copied to the clipboard. Share it with friends!",
+    });
+  };
 
   const activeProfile = profileVariants.find(p => p.id === activeProfileId) || profileVariants[0];
   const currentStatus = statusConfig[status];
@@ -155,6 +165,38 @@ export default function GuestView() {
                      />
                 </div>
                  <p className="text-xs text-muted-foreground mt-3 text-center">Present this code to event staff for scanning.</p>
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><Share2 /> Referral Program</CardTitle>
+                <CardDescription>Refer 10 friends who complete paid signup and get £3 credit for premium features.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                 <div>
+                    <div className="flex justify-between items-center mb-1">
+                        <Label>Your Progress</Label>
+                        <span className="text-sm font-bold">{referralCount} / 10 Referrals</span>
+                    </div>
+                    <Progress value={(referralCount / 10) * 100} />
+                </div>
+                {referralCount >= 10 && (
+                    <Alert variant="default" className="border-green-500">
+                        <Star className="h-4 w-4 text-green-500" />
+                        <AlertTitle>Congratulations!</AlertTitle>
+                        <AlertDescription>You've earned £3 credit!</AlertDescription>
+                    </Alert>
+                )}
+                 <div>
+                    <Label>Your Referral ID</Label>
+                    <div className="flex gap-2">
+                        <Input value={activeProfile.pseudonym} readOnly />
+                        <Button variant="outline" size="icon" onClick={copyReferralCode}>
+                            <Copy />
+                        </Button>
+                    </div>
+                </div>
             </CardContent>
         </Card>
         
