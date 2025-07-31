@@ -16,3 +16,4 @@ import '@/ai/flows/judge-demo-case.ts';
 import '@/ai/flows/suspend-guest.ts';
 import '@/ai/flows/verify-le-request.ts';
 import '@/ai/flows/verify-distinguishing-mark.ts';
+import '@/ai/flows/analyze-financials.ts';

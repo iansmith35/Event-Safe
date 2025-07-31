@@ -14,6 +14,7 @@ import { Badge } from "./ui/badge";
 import { BarChart, BookOpen, Briefcase, Landmark, MinusCircle, PlusCircle, TrendingDown, TrendingUp } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { Bar, CartesianGrid, XAxis, YAxis, BarChart as RechartsBarChart } from "recharts";
+import FinancialInsights from "./financial-insights";
 
 // Mock data simulating data fetched from Firestore and tagged for ESAFE
 const financialData = {
@@ -55,6 +56,8 @@ export default function FinancialDashboard() {
                 </CardDescription>
             </CardHeader>
         </Card>
+
+        <FinancialInsights data={financialData} />
 
         <div className="grid gap-6 md:grid-cols-3">
             <Card>
