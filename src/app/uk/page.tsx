@@ -94,7 +94,10 @@ export default function WelcomePage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="p-4 flex justify-between items-center border-b">
-         <Logo className="w-auto h-10" />
+         <div className="flex items-center gap-4">
+           <Logo className="w-auto h-10" />
+           <p className="text-sm text-muted-foreground hidden md:block">The UK's unified safety platform for live events.</p>
+         </div>
          <div className="flex items-center gap-2">
             <Button asChild variant="outline">
                 <Link href="/">Global Site</Link>
@@ -313,5 +316,3 @@ export default function WelcomePage() {
     </div>
   );
 }
-
-    
