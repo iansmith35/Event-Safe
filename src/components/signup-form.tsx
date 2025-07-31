@@ -35,8 +35,12 @@ function SignupFormComponent() {
   useEffect(() => {
     if (searchParams.get('status') === 'success') {
       setIsPaid(true);
+      toast({
+        title: "Payment Successful!",
+        description: "Your account is now pending verification.",
+      });
     }
-  }, [searchParams]);
+  }, [searchParams, toast]);
 
   useEffect(() => {
     const getCameraPermission = async () => {
@@ -205,7 +209,7 @@ function SignupFormComponent() {
                     </AlertTitle>
                     <AlertDescription>
                         {duplicateCheckResult.reason}
-                    </Description>
+                    </AlertDescription>
                 </Alert>
               )}
             </div>
@@ -308,7 +312,7 @@ function SignupFormComponent() {
           </div>
 
           <Button asChild disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
-            <a href="https://buy.stripe.com/5kQ8wPgx31ua0YdajbdfG00" rel="noopener noreferrer">
+            <a href="https://buy.stripe.com/test_7sI5kgeN2d4i5gYfZ0" rel="noopener noreferrer">
               Proceed to Payment
             </a>
           </Button>
