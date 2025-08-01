@@ -16,8 +16,6 @@ import {
   LayoutDashboard,
   User,
   Menu,
-  UserPlus,
-  Loader2,
   Home,
 } from 'lucide-react';
 import GuestView from '@/components/guest-view';
@@ -26,11 +24,10 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
-import { auth } from '@/lib/firebase';
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
+const DEMO_EMAIL = 'demo@eventsafe.com';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void, isAdmin: boolean }) {
   const handleMenuClick = (view: string) => {
@@ -81,45 +78,26 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
 export default function DashboardPage() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<FirebaseUser | null | {email: string}>({ email: "demo@eventsafe.com"});
+  const [user, setUser] = useState<{ email: string | null }>({ email: DEMO_EMAIL });
   const [isAdmin, setIsAdmin] = useState(false);
   const isMobile = useIsMobile();
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        const isAdminUser = currentUser.email === ADMIN_EMAIL;
-        setIsAdmin(isAdminUser);
-        
-        const view = searchParams.get('view');
-        if (isAdminUser && view === 'admin') {
-          setActiveView('admin');
-        } else {
-          setActiveView('guest');
-        }
-      } else {
-        // For demo purposes, allow viewing without login.
-        setUser({ email: "demo@eventsafe.com" });
-        setIsAdmin(false); // Demo user is not an admin
-        setActiveView('guest');
-      }
-      setIsLoading(false);
-    });
+    // For demo/testing purposes, we'll use a URL parameter to switch between admin/guest views
+    const view = searchParams.get('view');
+    const isAdminUser = view === 'admin';
+    
+    setIsAdmin(isAdminUser);
+    setUser({ email: isAdminUser ? ADMIN_EMAIL : DEMO_EMAIL });
 
-    return () => unsubscribe();
+    if (isAdminUser) {
+      setActiveView('admin');
+    } else {
+      setActiveView('guest');
+    }
   }, [searchParams]);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
-      </div>
-    );
-  }
   
   const currentView = isAdmin && activeView === 'admin' ? <AdminDashboard /> : <GuestView />;
 
@@ -152,8 +130,7 @@ export default function DashboardPage() {
               </Link>
             </Button>
             <div className="flex items-center gap-4">
-               <p className="text-sm text-muted-foreground">Logged in as: {user?.email}</p>
-                <Button onClick={() => auth.signOut()}>Sign Out</Button>
+               <p className="text-sm text-muted-foreground">Viewing as: <span className="font-semibold">{user?.email}</span></p>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">

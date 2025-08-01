@@ -20,7 +20,7 @@ import { Textarea } from './ui/textarea';
 
 function SignupFormComponent() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isPaid, setIsPaid] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(false);
   const [selfie, setSelfie] = useState<string | null>(null);
   const [dob, setDob] = useState<Date | undefined>();
   const [consent, setConsent] = useState(false);
@@ -30,18 +30,6 @@ function SignupFormComponent() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    // This part is now less critical but good to keep for when real payments are added
-    if (searchParams.get('status') === 'success') {
-      setIsPaid(true);
-      toast({
-        title: "Payment Successful!",
-        description: "Your account is now pending verification.",
-      });
-    }
-  }, [searchParams, toast]);
 
   useEffect(() => {
     const getCameraPermission = async () => {
@@ -144,7 +132,7 @@ function SignupFormComponent() {
       // Simulate network request
       setTimeout(() => {
           setIsLoading(false);
-          setIsPaid(true); // This state now means "signup complete"
+          setIsSignedUp(true);
           toast({
               title: "Signup Complete!",
               description: "Your account is now pending verification.",
@@ -152,7 +140,7 @@ function SignupFormComponent() {
       }, 1500)
   }
 
-  if (isPaid) {
+  if (isSignedUp) {
     return (
         <Card>
             <CardHeader>
