@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
@@ -25,19 +25,18 @@ export default function RebeccaChatbot() {
     const { toast } = useToast();
     const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-    const handleSendMessage = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!input.trim() || isLoading) return;
+    const handleSendMessage = useCallback(async (currentInput: string) => {
+        if (!currentInput.trim() || isLoading) return;
 
-        const userMessage: Message = { role: 'user', content: input };
+        const userMessage: Message = { role: 'user', content: currentInput };
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
 
         try {
             const response = await rebeccaChat({
-                message: input,
-                conversationHistory: messages,
+                message: currentInput,
+                conversationHistory: [...messages, userMessage],
             });
             setMessages(prev => [...prev, { role: 'model', content: response.response }]);
         } catch (error) {
@@ -53,7 +52,7 @@ export default function RebeccaChatbot() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [isLoading, messages, toast]);
     
     useEffect(() => {
         if (scrollAreaRef.current) {
@@ -63,6 +62,11 @@ export default function RebeccaChatbot() {
             });
         }
     }, [messages]);
+    
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        handleSendMessage(input);
+    }
 
     return (
         <Card>
@@ -102,14 +106,14 @@ export default function RebeccaChatbot() {
                     </div>
                 </ScrollArea>
 
-                <form onSubmit={handleSendMessage} className="flex items-center gap-2 pt-4 border-t">
+                <form onSubmit={handleSubmit} className="flex items-center gap-2 pt-4 border-t">
                     <Textarea
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={e => {
                             if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault();
-                                handleSendMessage(e);
+                                handleSubmit(e);
                             }
                         }}
                         placeholder="Type your message..."
