@@ -15,11 +15,14 @@ import { useToast } from '@/hooks/use-toast';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
+const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeSessionConflict, setActiveSessionConflict] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -27,6 +30,18 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+    setActiveSessionConflict(false);
+
+    // Simulate checking for an active session for admin/host accounts
+    if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+        // In a real app, you'd call a backend function here to check Firestore for active sessions.
+        // For this demo, we'll simulate a conflict.
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network latency
+        setActiveSessionConflict(true);
+        setError("This host account is already signed in on another device. Please sign out from the other device or upgrade your plan to allow multiple sessions.");
+        setIsLoading(false);
+        return;
+    }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -45,6 +60,7 @@ export default function LoginPage() {
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     setError(null);
+    setActiveSessionConflict(false);
     try {
       await signInWithPopup(auth, googleProvider);
       toast({
@@ -73,7 +89,7 @@ export default function LoginPage() {
               {error && (
                 <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
-                  <AlertTitle>Login Failed</AlertTitle>
+                  <AlertTitle>{activeSessionConflict ? "Active Session Conflict" : "Login Failed"}</AlertTitle>
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
