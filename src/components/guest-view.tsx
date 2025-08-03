@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot, CheckSquare, Share2, Copy } from "lucide-react";
+import { Ticket, ShieldCheck, ThumbsUp, Star, Users, Map, MicVocal, Award, UserPlus, RefreshCw, Heart, Search, Bot, CheckSquare, Share2, Copy, Camera } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
 import { Textarea } from "./ui/textarea";
 import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Label } from "@/components/ui/label";
+import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import SocialFeed from "./social-feed";
 import SuggestionBox from "./suggestion-box";
@@ -28,6 +28,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { cn } from "@/lib/utils";
 import { Progress } from "./ui/progress";
+import EventGallery from "./event-gallery";
 
 type Status = 'Green' | 'Amber' | 'Red';
 
@@ -334,10 +335,11 @@ export default function GuestView() {
         </Card>
 
         <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="history">Event History</TabsTrigger>
             <TabsTrigger value="reports">My Reports</TabsTrigger>
             <TabsTrigger value="kudos">My Kudos</TabsTrigger>
+            <TabsTrigger value="photos" className="flex items-center gap-2"><Camera className="h-4 w-4" /> Photos</TabsTrigger>
             <TabsTrigger value="ratings" className="flex items-center gap-2"><Star className="h-4 w-4" /> Ratings</TabsTrigger>
             <TabsTrigger value="map" className="flex items-center gap-2"><Map className="h-4 w-4" /> Event Map</TabsTrigger>
           </TabsList>
@@ -444,6 +446,9 @@ export default function GuestView() {
                     )}
                 </CardContent>
             </Card>
+          </TabsContent>
+          <TabsContent value="photos">
+            <EventGallery userType="guest" />
           </TabsContent>
           <TabsContent value="ratings">
             <Card>

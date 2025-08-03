@@ -116,3 +116,19 @@ body {
     user-select: none;
   }
 }
+
+@layer utilities {
+  .prevent-screenshot::after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIzMCUiIHg9IjEwJSIgZmlsbD0icmdiYSgwLDAsMCwwLjEpIjBzdHlsZT0iZm9udC1zaXplOjZweDtmb250LXdlaWdodDpib2xkO3JvdGF0ZSg0NSk7Ij5FdmVudFNhZmU8L3RleHQ+PC9zdmc+');
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 9999;
+  }
+}

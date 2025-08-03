@@ -17,3 +17,4 @@ import '@/ai/flows/suspend-guest.ts';
 import '@/ai/flows/verify-le-request.ts';
 import '@/ai/flows/verify-distinguishing-mark.ts';
 import '@/ai/flows/analyze-financials.ts';
+import '@/ai/flows/verify-guest-in-photo.ts';

@@ -7,7 +7,7 @@ import AdminReportAnalysis from "./admin-report-analysis";
 import AdminStatusSuggester from "./admin-status-suggester";
 import AdminAppealHandler from "./admin-appeal-handler";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, UserCheck, Annoyed } from "lucide-react";
+import { AlertCircle, X, Ticket, ShieldCheck, Star, Users, Megaphone, ThumbsUp, UserCheck, Annoyed, Camera } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card";
 import AdminKudosAnalyzer from "./admin-kudos-analyzer";
@@ -18,6 +18,7 @@ import FinancialDashboard from "./financial-dashboard";
 import EventPreApproval from "./event-pre-approval";
 import GuestAlerts from "./guest-alerts";
 import StaffRoleManager from "./staff-role-manager";
+import EventGallery from "./event-gallery";
 
 export default function AdminDashboard() {
   // This state would in reality be populated by fetching flagged users from your database.
@@ -46,7 +47,7 @@ export default function AdminDashboard() {
       )}
 
       <Tabs defaultValue="verification" className="w-full">
-        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-6 h-auto sm:h-12">
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-7 h-auto sm:h-12">
           <TabsTrigger value="verification"><div className="flex items-center gap-2"><UserCheck className="h-4 w-4" /> Verification</div></TabsTrigger>
           <TabsTrigger value="report-analysis">AI Report Analysis</TabsTrigger>
           <TabsTrigger value="status-suggester">Status Change Suggester</TabsTrigger>
@@ -54,6 +55,9 @@ export default function AdminDashboard() {
           <TabsTrigger value="kudos-analyzer"><div className="flex items-center gap-2"><ThumbsUp className="h-4 w-4" /> Kudos Analyzer</div></TabsTrigger>
           <TabsTrigger value="financials" className="flex items-center gap-2">
             <Ticket className="h-4 w-4" /> EventSafe Pay
+          </TabsTrigger>
+           <TabsTrigger value="gallery" className="flex items-center gap-2">
+            <Camera className="h-4 w-4" /> Photo Sales
           </TabsTrigger>
         </TabsList>
         <TabsContent value="verification">
@@ -73,6 +77,9 @@ export default function AdminDashboard() {
         </TabsContent>
          <TabsContent value="financials">
           <FinancialDashboard />
+        </TabsContent>
+        <TabsContent value="gallery">
+          <EventGallery userType="host" />
         </TabsContent>
       </Tabs>
       
