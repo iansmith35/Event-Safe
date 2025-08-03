@@ -17,6 +17,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Bot } from "lucide-react";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -255,11 +257,19 @@ export default function WelcomePage() {
                         </CardContent>
                     </Card>
                     <FunCourt />
+                     <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger>
+                                <div className="flex items-center gap-2 text-lg font-semibold">
+                                  <Bot /> Ask Rebecca
+                                </div>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                               <RebeccaChatbot />
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                 </div>
-            </div>
-
-            <div className="max-w-4xl mx-auto w-full">
-                <RebeccaChatbot />
             </div>
 
              <div className="max-w-6xl mx-auto w-full space-y-12">

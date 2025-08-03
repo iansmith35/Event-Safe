@@ -69,14 +69,11 @@ export default function RebeccaChatbot() {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <Bot /> Ask Rebecca
-                </CardTitle>
+        <Card className="shadow-none border-0">
+            <CardHeader className="p-0 mb-4">
                 <CardDescription>Your guide to the EventSafe platform.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-0">
                 <ScrollArea className="h-64 w-full pr-4" ref={scrollAreaRef}>
                      <div className="space-y-4">
                         {messages.map((message, index) => (
