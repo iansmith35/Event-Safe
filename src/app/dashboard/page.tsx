@@ -78,18 +78,22 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
 export default function DashboardPage() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ email: string | null }>({ email: DEMO_EMAIL });
+  const [user, setUser] = useState<{ email: string | null }>({ email: null });
   const [isAdmin, setIsAdmin] = useState(false);
   const isMobile = useIsMobile();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     // For demo/testing purposes, we'll use a URL parameter to switch between admin/guest views
+    // In a real app, you would get the user from your auth state management.
     const view = searchParams.get('view');
-    const isAdminUser = view === 'admin';
+    const isAdminParam = view === 'admin';
+    const email = isAdminParam ? ADMIN_EMAIL : DEMO_EMAIL;
     
+    const isAdminUser = email === ADMIN_EMAIL;
+
+    setUser({ email: email });
     setIsAdmin(isAdminUser);
-    setUser({ email: isAdminUser ? ADMIN_EMAIL : DEMO_EMAIL });
 
     if (isAdminUser) {
       setActiveView('admin');
@@ -130,7 +134,7 @@ export default function DashboardPage() {
               </Link>
             </Button>
             <div className="flex items-center gap-4">
-               <p className="text-sm text-muted-foreground">Viewing as: <span className="font-semibold">{user?.email}</span></p>
+               <p className="text-sm text-muted-foreground">Viewing as: <span className="font-semibold">{user?.email || 'Guest'}</span></p>
             </div>
           </header>
           <main className="flex-1 p-4 md:p-8">
