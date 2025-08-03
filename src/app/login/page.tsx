@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
-import { auth, googleProvider } from '@/lib/firebase';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -45,24 +45,6 @@ export default function LoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast({
-        title: "Login Successful",
-        description: "Welcome back!",
-      });
-      router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setIsLoading(true);
-    setError(null);
-    setActiveSessionConflict(false);
-    try {
-      await signInWithPopup(auth, googleProvider);
       toast({
         title: "Login Successful",
         description: "Welcome back!",
@@ -123,9 +105,6 @@ export default function LoginPage() {
               </div>
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
-              </Button>
-              <Button variant="outline" className="w-full" onClick={handleGoogleLogin} type="button" disabled={isLoading}>
-                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login with Google'}
               </Button>
             </form>
           </CardContent>
