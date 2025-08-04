@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 import { Send, Bot, Loader2 } from "lucide-react";
-import Textarea from 'react-textarea-autosize';
+import { Textarea } from './ui/textarea';
 import { rebeccaChat } from '@/ai/flows/rebecca-chat';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from './ui/scroll-area';
@@ -61,7 +61,7 @@ export default function RebeccaChatbot() {
                 behavior: 'smooth',
             });
         }
-    }, [messages]);
+    }, [messages, handleSendMessage]);
     
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -116,7 +116,6 @@ export default function RebeccaChatbot() {
                         placeholder="Type your message..."
                         className="flex-1 resize-none"
                         minRows={1}
-                        maxRows={5}
                         disabled={isLoading}
                     />
                     <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
