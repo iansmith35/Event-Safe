@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { getSeasonalTheme } from '@/ai/flows/get-seasonal-theme';
-import SeasonalEffects from '@/components/seasonal-effects';
+import SeasonalEffectsWrapper from '@/components/seasonal-effects-wrapper';
 
 export const metadata: Metadata = {
   title: 'Event Traffic',
@@ -31,7 +31,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <SeasonalEffects theme={theme} />
+        <SeasonalEffectsWrapper theme={theme} />
         {children}
         <Toaster />
       </body>
