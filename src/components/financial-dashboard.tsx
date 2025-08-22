@@ -152,7 +152,7 @@ export default function FinancialDashboard() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2"><MinusCircle className="text-destructive" /> Allowable Business Expenses</CardTitle>
                     <CardDescription>Costs you can claim to reduce your tax bill.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent>
                      <Table>
                         <TableHeader>
