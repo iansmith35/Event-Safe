@@ -1,4 +1,4 @@
-# **App Name**: Event Traffic
+# **App Name**: Event Safe
 
 ## Core Features:
 

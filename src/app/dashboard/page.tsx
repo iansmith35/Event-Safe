@@ -80,12 +80,15 @@ export default function DashboardPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<{ email: string | null }>({ email: null });
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const isMobile = useIsMobile();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // For demo/testing purposes, we'll use a URL parameter to switch between admin/guest views
-    // In a real app, you would get the user from your auth state management.
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
     const view = searchParams.get('view');
     const isAdminParam = view === 'admin';
     const email = isAdminParam ? ADMIN_EMAIL : DEMO_EMAIL;
@@ -105,11 +108,10 @@ export default function DashboardPage() {
   
   const currentView = isAdmin && activeView === 'admin' ? <AdminDashboard /> : <GuestView />;
 
-
   return (
     <SidebarProvider>
       <div className="flex min-h-screen bg-background">
-        {isMobile ? (
+        {isClient && isMobile ? (
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="fixed top-4 left-4 z-20 md:hidden">
