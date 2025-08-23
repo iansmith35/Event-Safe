@@ -28,22 +28,51 @@ const SeasonalThemeOutputSchema = z.object({
 export type SeasonalThemeOutput = z.infer<typeof SeasonalThemeOutputSchema>;
 
 export async function getSeasonalTheme(): Promise<SeasonalThemeOutput> {
-  // Check if API key is available for AI functionality
-  if (!process.env.GEMINI_API_KEY && !process.env.GOOGLE_API_KEY) {
-    // Return fallback theme when no API keys are present (e.g., during build)
-    return { theme: 'new-year' };
-  }
+'use client';
 
-  try {
-    // In a real scenario, you might pass the current date in, but the model can also use the current date it knows.
-    // For this demo, we'll force it to be New Year's for demonstration.
-    // In a real implementation, you would remove the hardcoded date.
-    const currentDate = 'January 1st';
-    return await getSeasonalThemeFlow({ currentDate });
-  } catch (error) {
-    // Fallback to default theme if AI service fails
-    console.warn('AI service unavailable, using fallback theme:', error);
-    return { theme: 'new-year' };
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@components/ui/table";
+import { Badge } from "./ui/badge";
+import {
+  BarChart,
+  BookOpen,
+  Briefcase,
+  Landmark,
+  MinusCircle,
+  PlusCircle,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
+import { Bar, CartesianGrid, XAxis, YAxis, BarChart as RechartsBarChart } from "recharts";
+import FinancialInsights from "./financial-insights";
+
+// Mock data simulating data fetched from Firestore and tagged for ESAFE
+const financialData = {
+  turnover: [
+    { source: "Guest Signup Fees", amount: 12500, date: "2024-07-31" },
+    { source: "Host Event Fees", amount: 2500, date: "2024-07-31" },
+    { source: "Promo Code Sales", amount: 500, date: "2024-07-31" },
+  ],
+  expenses: [
+    { item: "Cloud Server Costs", amount: 1500, category: "IT & Software" },
+    { item: "Stripe Processing Fees", amount: 450, category: "Bank, credit card and other financial charges" },
+    { item: "AI API Usage (Genkit)", amount: 800, category: "IT & Software" },
+    { item: "Legal Consultation", amount: 1200, category: "Professional fees" },
+  ]
+};
+
+export default function FinancialDashboard() {
+  // Your component logic...
+}
+
   }
 }
 
