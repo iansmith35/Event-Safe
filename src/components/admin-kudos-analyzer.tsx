@@ -114,7 +114,13 @@ export default function AdminKudosAnalyzer() {
                             <SelectContent>
                                 {KudosTagsSchema.options.map(tag => {
                                     const Icon = tagIconMap[tag];
-                                    return <SelectItem key={tag} value={tag}><div className="flex items-center gap-2"><Icon className="h-4 w-4 text-muted-foreground" /> {tag}</div></SelectItem>
+                                    return (
+                                        <SelectItem key={tag} value={tag}>
+                                            <div className="flex items-center gap-2">
+                                                <Icon className="h-4 w-4 text-muted-foreground" /> {tag}
+                                            </div>
+                                        </SelectItem>
+                                    )
                                 })}
                             </SelectContent>
                         </Select>
