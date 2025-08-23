@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   SidebarProvider,
   Sidebar,
@@ -75,7 +75,7 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
   );
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<{ email: string | null }>({ email: DEMO_EMAIL });
@@ -141,3 +141,14 @@ export default function DashboardPage() {
     </SidebarProvider>
   );
 }
+
+export default function DashboardPage() {
+  return (
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
+  );
+}
+
