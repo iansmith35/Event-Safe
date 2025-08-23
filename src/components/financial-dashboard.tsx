@@ -145,33 +145,74 @@ export default function FinancialDashboard() {
             </Table>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><MinusCircle className="text-destructive" /> Allowable Business Expenses</CardTitle>
-            <CardDescription>Costs you can claim to reduce your tax bill.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Item</TableHead>
-                  <TableHead>HMRC Category</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {financialData.expenses.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.item}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{item.category}</TableCell>
-                    <TableCell className="text-right">£{item.amount.toLocaleString()}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </div>
+<div className="grid gap-6 md:grid-cols-2">
+  <Card>
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2">
+        <PlusCircle className="text-chart-2" /> Income / Turnover
+      </CardTitle>
+      <CardDescription>
+        HMRC Category: Your self-employed turnover.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Source</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {financialData.turnover.map((item, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{item.source}</TableCell>
+              <TableCell className="text-right">
+                £{item.amount.toLocaleString()}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </CardContent>
+  </Card>
+
+  <Card>
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2">
+        <MinusCircle className="text-destructive" /> Allowable Business Expenses
+      </CardTitle>
+      <CardDescription>
+        Costs you can claim to reduce your tax bill.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Item</TableHead>
+            <TableHead>HMRC Category</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {financialData.expenses.map((item, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{item.item}</TableCell>
+              <TableCell className="text-xs text-muted-foreground">
+                {item.category}
+              </TableCell>
+              <TableCell className="text-right">
+                £{item.amount.toLocaleString()}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </CardContent>
+  </Card>
+</div>
+
     </div>
   );
 }
