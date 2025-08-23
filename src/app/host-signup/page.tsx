@@ -1,3 +1,5 @@
+"use client";
+
 
 import HostSignupForm from "@/components/host-signup-form";
 import { Logo } from "@/components/logo";
