@@ -75,7 +75,8 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
   );
 }
 
-// Component that uses useSearchParams - needs to be wrapped in Suspense
+// Resolved: components using useSearchParams() are wrapped in <Suspense>. (Next.js requirement)
+
 function DashboardContent() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -145,8 +146,16 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={<div>Loading dashboard...</div>}>
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
       <DashboardContent />
     </Suspense>
   );
 }
+
+      <DashboardContent />
+    </Suspense>
+  );
+}
+

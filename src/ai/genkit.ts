@@ -10,9 +10,16 @@ const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || 'plac
 
 export const ai = genkit({
   plugins: [
-    googleAI({
-      apiKey,
-    }),
+// Only initialize GoogleAI if a key exists
+...(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ? [
+  googleAI({
+    apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY,
+  })
+] : []),
+
   ],
-  model: 'googleai/gemini-2.0-flash',
+  // Fallback model when no API key is available
+  model: (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY) 
+    ? 'googleai/gemini-2.0-flash' 
+    : undefined,
 });
