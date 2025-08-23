@@ -1,32 +1,13 @@
 "use client";
 
 import { Fireworks } from 'fireworks-js';
-import { useRef, useEffect, useState } from 'react';
-import { getSeasonalTheme } from '@/ai/flows/get-seasonal-theme';
+import { useRef, useEffect } from 'react';
 
-export default function SeasonalEffects({ theme: initialTheme }: { theme: string }) {
+export default function SeasonalEffects({ theme }: { theme: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [currentTheme, setCurrentTheme] = useState(initialTheme);
-
-  // Fetch the actual seasonal theme on client side
-  useEffect(() => {
-    async function fetchTheme() {
-      try {
-        const { theme } = await getSeasonalTheme();
-        setCurrentTheme(theme);
-      } catch (error) {
-        console.log('Using default theme due to error:', error);
-        // Keep using the default theme if AI call fails
-      }
-    }
-    
-    if (initialTheme === 'default') {
-      fetchTheme();
-    }
-  }, [initialTheme]);
 
   useEffect(() => {
-    if (currentTheme === 'new-year' && containerRef.current) {
+    if (theme === 'new-year' && containerRef.current) {
       const fireworks = new Fireworks(containerRef.current, {
         rocketsPoint: {
           min: 0,
@@ -37,9 +18,9 @@ export default function SeasonalEffects({ theme: initialTheme }: { theme: string
       fireworks.start();
       return () => fireworks.stop();
     }
-  }, [currentTheme]);
+  }, [theme]);
 
-  if (currentTheme !== 'new-year') {
+  if (theme !== 'new-year') {
     return null;
   }
 

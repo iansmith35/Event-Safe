@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import { getSeasonalTheme } from '@/ai/flows/get-seasonal-theme';
 import SeasonalEffects from '@/components/seasonal-effects';
 
 export const metadata: Metadata = {
@@ -9,13 +10,12 @@ export const metadata: Metadata = {
   description: 'Live-event safety system for venues and guests.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Use default theme during build time, seasonal effects will update on client side
-  const theme = 'default';
+  const { theme } = await getSeasonalTheme();
   
   return (
     <html lang="en" suppressHydrationWarning className={theme}>

@@ -75,8 +75,6 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
   );
 }
 
-// Resolved: components using useSearchParams() are wrapped in <Suspense>. (Next.js requirement)
-
 function DashboardContent() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -151,4 +149,3 @@ export default function DashboardPage() {
     </Suspense>
   );
 }
-
