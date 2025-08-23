@@ -93,37 +93,56 @@ export default function AdminVerificationHandler() {
                 <CardDescription>Review new guest signups that have been automatically flagged as potential duplicates or policy violations.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-                {cases.length > 0 ? cases.map(item => (
-                     <div key={item.id} className="p-4 border rounded-lg space-y-4">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <h4 className="font-semibold">Case ID: {item.id}</h4>
-                                <p className="text-sm text-destructive font-semibold">{item.reason}</p>
-                            </div>
-                            <Badge variant="secondary">{item.status.toUpperCase()}</Badge>
+{cases.length > 0 ? cases.map((caseItem) => (
+  <div key={caseItem.id} className="p-4 border rounded-lg space-y-4">
+    <div className="flex justify-between items-start">
+      <div>
+        <h4 className="font-semibold">Case ID: {caseItem.id}</h4>
+        <p className="text-sm text-destructive font-semibold">{caseItem.reason}</p>
+      </div>
+      <Badge variant="secondary">{caseItem.status.toUpperCase()}</Badge>
+    </div>
+
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <h5 className="font-semibold text-sm text-center">New Signup</h5>
                                 <div className="p-2 border rounded-md bg-muted/30 text-center">
-                                    <Image src={item.newGuest.photo} alt={item.newGuest.name} width={150} height={150} className="w-32 h-32 object-cover rounded-full mx-auto mb-2" data-ai-hint={item.newGuest.photoHint} />
-                                    <p className="font-bold">{item.newGuest.name}</p>
-                                    <p className="text-xs text-muted-foreground">DOB: {item.newGuest.dob}</p>
+<Image
+  src={caseItem.newGuest.photo}
+  alt={caseItem.newGuest.name}
+  width={150}
+  height={150}
+  className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
+  data-ai-hint={caseItem.newGuest.photoHint}
+/>
+<p className="font-bold">{caseItem.newGuest.name}</p>
+<p className="text-xs text-muted-foreground">DOB: {caseItem.newGuest.dob}</p>
+
                                 </div>
                             </div>
                              <div className="space-y-2">
                                 <h5 className="font-semibold text-sm text-center">Matched User</h5>
                                  <div className="p-2 border rounded-md bg-muted/30 text-center">
-                                    <Image src={item.matchedUser.photo} alt={item.matchedUser.name} width={150} height={150} className="w-32 h-32 object-cover rounded-full mx-auto mb-2" data-ai-hint={item.matchedUser.photoHint}/>
-                                    <p className="font-bold">{item.matchedUser.name}</p>
-                                    <Badge variant="destructive">{item.matchedUser.status}</Badge>
+<Image
+  src={caseItem.newGuest.photo}
+  alt={caseItem.newGuest.name}
+  width={150}
+  height={150}
+  className="w-32 h-32 object-cover rounded-full mx-auto mb-2"
+  data-ai-hint={caseItem.newGuest.photoHint}
+/>
+<p className="font-bold">{caseItem.newGuest.name}</p>
+<p className="text-xs text-muted-foreground">DOB: {caseItem.newGuest.dob}</p>
+
                                 </div>
                             </div>
                         </div>
 
                         <Separator />
                         
-                        <StripeIdentityVerification caseId={item.id} guestName={item.newGuest.name} />
+<StripeIdentityVerification caseId={caseItem.id} guestName={caseItem.newGuest.name} />
+
 
                         <Separator />
 
@@ -134,9 +153,17 @@ export default function AdminVerificationHandler() {
                                 <div className="space-y-2">
                                     <h5 className="font-semibold text-sm text-center">Registered Mark</h5>
                                     <div className="p-2 border rounded-md bg-muted/30 text-center">
-                                        <Image src={item.distinguishingMark.registeredUri} alt={item.distinguishingMark.description} width={150} height={150} className="w-32 h-32 object-cover rounded-lg mx-auto mb-2" data-ai-hint="tattoo eagle" />
-                                        <p className="font-bold">{item.distinguishingMark.description}</p>
-                                        <p className="text-xs text-muted-foreground">{item.distinguishingMark.location}</p>
+<Image
+  src={caseItem.distinguishingMark.registeredUri}
+  alt={caseItem.distinguishingMark.description}
+  width={150}
+  height={150}
+  className="w-32 h-32 object-cover rounded-lg mx-auto mb-2"
+  data-ai-hint="tattoo eagle"
+/>
+<p className="font-bold">{caseItem.distinguishingMark.description}</p>
+<p className="text-xs text-muted-foreground">{caseItem.distinguishingMark.location}</p>
+
                                     </div>
                                 </div>
                                 <div className="space-y-2">
@@ -151,14 +178,16 @@ export default function AdminVerificationHandler() {
                                             </div>
                                         )}
                                         <Button asChild variant="outline" size="sm" className="w-full">
-                                            <label htmlFor={`upload-${item.id}`}><Upload className="mr-2" /> Upload Live Photo</label>
-                                        </Button>
-                                        <input id={`upload-${item.id}`} type="file" accept="image/*" className="sr-only" onChange={handleFileChange} />
+<label htmlFor={`upload-${caseItem.id}`}><Upload className="mr-2" /> Upload Live Photo</label>
+</Button>
+<input id={`upload-${caseItem.id}`} type="file" accept="image/*" className="sr-only" onChange={handleFileChange} />
+
                                      </div>
                                 </div>
                             </div>
 
-                            <Button onClick={() => handleMarkVerification(item.distinguishingMark.registeredUri)} disabled={!liveMarkUri || isVerifying}>
+<Button onClick={() => handleMarkVerification(caseItem.distinguishingMark.registeredUri)} disabled={!liveMarkUri || isVerifying}>
+
                                 {isVerifying ? <Loader2 className="animate-spin" /> : <ShieldCheck />} Verify Mark with AI
                             </Button>
 
@@ -177,8 +206,9 @@ export default function AdminVerificationHandler() {
                         <Separator />
 
                         <div className="flex flex-wrap gap-2 justify-end pt-4 border-t">
-                            <Button variant="destructive" onClick={() => handleDecision(item.id, 'rejected')}><X /> Reject Signup</Button>
-                            <Button className="bg-chart-2 hover:bg-chart-2/90" onClick={() => handleDecision(item.id, 'approved')}><Check /> Approve Signup</Button>
+<Button variant="destructive" onClick={() => handleDecision(caseItem.id, 'rejected')}><X /> Reject Signup</Button>
+<Button className="bg-chart-2 hover:bg-chart-2/90" onClick={() => handleDecision(caseItem.id, 'approved')}><Check /> Approve Signup</Button>
+
                         </div>
                      </div>
                 )) : (

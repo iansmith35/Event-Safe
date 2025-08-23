@@ -120,7 +120,8 @@ export default function AdminKudosAnalyzer() {
                                                 <Icon className="h-4 w-4 text-muted-foreground" /> {tag}
                                             </div>
                                         </SelectItem>
-                                    );
+)
+
                                 })}
                             </SelectContent>
                         </Select>
