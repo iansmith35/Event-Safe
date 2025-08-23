@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   SidebarProvider,
   Sidebar,
@@ -75,7 +75,8 @@ function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activ
   );
 }
 
-export default function DashboardPage() {
+// Component that uses useSearchParams - needs to be wrapped in Suspense
+function DashboardContent() {
   const [activeView, setActiveView] = useState('guest');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<{ email: string | null }>({ email: DEMO_EMAIL });
@@ -139,5 +140,13 @@ export default function DashboardPage() {
         </div>
       </div>
     </SidebarProvider>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div>Loading dashboard...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }
