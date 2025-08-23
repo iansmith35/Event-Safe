@@ -28,12 +28,10 @@ const SeasonalThemeOutputSchema = z.object({
 export type SeasonalThemeOutput = z.infer<typeof SeasonalThemeOutputSchema>;
 
 export async function getSeasonalTheme(): Promise<SeasonalThemeOutput> {
-// In a real scenario, you might pass the current date in, but the model can also use the current date it knows.
-// For this demo, we'll force it to be New Year's for demonstration.
-// In a real implementation, you would remove the hardcoded date.
+// Force a demo date (remove in real use)
 const currentDate = 'January 1st';
 
-// Fallback to default theme if API key is not available (e.g., during build)
+// If no Gemini key at build/prerender, use a safe default
 if (!process.env.GEMINI_API_KEY && !process.env.GOOGLE_API_KEY) {
   return { theme: 'default' };
 }
@@ -41,12 +39,10 @@ if (!process.env.GEMINI_API_KEY && !process.env.GOOGLE_API_KEY) {
 try {
   return await getSeasonalThemeFlow({ currentDate });
 } catch (error) {
-  // Fallback to default theme if AI service fails
-  console.warn('Failed to get seasonal theme from AI, using default theme:', error);
+  console.warn('Failed to get seasonal theme from AI, using default:', error);
   return { theme: 'default' };
 }
 
-  }
 }
 
 const prompt = ai.definePrompt({
