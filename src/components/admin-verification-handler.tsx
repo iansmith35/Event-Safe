@@ -93,7 +93,7 @@ export default function AdminVerificationHandler() {
                 <CardDescription>Review new guest signups that have been automatically flagged as potential duplicates or policy violations.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-{cases.length > 0 ? cases.map((caseItem) => (
+                {cases.length > 0 ? cases.map((caseItem) => (
   <div key={caseItem.id} className="p-4 border rounded-lg space-y-4">
     <div className="flex justify-between items-start">
       <div>
