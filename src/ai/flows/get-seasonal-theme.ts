@@ -32,7 +32,14 @@ export async function getSeasonalTheme(): Promise<SeasonalThemeOutput> {
   // For this demo, we'll force it to be New Year's for demonstration.
   // In a real implementation, you would remove the hardcoded date.
   const currentDate = 'January 1st';
-  return getSeasonalThemeFlow({ currentDate });
+  
+  try {
+    return await getSeasonalThemeFlow({ currentDate });
+  } catch (error) {
+    // If AI service is unavailable (e.g., missing API key), return default theme
+    console.warn('AI service unavailable, using default theme:', error);
+    return { theme: 'default' };
+  }
 }
 
 const prompt = ai.definePrompt({
