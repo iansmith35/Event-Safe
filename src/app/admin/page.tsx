@@ -20,7 +20,7 @@ interface HealthData {
 interface LogEntry {
   id: string;
   event: string;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   ts: string;
 }
 
@@ -263,7 +263,7 @@ export default function AdminPage() {
             </div>
           ) : (
             <div className="space-y-2 max-h-96 overflow-y-auto">
-              {recentLogs.slice(0, 10).map((log: any) => (
+              {recentLogs.slice(0, 10).map((log: LogEntry) => (
                 <div key={log.id} className="border rounded p-3 text-sm">
                   <div className="flex justify-between items-start mb-1">
                     <Badge variant="outline" className="text-xs">

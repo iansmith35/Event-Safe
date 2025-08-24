@@ -5,7 +5,7 @@
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-export async function log(event: string, data: Record<string, any> = {}) {
+export async function log(event: string, data: Record<string, unknown> = {}) {
   try {
     // Write to Firestore system_logs collection
     await addDoc(collection(db, 'system_logs'), {
