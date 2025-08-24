@@ -112,20 +112,56 @@ export default function LegalPage() {
                 </CardHeader>
                 <CardContent className="space-y-4 text-sm">
                     <p>
-                    All new host or venue accounts are eligible for a **one-month free trial** to experience the full benefits of the EventSafe platform. To reward our pioneering early adopters, we offer extended free periods for the first venues to sign up:
+                    All new host or venue accounts are eligible for a one-month free trial to experience the full benefits of the EventSafe platform. To reward our pioneering early adopters, we offer extended free periods:
                     </p>
                     <ul className="list-disc list-inside space-y-2 pl-2">
-                        <li>The **first 20 venues** to sign up will receive **6 months free**.</li>
-                        <li>The **next 30 venues** to sign up will receive **3 months free**.</li>
+                        <li>The <strong>first 5 venues</strong> to sign up will receive <strong>3 months free</strong>.</li>
+                        <li>The <strong>next 5 venues</strong> to sign up will receive <strong>2 months free</strong>.</li>
+                        <li>All others receive <strong>1 month free</strong>. The first sign-up fee is taken on application.</li>
                     </ul>
                     <p>
-                        <strong>Billing Process:</strong> Your first month is always free. At the start of your second month, your first subscription payment will be taken. For promotional offer recipients, billing will then be suspended for the remainder of your offer period (e.g., 5 months for the 6-month offer) and will resume automatically on a monthly basis thereafter.
-                    </p>
-                    <p className="text-muted-foreground">
-                        The first subscription payment is non-refundable. You may cancel your subscription at any time. These terms are subject to change and are part of the full terms and conditions agreed to upon signup.
+                        <strong>Billing Process:</strong> Your first month is always free. At the start of your second month, your first subscription payment will be taken. For promotional offer recipients, billing will then be suspended for the remainder of your offer period and will resume automatically on a monthly basis thereafter.
                     </p>
                 </CardContent>
              </Card>
+        </section>
+
+        <section id="disclaimers" className="space-y-4">
+            <h2 className="text-2xl font-semibold border-b pb-2">Important Disclaimers</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+                <Card className="border-destructive">
+                    <CardHeader>
+                        <CardTitle className="text-destructive">No Refunds</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm">All payments are non-refundable, including during downtime or if the project is discontinued.</p>
+                    </CardContent>
+                </Card>
+                <Card className="border-yellow-500">
+                    <CardHeader>
+                        <CardTitle className="text-yellow-600">Beta & Best-Efforts</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm">This is a community-led initiative provided &ldquo;as is&rdquo;.</p>
+                    </CardContent>
+                </Card>
+                <Card className="border-blue-500">
+                    <CardHeader>
+                        <CardTitle className="text-blue-600">Pricing & Premium Features</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm">We may introduce premium features and adjust pricing with at least monthly granularity. Fees may increase to reflect infrastructure/AI costs.</p>
+                    </CardContent>
+                </Card>
+                <Card className="border-green-500">
+                    <CardHeader>
+                        <CardTitle className="text-green-600">Maximum Exposure</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm">Typical maximum exposure is one month&apos;s subscription.</p>
+                    </CardContent>
+                </Card>
+            </div>
         </section>
       </div>
     </div>

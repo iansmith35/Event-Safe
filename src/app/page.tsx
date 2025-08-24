@@ -17,16 +17,29 @@ export default function GlobalPage() {
 
     const handleInterestSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const country = formData.get('country') as string;
+        const city = formData.get('city') as string;
+        const email = formData.get('email') as string;
+        const role = formData.get('user-type') as string;
+        
+        // Create mailto URL with prefilled content
+        const subject = encodeURIComponent('EventSafe Global Interest');
+        const body = encodeURIComponent(`Country: ${country}\nCity: ${city}\nRole: ${role}\nContact: ${email}\n\nI'm interested in EventSafe expanding to my country.`);
+        const mailtoUrl = `mailto:support@eventsafe.id?subject=${subject}&body=${body}`;
+        
+        // Open email client
+        window.location.href = mailtoUrl;
+        
         toast({
-            title: "Interest Registered!",
-            description: "Thank you! We've added you to the list and will notify you when EventSafe is coming to your country.",
+            title: "Opening email client...",
+            description: "We've added you to the list and will notify you when EventSafe is coming to your country.",
         });
-        (e.target as HTMLFormElement).reset();
     }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="p-4 flex justify-between items-center border-b">
+      <header className="p-4 flex flex-col sm:flex-row justify-between items-center border-b gap-4 sm:gap-0">
          <Logo className="w-auto h-10" />
          <div className="flex items-center gap-4">
             <Button asChild variant="outline">
@@ -73,16 +86,16 @@ export default function GlobalPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="country">Your Country</Label>
-                                <Input id="country" placeholder="e.g., Germany" required />
+                                <Input id="country" name="country" placeholder="e.g., Germany" required />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="city">Your City</Label>
-                                <Input id="city" placeholder="e.g., Berlin" required />
+                                <Input id="city" name="city" placeholder="e.g., Berlin" required />
                             </div>
                         </div>
                          <div className="space-y-2">
                             <Label htmlFor="email">Your Email</Label>
-                            <Input id="email" type="email" placeholder="you@example.com" required />
+                            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="user-type">I am a...</Label>

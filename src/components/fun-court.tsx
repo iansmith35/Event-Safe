@@ -10,6 +10,7 @@ import { Label } from './ui/label';
 import { judgeDemoCase, type JudgeDemoCaseOutput } from '@/ai/flows/judge-demo-case';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import { FEATURES } from '@/config/features';
 
 
 export default function FunCourt() {
@@ -26,13 +27,21 @@ export default function FunCourt() {
         try {
             const res = await judgeDemoCase({ complaint });
             setResult(res);
+            
+            // Check if this is an AI unavailable response
+            if (res.verdict.includes('temporarily unavailable')) {
+                toast({
+                    title: "AI temporarily unavailable",
+                    description: "The Resolution Center will be back online soon!"
+                });
+            }
         } catch (error) {
             console.error(error);
             toast({
                 variant: 'destructive',
                 title: "Error Judging Case",
                 description: "The AI Judge is currently unavailable. Please try again later."
-            })
+            });
         } finally {
             setIsLoading(false);
         }
@@ -58,10 +67,13 @@ export default function FunCourt() {
                             required
                         />
                     </div>
-                    <Button type="submit" disabled={isLoading}>
+                    <Button type="submit" disabled={isLoading || !FEATURES.judgeEnabled}>
                         {isLoading ? <Loader2 className="animate-spin" /> : <Gavel />}
                         {isLoading ? "Deliberating..." : "Submit to the Judge"}
                     </Button>
+                    {!FEATURES.judgeEnabled && (
+                        <p className="text-xs text-muted-foreground">Coming soon (AI temporarily unavailable)</p>
+                    )}
                 </form>
 
                 {result && (

@@ -16,7 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Image from "next/image";
+import Map from "@/components/map";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -84,38 +84,52 @@ export default function WelcomePage() {
 
     const handleInterestSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const city = formData.get('city-uk') as string;
+        const email = formData.get('email-uk') as string;
+        const role = formData.get('user-type-uk') as string;
+        
+        // Create mailto URL with prefilled content
+        const subject = encodeURIComponent('EventSafe Local Interest');
+        const body = encodeURIComponent(`City: ${city}\nRole: ${role}\nContact: ${email}\n\nI'm interested in EventSafe coming to my city.`);
+        const mailtoUrl = `mailto:support@eventsafe.id?subject=${subject}&body=${body}`;
+        
+        // Open email client
+        window.location.href = mailtoUrl;
+        
         toast({
-            title: "Interest Registered!",
-            description: "Thank you! We'll keep you updated on new venues and events in your area.",
+            title: "Opening email client...",
+            description: "We'll keep you updated on new venues and events in your area.",
         });
-        (e.target as HTMLFormElement).reset();
     }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="p-4 grid grid-cols-3 items-center border-b">
-         <div className="flex items-center gap-4 justify-start">
+      <header className="p-4 border-b">
+        <div className="flex flex-col sm:grid sm:grid-cols-3 items-center gap-4 sm:gap-0">
+         <div className="flex items-center gap-4 justify-start order-1 sm:order-1">
            <Logo className="w-auto h-10" />
             <Button asChild variant="outline" className="hidden md:flex">
                 <Link href="/">Global Site</Link>
             </Button>
          </div>
-        <div className="text-center">
-            <h2 className="font-bold text-foreground text-sm md:text-base whitespace-nowrap">
+        <div className="text-center order-3 sm:order-2">
+            <h2 className="font-bold text-foreground text-sm md:text-base">
                 EventSafe: Connecting Guests & Venues With a Safety Score
             </h2>
         </div>
-         <div className="flex items-center gap-2 justify-end">
-             <Button asChild variant="ghost">
+         <div className="flex items-center gap-2 justify-end order-2 sm:order-3">
+             <Button asChild variant="ghost" size="sm">
                 <Link href="/login">Login</Link>
             </Button>
-            <Button asChild>
+            <Button asChild size="sm">
                 <Link href="/signup">Sign Up</Link>
             </Button>
          </div>
+        </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 pt-8 sm:pt-4 md:pt-8">
         <div className="container max-w-6xl space-y-16">
             <div className="text-center">
                 <Carousel
@@ -188,6 +202,9 @@ export default function WelcomePage() {
                                 <Button asChild className="flex-1" size="lg" variant="secondary">
                                     <Link href="/signup">Create Your Event Pass</Link>
                                 </Button>
+                                <Button asChild className="flex-1" size="lg" variant="outline">
+                                    <Link href="/demo/guest">View Guest Demo</Link>
+                                </Button>
                             </div>
                         </CardContent>
                     </Card>
@@ -206,6 +223,12 @@ export default function WelcomePage() {
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Button asChild className="flex-1" size="lg" variant="secondary">
                                     <Link href="/host-signup">Onboard Your Venue</Link>
+                                </Button>
+                                <Button asChild className="flex-1" size="lg" variant="outline">
+                                    <Link href="/demo/host">View Host Demo</Link>
+                                </Button>
+                                <Button asChild className="flex-1" size="lg" variant="outline">
+                                    <Link href="/demo/venue">View Venue Demo</Link>
                                 </Button>
                             </div>
                         </CardContent>
@@ -267,11 +290,18 @@ export default function WelcomePage() {
                     <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
-                <img 
-                    src="https://images.unsplash.com/photo-1529107386315-e42103494675?q=80&w=1200" 
-                    alt="UK map with glowing points"
-                    className="rounded-lg border max-w-full h-auto mx-auto"
-                    data-ai-hint="UK map lights" 
+                <Map 
+                    className="rounded-lg border max-w-full h-96 mx-auto"
+                    center={{ lat: 54.5, lng: -2 }}
+                    zoom={6}
+                    markers={[
+                        { lat: 51.5074, lng: -0.1278, title: "London" },
+                        { lat: 53.4808, lng: -2.2426, title: "Manchester" },
+                        { lat: 55.9533, lng: -3.1883, title: "Edinburgh" },
+                        { lat: 51.4545, lng: -2.5879, title: "Bristol" },
+                        { lat: 53.4084, lng: -2.9916, title: "Liverpool" },
+                        { lat: 52.4862, lng: -1.8904, title: "Birmingham" }
+                    ]}
                 />
 
                 <Card>
@@ -283,11 +313,11 @@ export default function WelcomePage() {
                         <form onSubmit={handleInterestSubmit} className="max-w-xl mx-auto text-left space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="city-uk">Your City</Label>
-                                <Input id="city-uk" placeholder="e.g., Manchester, Bristol, Glasgow" required />
+                                <Input id="city-uk" name="city-uk" placeholder="e.g., Manchester, Bristol, Glasgow" required />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email-uk">Your Email</Label>
-                                <Input id="email-uk" type="email" placeholder="you@example.com" required />
+                                <Input id="email-uk" name="email-uk" type="email" placeholder="you@example.com" required />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="user-type-uk">I am a...</Label>

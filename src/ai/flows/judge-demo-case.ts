@@ -11,6 +11,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { getAiClient, AIUnavailableError } from '@/lib/ai';
 
 const JudgeDemoCaseInputSchema = z.object({
   complaint: z.string().describe('The complaint filed by the user.'),
@@ -24,7 +25,21 @@ const JudgeDemoCaseOutputSchema = z.object({
 export type JudgeDemoCaseOutput = z.infer<typeof JudgeDemoCaseOutputSchema>;
 
 export async function judgeDemoCase(input: JudgeDemoCaseInput): Promise<JudgeDemoCaseOutput> {
-  return judgeDemoCaseFlow(input);
+  try {
+    // Check if AI is available before proceeding
+    getAiClient();
+    return judgeDemoCaseFlow(input);
+  } catch (error) {
+    if (error instanceof AIUnavailableError) {
+      console.error('AI unavailable for judge demo case:', error.message);
+      return {
+        defense: "AI Judge is temporarily unavailable to generate a defense.",
+        verdict: "The EventSafe Resolution Center is currently experiencing technical difficulties. This AI-powered dispute resolution feature will be available again soon. For immediate assistance, please contact support@eventsafe.id. This is a demo feature and any verdicts provided are for educational purposes only and are not legally binding."
+      };
+    }
+    // Re-throw other errors
+    throw error;
+  }
 }
 
 const prompt = ai.definePrompt({
