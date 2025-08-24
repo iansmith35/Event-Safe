@@ -137,6 +137,7 @@ export default function LegalPage() {
               <li><strong>Retention:</strong> minimum necessary and proportionate; tickets/financial records retained per legal obligations.</li>
               <li><strong>Your Rights:</strong> access, rectification, erasure, restriction, portability, objection; contact us to exercise rights.</li>
               <li><strong>Cookies/Tracking:</strong> used for session security and analytics; see our cookie banner for choices.</li>
+              <li><strong>Verified Identity & Lawful Requests:</strong> We use Stripe (payments) and Stripe Identity (identity verification). We may use verified identity and payment information to protect the platform, pursue unpaid debts, or comply with lawful requests from police, courts or regulators. This information is never shared with other users, hosts or venues.</li>
             </ul>
           </div>
         </section>
