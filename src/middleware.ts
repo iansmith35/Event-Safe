@@ -4,26 +4,12 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Admin route protection
-  if (path.startsWith('/admin')) {
-    const adminCode = process.env.ADMIN_CODE || '2338';
-    const headerCode = request.headers.get('x-admin-code');
-    const cookieCode = request.cookies.get('x-admin-code')?.value;
-    const queryCode = request.nextUrl.searchParams.get('admin');
+  if (path.startsWith('/admin') && !path.startsWith('/admin/login')) {
+    const adminSession = request.cookies.get('admin_session')?.value;
     
-    // Set cookie if query param provided
-    if (queryCode === adminCode) {
-      const response = NextResponse.next();
-      response.cookies.set('x-admin-code', adminCode, { 
-        httpOnly: true, 
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24 // 24 hours
-      });
-      return response;
-    }
-    
-    // Check authentication
-    if (headerCode !== adminCode && cookieCode !== adminCode) {
-      return new NextResponse('Unauthorized', { status: 401 });
+    // If no admin session cookie, redirect to admin login
+    if (adminSession !== '1') {
+      return NextResponse.redirect(new URL('/admin/login', request.url));
     }
   }
 
@@ -46,5 +32,5 @@ export const config = {
   // - _next/static (static files)
   // - _next/image (image optimization files)
   // - favicon.ico (favicon file)
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/admin/:path*', '/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
