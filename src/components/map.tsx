@@ -11,7 +11,17 @@ interface MapProps {
 
 declare global {
   interface Window {
-    google: typeof google;
+    google: {
+      maps: {
+        Map: any;
+        LatLng: any;
+        Marker: any;
+        Size: any;
+        visualization?: {
+          HeatmapLayer: any;
+        };
+      };
+    };
   }
 }
 
