@@ -79,6 +79,45 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
+# Stripe (for subscriptions and payments)
+STRIPE_SECRET_KEY=sk_live_or_test_key
+STRIPE_WEBHOOK_SECRET=whsec_webhook_secret
+# Create these Prices in Stripe Dashboard (GBP):
+STRIPE_PRICE_GUEST_YEARLY=price_guest_yearly_3gbp
+STRIPE_PRICE_VENUE_MONTHLY=price_venue_monthly_40gbp
+STRIPE_PRICE_COURT_CASE=price_court_case_3gbp
+
 # Admin Access
 ADMIN_CODE=2338
 ```
+
+### Admin Configuration
+
+After setting up environment variables, initialize the system configuration:
+
+1. **Seed Configuration**: Visit `/admin/seed-config` to initialize default feature flags, pricing, and limits in Firestore.
+
+2. **Feature Toggles**: Access the admin controls at `/admin/controls` to manage:
+   - Global feature flags (ticketing, AI, maps, etc.)
+   - Pricing configuration (platform fees, membership costs)
+   - Usage limits (AI messages per day)
+   - Entity suspensions (users/venues)
+
+3. **Configuration Documents**: The system creates these Firestore collections:
+   ```
+   config/features   - Feature flag toggles
+   config/pricing    - Platform fees and subscription prices  
+   config/limits     - Usage limits for various features
+   config/admin      - Emergency admin flags (read-only mode)
+   ```
+
+4. **Stripe Setup**: Create the required Price objects in your Stripe Dashboard:
+   - Guest yearly membership: £3/year
+   - Venue monthly subscription: £40/month  
+   - Court case fee: £3 one-time (optional)
+
+5. **Webhook Configuration**: Configure Stripe webhook endpoint at `/api/billing/webhook` for:
+   - `checkout.session.completed`
+   - `invoice.paid`
+   - `customer.subscription.deleted`
+   - `customer.subscription.updated`

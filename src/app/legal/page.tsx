@@ -133,6 +133,7 @@ export default function LegalPage() {
               <li><strong>Purposes & Bases:</strong> account management (contract), ticketing and payments (contract), safety scoring and venue access control (legitimate interests/consent where required), fraud prevention and security (legitimate interests), legal compliance.</li>
               <li><strong>Data:</strong> account details, contact info, verification status, event history, safety signals, device/usage data, and payment tokens (handled by Stripe).</li>
               <li><strong>Sub-processors:</strong> Stripe (payments), Google/Firebase (hosting, auth, Firestore), Google Maps (geolocation/UX). Each processes data under its own terms and safeguards.</li>
+              <li><strong>Verified Identity & Lawful Requests:</strong> We use Stripe (payments) and Stripe Identity (identity verification). We may use verified identity and payment information to protect the platform, pursue unpaid debts, or comply with lawful requests from police, courts or regulators. This information is never shared with other users, hosts or venues.</li>
               <li><strong>International Transfers:</strong> protected via recognised mechanisms (e.g., SCCs) by our providers.</li>
               <li><strong>Retention:</strong> minimum necessary and proportionate; tickets/financial records retained per legal obligations.</li>
               <li><strong>Your Rights:</strong> access, rectification, erasure, restriction, portability, objection; contact us to exercise rights.</li>
