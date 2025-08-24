@@ -27,7 +27,7 @@ export default function LegalPage() {
         <section id="terms-of-use" className="space-y-4">
             <h2 className="text-2xl font-semibold border-b pb-2">Terms of Use</h2>
             <div className="space-y-2 text-sm text-muted-foreground">
-                <p><strong>1. Acceptance of Terms:</strong> By creating an account and using the EventSafe platform ("Service"), you agree to be bound by these Terms of Use, our Privacy Policy, and any other policies referenced. This Service is provided as a facilitation tool to enhance safety and accountability at live events.</p>
+                <p><strong>1. Acceptance of Terms:</strong> By creating an account and using the EventSafe platform (&ldquo;Service&rdquo;), you agree to be bound by these Terms of Use, our Privacy Policy, and any other policies referenced. This Service is provided as a facilitation tool to enhance safety and accountability at live events.</p>
                 <p><strong>2. Eligibility:</strong> You must be at least 18 years of age and have the legal capacity to enter into a binding contract to use this Service. By creating an account, you warrant that you meet these requirements.</p>
                 <p><strong>3. User Accounts:</strong> You are responsible for maintaining the confidentiality of your account credentials, including your password and Safe Word. You are responsible for all activities that occur under your account. You agree to notify EventSafe immediately of any unauthorized use of your account.</p>
                 <p><strong>4. User Conduct:</strong> You agree to use the Service in a manner that is lawful, respectful, and in accordance with the community standards of the events you attend. EventSafe is not responsible for the conduct of any user, host, or venue. We reserve the right to suspend or terminate accounts that violate our policies or are deemed to pose a risk to the community.</p>
@@ -40,9 +40,9 @@ export default function LegalPage() {
                         <ul className="list-decimal list-inside pl-4 mt-2 space-y-1">
                             <li>The Host/Venue uploads their specific rules and terms of entry to their EventSafe profile.</li>
                             <li>When a guest first attends this venue, they are prompted within their EventSafe app to read and accept these rules before they can check in.</li>
-                            <li>The first successful QR code scan at the venue acts as a timestamped, digital signature, confirming the guest's acceptance of the rules.</li>
-                            <li>This acceptance is logged in the guest's profile for that specific venue and does not need to be repeated on subsequent visits.</li>
-                            <li>If a guest has not yet accepted the rules, the door staff's scanner will be alerted, and they will be instructed to ask the guest to accept the rules on their phone before rescanning.</li>
+                            <li>The first successful QR code scan at the venue acts as a timestamped, digital signature, confirming the guest&apos;s acceptance of the rules.</li>
+                            <li>This acceptance is logged in the guest&apos;s profile for that specific venue and does not need to be repeated on subsequent visits.</li>
+                            <li>If a guest has not yet accepted the rules, the door staff&apos;s scanner will be alerted, and they will be instructed to ask the guest to accept the rules on their phone before rescanning.</li>
                         </ul>
                         <p className="mt-2 text-xs italic">This feature provides venues with a verifiable record of rule acceptance, offering a layer of legal protection that is often missing from traditional entry procedures.</p>
                     </div>
@@ -53,7 +53,7 @@ export default function LegalPage() {
                     </div>
                 </div>
                 
-                <p className="mt-4"><strong>6. Disclaimers:</strong> The Service is provided on an "as is" and "as available" basis. EventSafe makes no warranties, express or implied, regarding the operation or availability of the Service. We are a facilitation tool and are not a party to any agreement between guests, hosts, or venues. All users are responsible for their own legal and tax compliance.</p>
+                <p className="mt-4"><strong>6. Disclaimers:</strong> The Service is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. EventSafe makes no warranties, express or implied, regarding the operation or availability of the Service. We are a facilitation tool and are not a party to any agreement between guests, hosts, or venues. All users are responsible for their own legal and tax compliance.</p>
             </div>
         </section>
 
@@ -64,7 +64,7 @@ export default function LegalPage() {
                 <p><strong>2. Data We Collect:</strong> We collect data necessary to provide the Service, including: name, date of birth, email address, biometric data for verification (processed as a secure hash), user-provided photographs, and optional distinguishing mark information. We also process data related to event attendance, reports, and kudos.</p>
                 <p><strong>3. Lawful Basis for Processing:</strong> We process your data based on your consent (provided at signup), for the performance of our contract with you (to provide the Service), and for our legitimate interests (fraud prevention, security, and service improvement).</p>
                 <p><strong>4. Data Use:</strong> Your data is used to create and manage your account, verify your identity, facilitate entry to events, and operate the reporting and community feedback systems. Anonymized and aggregated data may be used for statistical analysis.</p>
-                <p><strong>5. Data Retention & Deletion:</strong> Your personal data is retained for the duration of your account's existence. For fraud prevention and security purposes, an anonymized hash of your biometric data and report history may be retained for up to 12 months after account deletion. For offline verification, staff devices may cache event data securely for the duration of an event, which is automatically purged within 24 hours of the event's conclusion.</p>
+                <p><strong>5. Data Retention & Deletion:</strong> Your personal data is retained for the duration of your account&apos;s existence. For fraud prevention and security purposes, an anonymized hash of your biometric data and report history may be retained for up to 12 months after account deletion. For offline verification, staff devices may cache event data securely for the duration of an event, which is automatically purged within 24 hours of the event&apos;s conclusion.</p>
                 <p><strong>6. Your Rights (Data Subject Access Requests):</strong> Under UK GDPR, you have the right to access, rectify, or erase your personal data. To make a Data Subject Access Request (SAR), please contact <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a> from the email address associated with your account. We may require further verification to protect your privacy.</p>
             </div>
         </section>
@@ -85,7 +85,7 @@ export default function LegalPage() {
                         <CardTitle className="flex items-center gap-2 text-base"><Gavel /> Formal Legal Requests</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <p>EventSafe will only disclose user data in response to a valid, legally-binding instrument such as a court order or warrant. All requests must be sent from an official, verifiable domain (e.g., '.police.uk'). We will challenge any requests that are overly broad to protect our users' privacy.</p>
+                        <p>EventSafe will only disclose user data in response to a valid, legally-binding instrument such as a court order or warrant. All requests must be sent from an official, verifiable domain (e.g., &apos;.police.uk&apos;). We will challenge any requests that are overly broad to protect our users&apos; privacy.</p>
                          <p className="font-semibold pt-2">
                             Direct inquiries to: <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a>
                         </p>

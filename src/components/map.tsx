@@ -9,6 +9,12 @@ interface MapProps {
   markers?: Array<{ lat: number; lng: number; title?: string }>;
 }
 
+declare global {
+  interface Window {
+    google: typeof google;
+  }
+}
+
 export default function Map({ 
   className = "w-full h-96", 
   center = { lat: 54.5, lng: -2 }, // UK center
@@ -16,7 +22,6 @@ export default function Map({
   markers = []
 }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +34,7 @@ export default function Map({
     }
 
     // Check if Google Maps is already loaded
-    if (window.google && window.google.maps) {
+    if (typeof window !== 'undefined' && window.google && window.google.maps) {
       initializeMap();
       return;
     }
@@ -53,10 +58,10 @@ export default function Map({
   }, []);
 
   const initializeMap = () => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || typeof window === 'undefined' || !window.google) return;
 
     try {
-      const map = new google.maps.Map(mapRef.current, {
+      const map = new window.google.maps.Map(mapRef.current, {
         center,
         zoom,
         styles: [
@@ -78,17 +83,16 @@ export default function Map({
         ]
       });
 
-      setMapInstance(map);
       setIsLoaded(true);
 
       // Add markers with glow effect
       markers.forEach(marker => {
-        const mapMarker = new google.maps.Marker({
+        const mapMarker = new window.google.maps.Marker({
           position: { lat: marker.lat, lng: marker.lng },
           map,
           title: marker.title,
           icon: {
-            path: google.maps.SymbolPath.CIRCLE,
+            path: window.google.maps.SymbolPath.CIRCLE,
             scale: 8,
             fillColor: '#3b82f6',
             fillOpacity: 0.8,
@@ -98,11 +102,11 @@ export default function Map({
         });
 
         // Add glow effect with multiple circles
-        new google.maps.Marker({
+        new window.google.maps.Marker({
           position: { lat: marker.lat, lng: marker.lng },
           map,
           icon: {
-            path: google.maps.SymbolPath.CIRCLE,
+            path: window.google.maps.SymbolPath.CIRCLE,
             scale: 16,
             fillColor: '#3b82f6',
             fillOpacity: 0.3,
@@ -129,7 +133,7 @@ export default function Map({
   }
 
   return (
-    <div className={`${className} bg-muted rounded-lg border overflow-hidden`}>
+    <div className={`${className} bg-muted rounded-lg border overflow-hidden relative`}>
       <div ref={mapRef} className="w-full h-full" />
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted">
@@ -140,11 +144,4 @@ export default function Map({
       )}
     </div>
   );
-}
-
-// Type declarations for Google Maps
-declare global {
-  interface Window {
-    google: typeof google;
-  }
 }

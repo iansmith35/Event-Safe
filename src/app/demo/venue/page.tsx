@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
 import { Badge } from "@/components/ui/badge";
-import { Building, DollarSign, Calendar, Shield, TrendingUp, ArrowLeft, CheckCircle } from "lucide-react";
+import { Building, DollarSign, Calendar, Shield, ArrowLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
