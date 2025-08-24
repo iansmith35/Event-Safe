@@ -17,6 +17,7 @@ import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
 import { checkDuplicateGuest, type CheckDuplicateGuestOutput } from '@/ai/flows/check-duplicate-guest';
 import { Textarea } from './ui/textarea';
+import CheckoutNotices from './CheckoutNotices';
 
 function SignupFormComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -327,6 +328,7 @@ function SignupFormComponent() {
           <Button type="submit" disabled={isLoading || !selfie || !consent || !dob || isCheckingDuplicate} className="w-full">
             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Complete Signup (Simulate Payment)'}
           </Button>
+          <CheckoutNotices />
         </form>
       </CardContent>
     </Card>

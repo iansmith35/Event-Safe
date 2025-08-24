@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from './ui/textarea';
 import { Checkbox } from './ui/checkbox';
 import Link from 'next/link';
+import CheckoutNotices from './CheckoutNotices';
 
 const eventTypes = [
     "Adult (Sex-Positive)",
@@ -144,6 +145,7 @@ export default function HostSignupForm() {
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create Host Account
             </Button>
+            <CheckoutNotices />
         </form>
       </CardContent>
     </Card>
