@@ -117,7 +117,7 @@ export default function RebeccaChatbot() {
                             }
                         }}
                         placeholder="Type your message..."
-                        className="flex-1 resize-none"
+                        className="flex-1 resize-none text-foreground placeholder:text-muted-foreground caret-foreground bg-background"
                         minRows={1}
                         maxRows={5}
                         disabled={isLoading}

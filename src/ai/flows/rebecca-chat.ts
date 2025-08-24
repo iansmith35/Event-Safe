@@ -13,6 +13,7 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 import { diagnoseAppIssueTool } from './diagnose-app-issue';
 import { verifyLawEnforcementRequestTool } from './verify-le-request';
+import { getAiClient, AIUnavailableError } from '@/lib/ai';
 
 const RebeccaChatInputSchema = z.object({
   message: z.string().describe('The user message to Rebecca.'),
@@ -30,7 +31,20 @@ const RebeccaChatOutputSchema = z.object({
 export type RebeccaChatOutput = z.infer<typeof RebeccaChatOutputSchema>;
 
 export async function rebeccaChat(input: RebeccaChatInput): Promise<RebeccaChatOutput> {
-  return rebeccaChatFlow(input);
+  try {
+    // Check if AI is available before proceeding
+    getAiClient();
+    return rebeccaChatFlow(input);
+  } catch (error) {
+    if (error instanceof AIUnavailableError) {
+      console.error('AI unavailable for Rebecca chat:', error.message);
+      return {
+        response: "I'm currently experiencing some technical difficulties and can't provide my full assistance right now. Please try again later, or contact our support team at support@eventsafe.id if you need immediate help with EventSafe!"
+      };
+    }
+    // Re-throw other errors
+    throw error;
+  }
 }
 
 const prompt = ai.definePrompt({
