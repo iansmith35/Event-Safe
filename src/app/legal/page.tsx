@@ -1,10 +1,5 @@
-"use client";
-
-
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Gavel, ShieldCheck, UserCheck, Gift, CheckSquare, History } from "lucide-react";
 import Link from "next/link";
 
 export default function LegalPage() {
@@ -18,150 +13,174 @@ export default function LegalPage() {
       <div className="w-full max-w-4xl space-y-8">
         <div className="flex flex-col items-center mb-6 text-center">
           <Logo className="w-auto h-12 text-primary mb-4" />
-          <h1 className="text-3xl font-bold">Legal, Safety, and Data Request Information</h1>
+          <h1 className="text-3xl font-bold">Legal — Terms, Privacy & Data</h1>
           <p className="text-muted-foreground mt-2 max-w-2xl">
-            This page outlines our terms, privacy policy, and data handling procedures. These are provided for informational purposes and are subject to review by a qualified legal professional.
+            These Terms & Conditions, Privacy Policy and Data Handling Procedures form a binding agreement between EventSafe and its users. They are written to comply with UK consumer law and UK GDPR.
           </p>
         </div>
 
-        <section id="terms-of-use" className="space-y-4">
-            <h2 className="text-2xl font-semibold border-b pb-2">Terms of Use</h2>
-            <div className="space-y-2 text-sm text-muted-foreground">
-                <p><strong>1. Acceptance of Terms:</strong> By creating an account and using the EventSafe platform (&ldquo;Service&rdquo;), you agree to be bound by these Terms of Use, our Privacy Policy, and any other policies referenced. This Service is provided as a facilitation tool to enhance safety and accountability at live events.</p>
-                <p><strong>2. Eligibility:</strong> You must be at least 18 years of age and have the legal capacity to enter into a binding contract to use this Service. By creating an account, you warrant that you meet these requirements.</p>
-                <p><strong>3. User Accounts:</strong> You are responsible for maintaining the confidentiality of your account credentials, including your password and Safe Word. You are responsible for all activities that occur under your account. You agree to notify EventSafe immediately of any unauthorized use of your account.</p>
-                <p><strong>4. User Conduct:</strong> You agree to use the Service in a manner that is lawful, respectful, and in accordance with the community standards of the events you attend. EventSafe is not responsible for the conduct of any user, host, or venue. We reserve the right to suspend or terminate accounts that violate our policies or are deemed to pose a risk to the community.</p>
-                <p><strong>5. Host & Venue Compliance:</strong> Hosts and Venues agree that a condition of using the Service is that all guests and attendees at their events must be registered and verified members of EventSafe. The first month of service is provided free of charge to serve as a grace period to facilitate the onboarding of existing patrons. EventSafe reserves the right to monitor compliance by checking event listings and attendance logs.</p>
-                
-                <div className="p-4 border rounded-lg bg-muted/50 mt-4 space-y-4">
-                    <div>
-                        <h3 className="font-semibold text-base flex items-center gap-2"><CheckSquare /> Venue Rule Acceptance via QR Scan</h3>
-                        <p className="mt-2">For enhanced legal protection, EventSafe provides a mechanism for venues to log guest acceptance of their specific house rules. The process is as follows:</p>
-                        <ul className="list-decimal list-inside pl-4 mt-2 space-y-1">
-                            <li>The Host/Venue uploads their specific rules and terms of entry to their EventSafe profile.</li>
-                            <li>When a guest first attends this venue, they are prompted within their EventSafe app to read and accept these rules before they can check in.</li>
-                            <li>The first successful QR code scan at the venue acts as a timestamped, digital signature, confirming the guest&apos;s acceptance of the rules.</li>
-                            <li>This acceptance is logged in the guest&apos;s profile for that specific venue and does not need to be repeated on subsequent visits.</li>
-                            <li>If a guest has not yet accepted the rules, the door staff&apos;s scanner will be alerted, and they will be instructed to ask the guest to accept the rules on their phone before rescanning.</li>
-                        </ul>
-                        <p className="mt-2 text-xs italic">This feature provides venues with a verifiable record of rule acceptance, offering a layer of legal protection that is often missing from traditional entry procedures.</p>
-                    </div>
-
-                    <div className="pt-4 border-t">
-                        <h3 className="font-semibold text-base flex items-center gap-2"><History /> Document Version Control</h3>
-                        <p className="mt-2">To protect all parties, any amendments made by a Host or Venue to these default legal templates or their own uploaded house rules are version-controlled. Each change is logged with a timestamp. This ensures a clear audit trail of which version of the terms a guest agreed to and when, providing clarity in the event of a dispute.</p>
-                    </div>
-                </div>
-                
-                <p className="mt-4"><strong>6. Disclaimers:</strong> The Service is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. EventSafe makes no warranties, express or implied, regarding the operation or availability of the Service. We are a facilitation tool and are not a party to any agreement between guests, hosts, or venues. All users are responsible for their own legal and tax compliance.</p>
-            </div>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Introduction</h2>
+          <p className="text-sm">
+            By creating an account, browsing, or purchasing tickets on EventSafe (&ldquo;we/us/our&rdquo;), you agree to these Terms & Conditions, Privacy Policy and Data Handling Procedures (collectively, the &ldquo;Terms&rdquo;). These Terms form a binding agreement governed by the laws of England & Wales.
+          </p>
         </section>
 
-        <section id="privacy-policy" className="space-y-4">
-            <h2 className="text-2xl font-semibold border-b pb-2">Privacy & Data Policy (UK GDPR)</h2>
-             <div className="space-y-2 text-sm text-muted-foreground">
-                <p><strong>1. Data Controller:</strong> EventSafe is the data controller for the personal data collected through the Service.</p>
-                <p><strong>2. Data We Collect:</strong> We collect data necessary to provide the Service, including: name, date of birth, email address, biometric data for verification (processed as a secure hash), user-provided photographs, and optional distinguishing mark information. We also process data related to event attendance, reports, and kudos.</p>
-                <p><strong>3. Lawful Basis for Processing:</strong> We process your data based on your consent (provided at signup), for the performance of our contract with you (to provide the Service), and for our legitimate interests (fraud prevention, security, and service improvement).</p>
-                <p><strong>4. Data Use:</strong> Your data is used to create and manage your account, verify your identity, facilitate entry to events, and operate the reporting and community feedback systems. Anonymized and aggregated data may be used for statistical analysis.</p>
-                <p><strong>5. Data Retention & Deletion:</strong> Your personal data is retained for the duration of your account&apos;s existence. For fraud prevention and security purposes, an anonymized hash of your biometric data and report history may be retained for up to 12 months after account deletion. For offline verification, staff devices may cache event data securely for the duration of an event, which is automatically purged within 24 hours of the event&apos;s conclusion.</p>
-                <p><strong>6. Your Rights (Data Subject Access Requests):</strong> Under UK GDPR, you have the right to access, rectify, or erase your personal data. To make a Data Subject Access Request (SAR), please contact <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a> from the email address associated with your account. We may require further verification to protect your privacy.</p>
-            </div>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Who We Are & Role</h2>
+          <p className="text-sm">
+            EventSafe operates a ticketing and safety platform enabling venues and hosts (&ldquo;Organisers&rdquo;) to list events and sell tickets to registered guests (&ldquo;Guests&rdquo;). We act as a facilitating agent and technology provider. Organisers remain responsible for the event itself, venue rules, admission decisions and any statutory obligations.
+          </p>
         </section>
 
-        <section id="data-disclosure" className="space-y-4">
-            <h2 className="text-2xl font-semibold border-b pb-2">Data Disclosure & Law Enforcement</h2>
-            <div className="grid md:grid-cols-2 gap-8 text-sm">
-                 <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-base"><UserCheck /> User-Consent Pathway</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p>With your explicit and re-authenticated consent, we can provide your contact information to a verified law enforcement officer associated with a specific case number you have provided. This pathway is designed to be transparent and is entirely controlled by you.</p>
-                    </CardContent>
-                </Card>
-                 <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-base"><Gavel /> Formal Legal Requests</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p>EventSafe will only disclose user data in response to a valid, legally-binding instrument such as a court order or warrant. All requests must be sent from an official, verifiable domain (e.g., &apos;.police.uk&apos;). We will challenge any requests that are overly broad to protect our users&apos; privacy.</p>
-                         <p className="font-semibold pt-2">
-                            Direct inquiries to: <a href="mailto:legal@eventsafe.com" className="text-primary underline">legal@eventsafe.com</a>
-                        </p>
-                    </CardContent>
-                </Card>
-            </div>
-             <Card className="border-destructive mt-4">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-destructive"><ShieldCheck /> Our Commitment</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-sm text-destructive/90">
-                        We will not release any user data without either explicit user consent or a formal, legally-binding request. The safety and trust of our community is paramount.
-                    </p>
-                </CardContent>
-            </Card>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Accounts & Eligibility</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li>You must be 18+. You must provide accurate details and keep them current.</li>
+              <li>Anonymous display names/pseudonyms are supported; certain features require identity verification.</li>
+              <li>We may suspend or terminate accounts for fraud, abuse or breach of these Terms.</li>
+            </ul>
+          </div>
         </section>
 
-        <section id="promotional-terms" className="space-y-4">
-             <h2 className="text-2xl font-semibold border-b pb-2 flex items-center gap-2"><Gift/> Host & Venue Promotional Terms</h2>
-             <Card>
-                <CardHeader>
-                    <CardDescription>A summary of our launch offers for early adopters.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 text-sm">
-                    <p>
-                    All new host or venue accounts are eligible for a one-month free trial to experience the full benefits of the EventSafe platform. To reward our pioneering early adopters, we offer extended free periods:
-                    </p>
-                    <ul className="list-disc list-inside space-y-2 pl-2">
-                        <li>The <strong>first 5 venues</strong> to sign up will receive <strong>3 months free</strong>.</li>
-                        <li>The <strong>next 5 venues</strong> to sign up will receive <strong>2 months free</strong>.</li>
-                        <li>All others receive <strong>1 month free</strong>. The first sign-up fee is taken on application.</li>
-                    </ul>
-                    <p>
-                        <strong>Billing Process:</strong> Your first month is always free. At the start of your second month, your first subscription payment will be taken. For promotional offer recipients, billing will then be suspended for the remainder of your offer period and will resume automatically on a monthly basis thereafter.
-                    </p>
-                </CardContent>
-             </Card>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Pricing & Fees</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li><strong>Guest Price:</strong> Guests see a clear final price. Organisers absorb the platform fee so Guests are not surprised by add-ons.</li>
+              <li><strong>Platform Fee (Organisers):</strong> 8% of the ticket price per paid order.</li>
+              <li><strong>Processing/Admin Fee (Guests):</strong> £1 per order or pre-approval attempt; this fee is non-refundable once processing has begun.</li>
+              <li><strong>Currency:</strong> GBP. Prices may change; premium features may be introduced. We may adjust pricing with at least monthly granularity.</li>
+            </ul>
+          </div>
         </section>
 
-        <section id="disclaimers" className="space-y-4">
-            <h2 className="text-2xl font-semibold border-b pb-2">Important Disclaimers</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-                <Card className="border-destructive">
-                    <CardHeader>
-                        <CardTitle className="text-destructive">No Refunds</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm">All payments are non-refundable, including during downtime or if the project is discontinued.</p>
-                    </CardContent>
-                </Card>
-                <Card className="border-yellow-500">
-                    <CardHeader>
-                        <CardTitle className="text-yellow-600">Beta & Best-Efforts</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm">This is a community-led initiative provided &ldquo;as is&rdquo;.</p>
-                    </CardContent>
-                </Card>
-                <Card className="border-blue-500">
-                    <CardHeader>
-                        <CardTitle className="text-blue-600">Pricing & Premium Features</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm">We may introduce premium features and adjust pricing with at least monthly granularity. Fees may increase to reflect infrastructure/AI costs.</p>
-                    </CardContent>
-                </Card>
-                <Card className="border-green-500">
-                    <CardHeader>
-                        <CardTitle className="text-green-600">Maximum Exposure</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm">Typical maximum exposure is one month&apos;s subscription.</p>
-                    </CardContent>
-                </Card>
-            </div>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Tickets, Pre-Approval & Issuance</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li>Standard purchases are issued immediately upon successful payment.</li>
+              <li>If an account is flagged, blacklisted by an Organiser, or an event uses manual approval, the order enters pre-approval:
+                <ul className="list-disc list-inside ml-4 mt-1 space-y-1">
+                  <li>We may authorise your payment and charge the £1 processing fee immediately.</li>
+                  <li>If approved, the ticket is issued and payment is captured.</li>
+                  <li>If declined, the ticket price is released/refunded; the £1 processing fee is retained.</li>
+                </ul>
+              </li>
+              <li>Tickets are non-transferable unless the Organiser explicitly allows it.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Refunds, Cancellations & Downtime</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li>Refunds are requested directly from EventSafe; do not raise bank/Stripe disputes. We process lawful refunds of the ticket price; the £1 processing fee is never refunded once processing has begun.</li>
+              <li><strong>Platform Availability:</strong> Services are provided &ldquo;as is&rdquo;. We do not guarantee uninterrupted availability. No refunds are due for downtime, maintenance or project discontinuation.</li>
+              <li><strong>Organiser Cancellations:</strong> If an event is cancelled by the Organiser, face value is refunded via EventSafe; the £1 processing fee may remain non-refundable.</li>
+              <li>Partial refunds or adjustments may deduct third-party payment costs where permitted by law.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Disputes & Chargebacks</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li>Raising external chargebacks is unnecessary and a breach of these Terms because EventSafe offers a direct refund route.</li>
+              <li>If you raise a bank/card dispute, you may be liable to repay our reasonable administration costs (including third-party dispute charges). We reserve the right to recover such costs through lawful means.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Venue Rules, Blacklisting & Ratio Policies</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li>Organisers may set lawful admission policies, including single-male ratios, couples/mixed-party rules, or pre-approval.</li>
+              <li>Providing false information (e.g., claiming to attend as a couple and arriving alone) may result in cancellation without refund of the £1 processing fee and/or denial of entry.</li>
+              <li>Organisers may blacklist specific users; where lawful, reasons may be communicated via EventSafe.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Safety, Conduct & Scores</h2>
+          <div className="text-sm space-y-2">
+            <p>We operate a safety score (0–1000) to reflect reported behaviour trends:</p>
+            <ul className="list-disc list-inside space-y-1 ml-4">
+              <li>Minor issues (1–25), Medium (50–150), Serious (200–400+), Ban (admin/venue discretion).</li>
+              <li>Reports are assessed fairly. Frivolous or abusive reporting is prohibited.</li>
+              <li>Appeals may be available; serious matters may be referred to appropriate authorities.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">QR Admission</h2>
+          <p className="text-sm">
+            Admission requires a valid QR linked to your account. Duplicate or previously-used codes are invalid. Ensure your device is charged; carry suitable ID if the venue requests it.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Privacy & Data Protection (UK GDPR)</h2>
+          <div className="text-sm space-y-2">
+            <ul className="list-disc list-inside space-y-1">
+              <li><strong>Controller:</strong> EventSafe. Contact: support@eventsafe.id</li>
+              <li><strong>Purposes & Bases:</strong> account management (contract), ticketing and payments (contract), safety scoring and venue access control (legitimate interests/consent where required), fraud prevention and security (legitimate interests), legal compliance.</li>
+              <li><strong>Data:</strong> account details, contact info, verification status, event history, safety signals, device/usage data, and payment tokens (handled by Stripe).</li>
+              <li><strong>Sub-processors:</strong> Stripe (payments), Google/Firebase (hosting, auth, Firestore), Google Maps (geolocation/UX). Each processes data under its own terms and safeguards.</li>
+              <li><strong>International Transfers:</strong> protected via recognised mechanisms (e.g., SCCs) by our providers.</li>
+              <li><strong>Retention:</strong> minimum necessary and proportionate; tickets/financial records retained per legal obligations.</li>
+              <li><strong>Your Rights:</strong> access, rectification, erasure, restriction, portability, objection; contact us to exercise rights.</li>
+              <li><strong>Cookies/Tracking:</strong> used for session security and analytics; see our cookie banner for choices.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Security</h2>
+          <p className="text-sm">
+            We use industry-standard controls (encrypted transport, access control, audit logs). No system is 100% secure; you must keep credentials confidential and report suspected compromise.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Acceptable Use</h2>
+          <p className="text-sm">
+            No illegal, abusive or deceptive activity; no attempts to bypass safety, ticketing or QR controls.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Changes to These Terms</h2>
+          <p className="text-sm">
+            We may update these Terms and pricing; material changes will be notified. Continued use after changes constitutes acceptance.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Liability</h2>
+          <p className="text-sm">
+            To the fullest extent permitted by law, we exclude indirect/ consequential loss and cap liability to the higher of (a) amounts you paid to us in the 12 months prior to the claim or (b) £100. Nothing limits liability for death/personal injury caused by negligence, fraud, or other liabilities that cannot be limited by law.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Governing Law & Jurisdiction</h2>
+          <p className="text-sm">
+            England & Wales. Exclusive jurisdiction of the English courts.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold border-b pb-2">Contact</h2>
+          <p className="text-sm">
+            EventSafe Support — support@eventsafe.id
+          </p>
         </section>
       </div>
     </div>

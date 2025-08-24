@@ -70,10 +70,11 @@ const profileVariants = [
 ]
 
 const eventHistory = [
-  { event: "Summer Fest '24", date: "2024-07-20", status: "Attended" },
-  { event: "Tech Con 2024", date: "2024-05-15", status: "Attended" },
-  { event: "NYE Gala", date: "2023-12-31", status: "Attended" },
+  { event: "Summer Fest '24", date: "2024-07-20", status: "Attended", poster: "https://placehold.co/800x450?text=Event+Poster+1" },
+  { event: "Tech Con 2024", date: "2024-05-15", status: "Attended", poster: "https://placehold.co/800x450?text=Event+Poster+2" },
+  { event: "NYE Gala", date: "2023-12-31", status: "Attended", poster: "https://placehold.co/800x450?text=Event+Poster+3" },
 ];
+// TODO: Replace with Firebase Storage uploads via Admin later.
 
 const accountReports = [
     { id: "REP-001", date: "2024-07-20", report: "Minor verbal altercation.", status: "Resolved"},
@@ -475,7 +476,8 @@ export default function GuestView() {
                          <p className="text-xs text-muted-foreground mt-2">Help us grow! By nominating venues, you show them their customers want a safer event experience.</p>
                     </div>
                     <div className="relative aspect-video w-full bg-muted rounded-lg overflow-hidden border">
-                         <Image src="https://placehold.co/800x450.png" alt="Map of venues" layout="fill" objectFit="cover" data-ai-hint="map city" />
+                         <Image src="https://placehold.co/800x450?text=Event+Venue+Map" alt="Map of venues" layout="fill" objectFit="cover" data-ai-hint="map city" />
+                         {/* TODO: Replace with Firebase Storage uploads via Admin later. */}
                          <div className="absolute inset-0 bg-background/30 flex items-center justify-center">
                             <div className="p-4 rounded-lg bg-background/80 backdrop-blur-sm text-center">
                                 <h4 className="font-bold">Interactive Map Coming Soon</h4>
