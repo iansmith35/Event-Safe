@@ -12,6 +12,8 @@ To get started, take a look at src/app/page.tsx.
 
 **Admin access**: Sign in with your normal account, then visit `/admin/login` and enter passcode. Only `ADMIN_EMAIL` is permitted. Successful entry sets a 7-day admin session cookie and marks your user doc as `{role:'admin'}`. Use `/admin/logout` to clear.
 
+**Multi-device support**: Admin can be signed in on multiple devices simultaneously. Use "Sign out other sessions" to revoke other devices, or "Log out everywhere" to clear all sessions.
+
 To change admin email/passcode, update `ADMIN_EMAIL`, `ADMIN_PASSCODE` env and redeploy.
 
 The admin dashboard shows:

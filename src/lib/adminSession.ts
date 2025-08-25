@@ -65,7 +65,7 @@ function generateSessionId(): string {
  * Set admin session cookie with session ID
  */
 export async function setAdminCookie(sessionId?: string): Promise<void> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieValue = sessionId || generateSessionId();
   cookieStore.set('admin_session', cookieValue, {
     httpOnly: true,
@@ -80,15 +80,15 @@ export async function setAdminCookie(sessionId?: string): Promise<void> {
  * Clear admin session cookie
  */
 export async function clearAdminCookie(): Promise<void> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   cookieStore.delete('admin_session');
 }
 
 /**
  * Get current session ID from cookie
  */
-export function getCurrentSessionId(): string | null {
-  const cookieStore = cookies();
+export async function getCurrentSessionId(): Promise<string | null> {
+  const cookieStore = await cookies();
   return cookieStore.get('admin_session')?.value || null;
 }
 
