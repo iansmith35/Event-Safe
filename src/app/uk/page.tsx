@@ -113,7 +113,7 @@ export default function WelcomePage() {
          <div className="flex items-center gap-4 justify-start order-1 sm:order-1">
            <Logo className="w-auto h-10" />
             <Button asChild variant="outline" className="hidden md:flex">
-                <Link href="/">Global Site</Link>
+                <Link href="/global">Global Site</Link>
             </Button>
          </div>
         <div className="text-center order-3 sm:order-2">

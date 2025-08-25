@@ -10,7 +10,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/uk', req.url));
   }
 
-  // Admin route protection
+  // Admin route protection - exclude login page
   if (path.startsWith('/admin') && !path.startsWith('/admin/login')) {
     const cookie = req.cookies.get("admin_ok")?.value;
     if (!cookie) {
