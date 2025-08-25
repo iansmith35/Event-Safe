@@ -9,13 +9,16 @@ import Link from "next/link";
 import RebeccaChatbot from "@/components/rebecca-chatbot";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay"
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FunCourt from "@/components/fun-court";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+import { getFlags, Flags } from "@/lib/flags";
+
 import SafeMap from "@/components/SafeMap";
 
 const testimonials = [
@@ -81,6 +84,11 @@ export default function WelcomePage() {
     const autoplayPlugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
     const testimonialPlugin = useRef(Autoplay({ delay: 10000, stopOnInteraction: true }));
     const { toast } = useToast();
+    const [flags, setFlags] = useState<Flags>({ homepageMap: false, loadVenues: false });
+
+    useEffect(() => { 
+        getFlags().then(setFlags); 
+    }, []);
 
     const handleInterestSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -290,7 +298,18 @@ export default function WelcomePage() {
                     <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
-                <SafeMap className="rounded-lg border max-w-full h-96 mx-auto" />
+
+                {flags.homepageMap && flags.loadVenues ? (
+                    <SafeMap className="rounded-lg border max-w-full h-96 mx-auto" />   // will lazy-load client-only map component
+                ) : (
+                    <section className="rounded-lg border max-w-full h-96 mx-auto rounded-xl border-white/10 bg-white/5 p-8 text-center flex items-center justify-center">
+                        <div>
+                            <h3 className="text-lg font-semibold">Interactive map disabled</h3>
+                            <p className="mt-2 text-sm opacity-80">We'll switch this on once it's ready.</p>
+                        </div>
+                    </section>
+                )}
+
                 <div className="text-center space-y-2 max-w-2xl mx-auto">
                     <p className="text-sm text-muted-foreground">
                         <strong>Click any glowing point</strong> to see venue status and register your interest. 

@@ -330,11 +330,11 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
         <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
           <div className="text-center p-4">
             <div className="animate-pulse text-slate-300 mb-2">
-              {venues.length === 0 ? 'Loading venues...' : 'Loading UK heatmap...'}
+              {venues.length === 0 ? 'Loading UK heatmap...' : 'Loading UK heatmap...'}
             </div>
             <div className="text-xs text-slate-500">
               {venues.length === 0 
-                ? 'Fetching venue data from server' 
+                ? 'Preparing interactive map with glowing points' 
                 : 'Preparing interactive map with glowing points'
               }
             </div>
