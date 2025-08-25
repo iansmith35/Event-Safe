@@ -330,3 +330,38 @@ The "For Hosts & Venues" call-to-action buttons follow these responsive rules:
 - **Mobile/Small screens**: Buttons stack vertically with full width
 - **Overflow prevention**: Uses `flex-wrap` and `max-w-full` to prevent buttons from hanging outside their container
 - **Spacing**: Consistent gap spacing (3-4 units) between buttons on all screen sizes
+
+## Admin Configuration
+
+### Environment Variables
+
+Add these environment variables to configure admin access:
+
+```env
+# Admin access configuration
+ADMIN_EMAIL_ALLOWLIST=ian@ishe-ltd.co.uk
+ADMIN_PASSCODE=2338
+# Optional: Use bcrypt hash instead of plain passcode
+# ADMIN_PASSCODE_HASH=<bcrypt hash>
+```
+
+### Feature Flags
+
+To toggle the homepage map display, edit `src/lib/flags.ts`:
+
+```typescript
+export const flags = {
+  homepageMapEnabled: false, // Set to true to enable map
+  showDemoLinks: true        // Set to false to hide demo links
+};
+```
+
+### Demo Access
+
+The following demo pages are publicly accessible without login:
+
+- `/demo/guest` - Guest user experience demo
+- `/demo/venue` - Venue management demo  
+- `/demo/host` - Event host dashboard demo
+
+All demo data uses GBP (£) currency formatting.

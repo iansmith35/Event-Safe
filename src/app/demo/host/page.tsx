@@ -19,7 +19,7 @@ export default function HostDemoPage() {
                     </Button>
                     <Logo className="w-auto h-8" />
                 </div>
-                <Badge variant="secondary" className="bg-blue-100 text-blue-800">DEMO MODE</Badge>
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800">Demo data only</Badge>
             </header>
 
             <main className="flex-1 p-4 md:p-8">
