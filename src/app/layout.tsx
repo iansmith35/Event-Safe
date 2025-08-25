@@ -4,6 +4,10 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { getSeasonalTheme } from '@/ai/flows/get-seasonal-theme';
 import SeasonalEffects from '@/components/seasonal-effects';
+import { initializeEnvironment } from '@/lib/env';
+
+// Initialize environment validation
+initializeEnvironment();
 
 export const metadata: Metadata = {
   title: 'Event Traffic',

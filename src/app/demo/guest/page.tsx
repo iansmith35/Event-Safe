@@ -4,11 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, MapPin, Calendar, Users, Shield, ArrowLeft } from "lucide-react";
+import { CheckCircle, MapPin, Calendar, Users, Shield, ArrowLeft, QrCode } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
+
+// Generate QR code data URL for demo
+const generateDemoQR = (id: string) => {
+  const qrSize = 100;
+  const data = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(id)}`;
+  return data;
+};
 
 export default function GuestDemoPage() {
+    const demoId = "ES-123456";
+    const eventDate = dayjs().add(2, 'days').format('MMM D, YYYY • h:mm A');
+    const eventRelative = dayjs().add(2, 'days').fromNow();
     return (
         <div className="min-h-screen bg-background flex flex-col">
             <header className="p-4 flex justify-between items-center border-b">
@@ -33,7 +48,41 @@ export default function GuestDemoPage() {
                         </Alert>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {/* Guest Pass Card */}
+                        <Card className="md:col-span-1">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2">
+                                    <QrCode className="h-5 w-5" />
+                                    Your Event Pass
+                                </CardTitle>
+                                <CardDescription>Digital ID for verified access</CardDescription>
+                            </CardHeader>
+                            <CardContent className="text-center space-y-4">
+                                <Avatar className="w-16 h-16 mx-auto">
+                                    <AvatarImage src="https://placehold.co/64x64.png?text=JD" />
+                                    <AvatarFallback>JD</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <h3 className="font-semibold">John Demo</h3>
+                                    <p className="text-sm text-muted-foreground">Pass ID: {demoId}</p>
+                                </div>
+                                <div className="border rounded-lg p-4 bg-muted">
+                                    <img 
+                                        src={generateDemoQR(demoId)} 
+                                        alt="QR Code" 
+                                        className="mx-auto"
+                                        width={100}
+                                        height={100}
+                                    />
+                                </div>
+                                <p className="text-xs text-muted-foreground">
+                                    Show this QR code at events for instant verification
+                                </p>
+                            </CardContent>
+                        </Card>
+
+                        <div className="md:col-span-2 space-y-6">
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
@@ -46,7 +95,7 @@ export default function GuestDemoPage() {
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
                                         <span>Safety Score</span>
-                                        <Badge variant="default" className="bg-green-500 text-white">Excellent (4.8/5)</Badge>
+                                        <Badge variant="default" className="bg-green-500 text-white">Excellent (950/1000)</Badge>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <span>Events Attended</span>
@@ -78,7 +127,7 @@ export default function GuestDemoPage() {
                                         <div className="flex justify-between items-start">
                                             <div>
                                                 <h4 className="font-semibold">Tech Meetup Manchester</h4>
-                                                <p className="text-sm text-muted-foreground">Jan 15, 2025 • 7:00 PM</p>
+                                                <p className="text-sm text-muted-foreground">{eventDate} • {eventRelative}</p>
                                                 <p className="text-sm text-muted-foreground">The Innovation Centre</p>
                                             </div>
                                             <Badge variant="secondary">Registered</Badge>
@@ -88,7 +137,7 @@ export default function GuestDemoPage() {
                                         <div className="flex justify-between items-start">
                                             <div>
                                                 <h4 className="font-semibold">Winter Music Festival</h4>
-                                                <p className="text-sm text-muted-foreground">Jan 22, 2025 • 8:00 PM</p>
+                                                <p className="text-sm text-muted-foreground">{dayjs().add(9, 'days').format('MMM D, YYYY • h:mm A')} • {dayjs().add(9, 'days').fromNow()}</p>
                                                 <p className="text-sm text-muted-foreground">Brighton Warehouse</p>
                                             </div>
                                             <Badge variant="outline">Interested</Badge>
@@ -113,14 +162,20 @@ export default function GuestDemoPage() {
                                             <h4 className="font-medium">The Basement Club</h4>
                                             <p className="text-xs text-muted-foreground">0.3 miles away</p>
                                         </div>
-                                        <Badge className="bg-green-100 text-green-800">Verified</Badge>
+                                        <div className="flex flex-col items-end gap-1">
+                                            <Badge className="bg-green-100 text-green-800">Verified</Badge>
+                                            <Badge variant="outline" className="text-xs">Score: 920</Badge>
+                                        </div>
                                     </div>
                                     <div className="flex justify-between items-center p-2 border rounded">
                                         <div>
                                             <h4 className="font-medium">Rooftop Lounge</h4>
                                             <p className="text-xs text-muted-foreground">0.7 miles away</p>
                                         </div>
-                                        <Badge className="bg-green-100 text-green-800">Verified</Badge>
+                                        <div className="flex flex-col items-end gap-1">
+                                            <Badge className="bg-green-100 text-green-800">Verified</Badge>
+                                            <Badge variant="outline" className="text-xs">Score: 895</Badge>
+                                        </div>
                                     </div>
                                 </div>
                             </CardContent>
@@ -154,6 +209,7 @@ export default function GuestDemoPage() {
                                 </div>
                             </CardContent>
                         </Card>
+                        </div>
                     </div>
 
                     <div className="text-center">

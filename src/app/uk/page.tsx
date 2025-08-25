@@ -16,7 +16,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import { getFlags, Flags } from "@/lib/flags";
+
 import SafeMap from "@/components/SafeMap";
 
 const testimonials = [
@@ -296,6 +298,7 @@ export default function WelcomePage() {
                     <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
+
                 {flags.homepageMap && flags.loadVenues ? (
                     <SafeMap className="rounded-lg border max-w-full h-96 mx-auto" />   // will lazy-load client-only map component
                 ) : (
@@ -306,6 +309,7 @@ export default function WelcomePage() {
                         </div>
                     </section>
                 )}
+
                 <div className="text-center space-y-2 max-w-2xl mx-auto">
                     <p className="text-sm text-muted-foreground">
                         <strong>Click any glowing point</strong> to see venue status and register your interest. 

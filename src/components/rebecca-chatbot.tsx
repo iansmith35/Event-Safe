@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import { Send, Bot, Loader2 } from "lucide-react";
 import Textarea from 'react-textarea-autosize';
 import { rebeccaChat } from '@/ai/flows/rebecca-chat';
+import { callRebecca, isRebeccaAvailable } from '@/lib/rebecca';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from './ui/scroll-area';
 
@@ -40,6 +41,29 @@ export default function RebeccaChatbot() {
         setIsLoading(true);
 
         try {
+            // Check if Rebecca is available via feature flags
+            const available = await isRebeccaAvailable();
+            if (!available) {
+                const fallbackMessage: Message = {
+                    role: 'model',
+                    content: "Rebecca AI is currently disabled. This feature is temporarily unavailable. Please contact our support team at support@eventsafe.id for assistance."
+                };
+                setMessages(prev => [...prev, fallbackMessage]);
+                return;
+            }
+
+            // Try the new Rebecca endpoint first, fallback to existing AI
+            try {
+                const rebeccaResponse = await callRebecca(currentInput);
+                if (rebeccaResponse.success && rebeccaResponse.data) {
+                    setMessages(prev => [...prev, { role: 'model', content: rebeccaResponse.data.response || rebeccaResponse.data }]);
+                    return;
+                }
+            } catch (rebeccaError) {
+                console.warn("Rebecca endpoint failed, falling back to local AI:", rebeccaError);
+            }
+
+            // Fallback to existing AI flow
             const response = await rebeccaChat({
                 message: currentInput,
                 conversationHistory: [...messages, userMessage],
@@ -141,9 +165,9 @@ export default function RebeccaChatbot() {
                         className="flex-1 resize-none text-foreground placeholder:text-muted-foreground caret-foreground bg-background"
                         minRows={1}
                         maxRows={5}
-                        disabled={isLoading || (aiDisabledUntil && Date.now() < aiDisabledUntil)}
+                        disabled={isLoading || Boolean(aiDisabledUntil && Date.now() < aiDisabledUntil)}
                     />
-                    <Button type="submit" size="icon" disabled={isLoading || !input.trim() || (aiDisabledUntil && Date.now() < aiDisabledUntil)}>
+                    <Button type="submit" size="icon" disabled={isLoading || !input.trim() || Boolean(aiDisabledUntil && Date.now() < aiDisabledUntil)}>
                         <Send />
                     </Button>
                 </form>
