@@ -10,14 +10,12 @@ To get started, take a look at src/app/page.tsx.
 
 ### Admin Dashboard
 
-Access the admin dashboard at `/admin` with the admin code. The admin code can be set via:
-- Environment variable: `ADMIN_CODE` (defaults to `2338`)
-- HTTP header: `x-admin-code: 2338`
-- Cookie: `x-admin-code=2338` (set automatically via query parameter)
-- Temporary query parameter: `?admin=2338` (sets a cookie for 24 hours)
+**Admin access**: Sign in with your normal account, then visit `/admin/login` and enter passcode. Only `ADMIN_EMAIL` is permitted. Successful entry sets a 7-day admin session cookie and marks your user doc as `{role:'admin'}`. Use `/admin/logout` to clear.
+
+To change admin email/passcode, update `ADMIN_EMAIL`, `ADMIN_PASSCODE` env and redeploy.
 
 The admin dashboard shows:
-- Live system status (AI, Maps, Firebase connectivity)
+- Live system status (AI, Maps, Firebase connectivity)  
 - Build information and deployment details
 - Service diagnostic tests
 - Recent system logs from Firestore
@@ -67,7 +65,8 @@ STRIPE_PRICE_VENUE_MONTHLY=price_venue_monthly_40gbp
 STRIPE_PRICE_COURT_CASE=price_court_case_3gbp
 
 # Admin Access
-ADMIN_CODE=2338  # Change this for production
+ADMIN_EMAIL=ian@ishe-ltd.co.uk
+ADMIN_PASSCODE=2338  # Change this for production
 
 # Firebase, AI, and Maps (see .env.example for full list)
 ```
@@ -237,5 +236,6 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
 # Admin Access
-ADMIN_CODE=2338
+ADMIN_EMAIL=ian@ishe-ltd.co.uk
+ADMIN_PASSCODE=2338
 ```

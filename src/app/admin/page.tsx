@@ -113,12 +113,20 @@ export default function AdminPage() {
 
   return (
     <div className="container mx-auto p-6 space-y-6 pt-16 md:pt-20">
-      <div className="flex items-center gap-3 mb-8">
-        <Shield className="w-8 h-8 text-primary" />
-        <div>
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="text-muted-foreground">System status and operational monitoring</p>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <Shield className="w-8 h-8 text-primary" />
+          <div>
+            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <p className="text-muted-foreground">System status and operational monitoring</p>
+          </div>
         </div>
+        <Button 
+          variant="outline" 
+          onClick={() => window.location.href = '/admin/logout'}
+        >
+          Logout
+        </Button>
       </div>
 
       {/* Status Overview */}
