@@ -3,8 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Shield, Zap, Map, Database, Activity, AlertCircle } from 'lucide-react';
+import { Shield, Zap, Map, Database, Activity, AlertCircle, Monitor, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface HealthData {
@@ -22,6 +21,15 @@ interface LogEntry {
   event: string;
   data: Record<string, unknown>;
   ts: string;
+}
+
+interface AdminSession {
+  id: string;
+  deviceInfo: string;
+  createdAt: string;
+  lastSeenAt: string;
+  ipHash: string;
+  isCurrent: boolean;
 }
 
 async function fetchHealthStatus(): Promise<HealthData> {
@@ -42,6 +50,33 @@ async function fetchRecentLogs(): Promise<LogEntry[]> {
     return [];
   } catch (error) {
     console.error('Failed to fetch logs:', error);
+    return [];
+  }
+}
+
+async function fetchAdminSessions(): Promise<AdminSession[]> {
+  try {
+    // Get current user info from Firebase Auth (simplified)
+    // In reality, you'd get this from useAuth hook or similar
+    const user = {
+      uid: 'admin-uid', // This would come from Firebase Auth
+      email: 'ian@ishe-ltd.co.uk' // This would come from Firebase Auth
+    };
+    
+    const response = await fetch(`/api/admin/sessions/list?userId=${user.uid}&userEmail=${user.email}`, {
+      headers: {
+        'Authorization': 'Bearer dummy-token' // Would be real Firebase ID token
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch sessions');
+    }
+    
+    const data = await response.json();
+    return data.ok ? data.sessions : [];
+  } catch (error) {
+    console.error('Failed to fetch admin sessions:', error);
     return [];
   }
 }
@@ -72,17 +107,21 @@ export default function AdminPage() {
     now: new Date().toISOString()
   });
   const [recentLogs, setRecentLogs] = useState<LogEntry[]>([]);
+  const [activeSessions, setActiveSessions] = useState<AdminSession[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sessionLoading, setSessionLoading] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      const [health, logs] = await Promise.all([
+      const [health, logs, sessions] = await Promise.all([
         fetchHealthStatus(),
-        fetchRecentLogs()
+        fetchRecentLogs(),
+        fetchAdminSessions()
       ]);
       setHealthData(health);
       setRecentLogs(logs);
+      setActiveSessions(sessions);
       setLoading(false);
     };
 
@@ -95,6 +134,73 @@ export default function AdminPage() {
 
   const handleViewHealth = () => {
     window.open('/api/health', '_blank');
+  };
+
+  const handleRevokeOtherSessions = async () => {
+    if (!confirm('Are you sure you want to sign out all other sessions?')) return;
+    
+    setSessionLoading(true);
+    try {
+      const user = {
+        uid: 'admin-uid', // This would come from Firebase Auth
+        email: 'ian@ishe-ltd.co.uk' // This would come from Firebase Auth
+      };
+      
+      const response = await fetch('/api/admin/sessions/revoke', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: user.uid,
+          userEmail: user.email,
+          revokeAll: false
+        })
+      });
+      
+      if (response.ok) {
+        // Refresh sessions list
+        const sessions = await fetchAdminSessions();
+        setActiveSessions(sessions);
+      }
+    } catch (error) {
+      console.error('Failed to revoke sessions:', error);
+    } finally {
+      setSessionLoading(false);
+    }
+  };
+
+  const handleLogoutEverywhere = async () => {
+    if (!confirm('Are you sure you want to sign out from all devices? You will need to sign in again.')) return;
+    
+    setSessionLoading(true);
+    try {
+      const user = {
+        uid: 'admin-uid', // This would come from Firebase Auth
+        email: 'ian@ishe-ltd.co.uk' // This would come from Firebase Auth
+      };
+      
+      const response = await fetch('/api/admin/sessions/revoke', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: user.uid,
+          userEmail: user.email,
+          revokeAll: true
+        })
+      });
+      
+      if (response.ok) {
+        // Redirect to login since all sessions are revoked
+        window.location.href = '/admin/login';
+      }
+    } catch (error) {
+      console.error('Failed to logout everywhere:', error);
+    } finally {
+      setSessionLoading(false);
+    }
   };
 
   if (loading) {
@@ -118,7 +224,9 @@ export default function AdminPage() {
           <Shield className="w-8 h-8 text-primary" />
           <div>
             <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">System status and operational monitoring</p>
+            <p className="text-muted-foreground">
+              Signed in as ian@ishe-ltd.co.uk • {activeSessions.length} active session{activeSessions.length !== 1 ? 's' : ''}
+            </p>
           </div>
         </div>
         <Button 
@@ -203,6 +311,74 @@ export default function AdminPage() {
             <span className="text-muted-foreground">Last Check:</span>
             <span>{healthData.now ? new Date(healthData.now).toLocaleString() : 'unknown'}</span>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Active Sessions */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Monitor className="w-5 h-5" />
+            Active Sessions
+          </CardTitle>
+          <CardDescription>Manage your active admin sessions across devices</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {activeSessions.length === 0 ? (
+            <div className="text-center text-muted-foreground py-4">
+              No active sessions found
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {activeSessions.slice(0, 10).map((session) => (
+                <div key={session.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <Monitor className="w-4 h-4" />
+                      <span className="font-medium text-sm">
+                        {session.deviceInfo}
+                        {session.isCurrent && (
+                          <Badge variant="secondary" className="ml-2 text-xs">Current</Badge>
+                        )}
+                      </span>
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1">
+                      Created: {new Date(session.createdAt).toLocaleString()} • 
+                      Last seen: {new Date(session.lastSeenAt).toLocaleString()} • 
+                      IP: {session.ipHash}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {activeSessions.length > 10 && (
+                <div className="text-center text-muted-foreground text-sm">
+                  ... and {activeSessions.length - 10} more sessions
+                </div>
+              )}
+            </div>
+          )}
+          
+          {activeSessions.length > 1 && (
+            <div className="flex gap-2 pt-4 border-t">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleRevokeOtherSessions}
+                disabled={sessionLoading}
+              >
+                <Trash2 className="w-4 h-4 mr-2" />
+                Sign out other sessions
+              </Button>
+              <Button 
+                variant="destructive" 
+                size="sm" 
+                onClick={handleLogoutEverywhere}
+                disabled={sessionLoading}
+              >
+                Log out everywhere
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
 

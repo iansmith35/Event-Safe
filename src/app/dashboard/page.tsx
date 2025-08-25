@@ -26,7 +26,7 @@ import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { useSearchParams } from 'next/navigation';
 
-const ADMIN_EMAIL = 'ian@ishe-ltd.co.uk';
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'ian@ishe-ltd.co.uk';
 const DEMO_EMAIL = 'demo@eventsafe.com';
 
 function AppSidebar({ activeView, setActiveView, onLinkClick, isAdmin }: { activeView: string, setActiveView: (view: string) => void, onLinkClick?: () => void, isAdmin: boolean }) {
