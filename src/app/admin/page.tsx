@@ -1,5 +1,6 @@
 'use client';
 
+import AdminNav from '@/components/AdminNav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -218,24 +219,26 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6 pt-16 md:pt-20">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-3">
-          <Shield className="w-8 h-8 text-primary" />
-          <div>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">
-              Signed in as ian@ishe-ltd.co.uk • {activeSessions.length} active session{activeSessions.length !== 1 ? 's' : ''}
-            </p>
-          </div>
+    <div className="container mx-auto p-6 space-y-6">
+      <div className="grid lg:grid-cols-4 gap-6">
+        {/* Navigation Sidebar */}
+        <div className="lg:col-span-1">
+          <AdminNav />
         </div>
-        <Button 
-          variant="outline" 
-          onClick={() => window.location.href = '/admin/logout'}
-        >
-          Logout
-        </Button>
-      </div>
+
+        {/* Main Content */}
+        <div className="lg:col-span-3 space-y-6">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <Shield className="w-8 h-8 text-primary" />
+              <div>
+                <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+                <p className="text-muted-foreground">
+                  Signed in as ian@ishe-ltd.co.uk • {activeSessions.length} active session{activeSessions.length !== 1 ? 's' : ''}
+                </p>
+              </div>
+            </div>
+          </div>
 
       {/* Status Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -475,6 +478,8 @@ export default function AdminPage() {
           )}
         </CardContent>
       </Card>
+        </div>
+      </div>
     </div>
   );
 }

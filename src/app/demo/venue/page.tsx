@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/logo";
 import { Badge } from "@/components/ui/badge";
-import { Building, DollarSign, Calendar, Shield, ArrowLeft, CheckCircle } from "lucide-react";
+import { Building, PoundSterling, Calendar, Shield, ArrowLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
@@ -58,7 +58,7 @@ export default function VenueDemoPage() {
                                 <CardTitle className="text-lg">Safety Score</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold text-purple-600">4.9/5</div>
+                                <div className="text-2xl font-bold text-purple-600">980/1000</div>
                                 <p className="text-sm text-muted-foreground">Excellent rating</p>
                             </CardContent>
                         </Card>
@@ -158,7 +158,7 @@ export default function VenueDemoPage() {
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <DollarSign className="h-5 w-5 text-green-500" />
+                                    <PoundSterling className="h-5 w-5 text-green-500" />
                                     Revenue Insights
                                 </CardTitle>
                                 <CardDescription>Financial performance and trends</CardDescription>
@@ -222,7 +222,7 @@ export default function VenueDemoPage() {
                                         <h5 className="font-semibold text-sm">Venue Rating</h5>
                                         <div className="flex items-center gap-2 mt-1">
                                             <Progress value={98} className="flex-1 h-2" />
-                                            <span className="text-sm font-semibold">4.9/5</span>
+                                            <span className="text-sm font-semibold">980/1000</span>
                                         </div>
                                     </div>
                                 </div>
