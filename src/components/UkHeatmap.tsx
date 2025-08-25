@@ -1,272 +1,188 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { loadGoogleMaps } from '@/lib/maps';
 
 interface HeatmapProps {
   className?: string;
 }
 
-interface Event {
-  id: string;
-  lat: number;
-  lng: number;
-  status: 'upcoming' | 'past';
-  title?: string;
-  date?: string;
-}
+// Demo UK locations for the heatmap with glowing effect
+const demoUkLocations = [
+  { lat: 51.4545, lng: -2.5879, title: 'Bristol' },
+  { lat: 51.5074, lng: -0.1278, title: 'London' },
+  { lat: 53.4808, lng: -2.2426, title: 'Manchester' },
+  { lat: 55.8642, lng: -4.2518, title: 'Glasgow' },
+  { lat: 53.8008, lng: -1.5491, title: 'Leeds' },
+  { lat: 51.4816, lng: -3.1791, title: 'Cardiff' },
+  { lat: 54.5973, lng: -5.9301, title: 'Belfast' },
+];
 
-interface Venue {
-  id: string;
-  lat: number;
-  lng: number;
-  active: boolean;
-  name?: string;
-}
-
-declare global {
-  interface Window {
-    google: {
-      maps: {
-        Map: any;
-        LatLng: any;
-        Marker: any;
-        Size: any;
-        visualization?: {
-          HeatmapLayer: any;
-        };
-      };
-    };
-  }
-}
-
-export default function UkHeatmap({ className = "h-[420px] md:h-[520px] rounded-2xl overflow-hidden" }: HeatmapProps) {
+export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl overflow-hidden bg-slate-900" }: HeatmapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [events, setEvents] = useState<Event[]>([]);
-  const [venues, setVenues] = useState<Venue[]>([]);
+  const heatmapRef = useRef<google.maps.visualization.HeatmapLayer | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load events and venues from Firestore
+  // Load and initialize the map
   useEffect(() => {
-    const eventsQuery = query(
-      collection(db, 'events'),
-      where('status', '==', 'upcoming')
-    );
-    
-    const venuesQuery = query(
-      collection(db, 'venues'),
-      where('active', '==', true)
-    );
+    let mounted = true;
 
-    const unsubEvents = onSnapshot(eventsQuery, (snapshot) => {
-      const eventsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      } as Event));
-      setEvents(eventsData);
-    });
+    const initializeMap = async () => {
+      if (!mapRef.current) return;
 
-    const unsubVenues = onSnapshot(venuesQuery, (snapshot) => {
-      const venuesData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      } as Venue));
-      setVenues(venuesData);
-    });
-
-    return () => {
-      unsubEvents();
-      unsubVenues();
-    };
-  }, []);
-
-  useEffect(() => {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    
-    if (!apiKey) {
-      setError('Google Maps API key not configured. Add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to environment variables.');
-      return;
-    }
-
-    // Check if Google Maps is already loaded
-    if (typeof window !== 'undefined' && window.google && window.google.maps) {
-      initializeMap();
-      return;
-    }
-
-    // Load Google Maps API
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=visualization`;
-    script.async = true;
-    script.defer = true;
-    script.onload = initializeMap;
-    script.onerror = () => {
-      if (apiKey) {
-        setError('Failed to load Google Maps. Check your API key restrictions and ensure billing is enabled.');
-      }
-    };
-    
-    document.head.appendChild(script);
-
-    return () => {
-      // Clean up script if component unmounts
-      if (script.parentNode) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
-
-  // Re-initialize map when data changes
-  useEffect(() => {
-    if (isLoaded) {
-      initializeMap();
-    }
-  }, [events, venues, isLoaded]);
-
-  const initializeMap = () => {
-    if (!mapRef.current || typeof window === 'undefined' || !window.google) return;
-
-    try {
-      // UK center coordinates
-      const ukCenter = { lat: 54.5, lng: -2 };
-      
-      const map = new window.google.maps.Map(mapRef.current, {
-        center: ukCenter,
-        zoom: 6,
-        styles: [
-          {
-            "featureType": "all",
-            "elementType": "geometry.fill",
-            "stylers": [{"color": "#1a1a2e"}]
-          },
-          {
-            "featureType": "water",
-            "elementType": "geometry.fill",
-            "stylers": [{"color": "#0c4a6e"}]
-          },
-          {
-            "featureType": "landscape",
-            "elementType": "geometry.fill",
-            "stylers": [{"color": "#27272a"}]
-          },
-          {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{"color": "#52525b"}]
-          },
-          {
-            "featureType": "administrative",
-            "elementType": "labels.text.fill",
-            "stylers": [{"color": "#a1a1aa"}]
+      try {
+        const google = await loadGoogleMaps();
+        
+        if (!google || !google.maps?.visualization?.HeatmapLayer) {
+          if (mounted) {
+            setError('Map temporarily unavailable');
+            console.warn('Google Maps or visualization library not available');
           }
-        ]
-      });
-
-      // Create heatmap data points
-      const heatmapData: Array<{ location: any; weight: number }> = [];
-      
-      // Add events (higher weight for upcoming events)
-      events.forEach(event => {
-        if (event.lat && event.lng) {
-          heatmapData.push({
-            location: new window.google.maps.LatLng(event.lat, event.lng),
-            weight: 3 // Higher weight for events
-          });
+          return;
         }
-      });
 
-      // Add venues (lower weight)
-      venues.forEach(venue => {
-        if (venue.lat && venue.lng) {
-          heatmapData.push({
-            location: new window.google.maps.LatLng(venue.lat, venue.lng),
-            weight: 1
-          });
-        }
-      });
-
-      // Create heatmap layer if we have data
-      if (heatmapData.length > 0 && window.google.maps.visualization) {
-        const heatmap = new window.google.maps.visualization.HeatmapLayer({
-          data: heatmapData,
-          map: map,
-        });
-
-        // Configure heatmap appearance
-        heatmap.setOptions({
-          radius: 50,
-          opacity: 0.8,
-          gradient: [
-            'rgba(0, 255, 255, 0)',
-            'rgba(0, 255, 255, 1)',
-            'rgba(0, 191, 255, 1)',
-            'rgba(0, 127, 255, 1)',
-            'rgba(0, 63, 255, 1)',
-            'rgba(0, 0, 255, 1)',
-            'rgba(0, 0, 223, 1)',
-            'rgba(0, 0, 191, 1)',
-            'rgba(0, 0, 159, 1)',
-            'rgba(0, 0, 127, 1)',
-            'rgba(63, 0, 91, 1)',
-            'rgba(127, 0, 63, 1)',
-            'rgba(191, 0, 31, 1)',
-            'rgba(255, 0, 0, 1)'
+        // Create map with dark theme and disabled UI
+        const map = new google.maps.Map(mapRef.current, {
+          center: { lat: 53.8, lng: -1.5 }, // UK center
+          zoom: 5,
+          disableDefaultUI: true,
+          styles: [
+            {
+              "featureType": "all",
+              "elementType": "geometry.fill",
+              "stylers": [{ "color": "#0f172a" }]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry.fill",
+              "stylers": [{ "color": "#1e293b" }]
+            },
+            {
+              "featureType": "landscape",
+              "elementType": "geometry.fill",
+              "stylers": [{ "color": "#0f172a" }]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [{ "visibility": "off" }]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry.stroke",
+              "stylers": [{ "color": "#334155" }, { "weight": 0.5 }]
+            },
+            {
+              "featureType": "administrative.country",
+              "elementType": "geometry.stroke",
+              "stylers": [{ "color": "#475569" }, { "weight": 1 }]
+            },
+            {
+              "featureType": "all",
+              "elementType": "labels",
+              "stylers": [{ "visibility": "off" }]
+            }
           ]
         });
-      } else {
-        // Fallback to markers if no heatmap visualization available
-        [...events, ...venues].forEach((item, index) => {
-          if (item.lat && item.lng) {
-            new window.google.maps.Marker({
-              position: { lat: item.lat, lng: item.lng },
-              map: map,
-              title: 'title' in item ? item.title : ('name' in item ? item.name : `Location ${index + 1}`),
-              icon: {
-                url: 'events' in item ? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMTAiIGZpbGw9IiMxMDk0M2UiLz4KPC9zdmc+' : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMTAiIGZpbGw9IiNlZjQ0NDQiLz4KPC9zdmc+',
-                scaledSize: new window.google.maps.Size(20, 20)
-              }
-            });
-          }
+
+        // Create initial heatmap data points
+        const initialHeatmapData = demoUkLocations.map((location, index) => ({
+          location: new google.maps.LatLng(location.lat, location.lng),
+          weight: 0.5 + (index * 0.1) // Vary initial weights
+        }));
+
+        // Create heatmap layer
+        const heatmap = new google.maps.visualization.HeatmapLayer({
+          data: initialHeatmapData,
+          map: map
         });
+
+        // Configure heatmap appearance for glowing effect
+        heatmap.set('radius', 25);
+        heatmap.set('dissipating', true);
+        heatmap.set('gradient', [
+          'rgba(59, 130, 246, 0)',    // transparent blue
+          'rgba(59, 130, 246, 0.6)',  // blue
+          'rgba(147, 51, 234, 0.8)',  // purple
+          'rgba(236, 72, 153, 1)',    // pink
+          'rgba(248, 113, 113, 1)'    // red
+        ]);
+
+        heatmapRef.current = heatmap;
+
+        // Animate by periodically shuffling weights for subtle glow effect
+        const animateHeatmap = () => {
+          if (!mounted || !heatmapRef.current) return;
+
+          const time = Date.now() * 0.001;
+          const animatedData = demoUkLocations.map((location, index) => ({
+            location: new google.maps.LatLng(location.lat, location.lng),
+            weight: 0.5 + Math.sin(time + index) * 0.3 + Math.cos(time * 0.5 + index * 0.5) * 0.2
+          }));
+
+          heatmapRef.current!.setData(animatedData);
+        };
+
+        // Start animation with 2-second interval
+        intervalRef.current = setInterval(animateHeatmap, 2000);
+
+        if (mounted) {
+          setIsLoaded(true);
+          setError(null);
+        }
+
+      } catch (err) {
+        console.error('Failed to initialize UK heatmap:', err);
+        if (mounted) {
+          setError('Map temporarily unavailable');
+        }
       }
+    };
 
-      setIsLoaded(true);
-    } catch (error) {
-      setError(`Map initialization failed: ${error}`);
-    }
-  };
+    initializeMap();
 
+    return () => {
+      mounted = false;
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (heatmapRef.current) {
+        heatmapRef.current.setMap(null);
+      }
+    };
+  }, []);
+
+  // Fallback component when map is unavailable
   if (error) {
     return (
-      <div className={`${className} bg-muted rounded-2xl border flex items-center justify-center`}>
-        <div className="p-6 text-center max-w-md">
-          <h4 className="font-semibold text-destructive mb-2">Map Unavailable</h4>
-          <p className="text-sm text-muted-foreground">{error}</p>
-          {error.includes('API key') && (
-            <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-              <p className="text-xs text-blue-700 dark:text-blue-300">
-                💡 <strong>Hint:</strong> Add your domain to HTTP referrer restrictions and enable billing in Google Cloud Console.
+      <div className={className}>
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center p-6">
+            <h4 className="font-semibold text-slate-200 mb-2">Map temporarily unavailable</h4>
+            <p className="text-sm text-slate-400">
+              {error}
+            </p>
+            {!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
+              <p className="text-xs text-slate-500 mt-2">
+                NEXT_PUBLIC_GOOGLE_MAPS_API_KEY not configured
               </p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`${className} bg-muted rounded-2xl border overflow-hidden relative`}>
+    <div className={className}>
       <div ref={mapRef} className="w-full h-full" />
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted">
-          <div className="p-4 text-center">
-            <div className="animate-spin w-6 h-6 border-2 border-primary border-t-transparent rounded-full mx-auto mb-2"></div>
-            <h4 className="font-semibold">Loading UK heatmap...</h4>
-            <p className="text-sm text-muted-foreground">
-              Events: {events.length} | Venues: {venues.length}
-            </p>
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+          <div className="text-center p-4">
+            <div className="animate-pulse text-slate-300 mb-2">Loading UK heatmap...</div>
+            <div className="text-xs text-slate-500">Preparing interactive map with glowing points</div>
           </div>
         </div>
       )}

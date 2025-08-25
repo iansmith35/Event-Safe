@@ -22,11 +22,17 @@ export default function RebeccaChatbot() {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [aiDisabledUntil, setAiDisabledUntil] = useState<number | null>(null);
     const { toast } = useToast();
     const scrollAreaRef = useRef<HTMLDivElement>(null);
 
     const handleSendMessage = useCallback(async (currentInput: string) => {
         if (!currentInput.trim() || isLoading) return;
+
+        // Check if AI is temporarily disabled
+        if (aiDisabledUntil && Date.now() < aiDisabledUntil) {
+            return; // Still within cooldown period
+        }
 
         const userMessage: Message = { role: 'user', content: currentInput };
         setMessages(prev => [...prev, userMessage]);
@@ -40,19 +46,34 @@ export default function RebeccaChatbot() {
             });
             setMessages(prev => [...prev, { role: 'model', content: response.response }]);
         } catch (error) {
-            console.error("Error chatting with Rebecca:", error);
+            console.warn("AI temporarily unavailable:", error);
+            
+            // Show user-friendly message and keep them on the page
+            const fallbackMessage: Message = { 
+                role: 'model', 
+                content: "Rebecca is temporarily unavailable. I'm experiencing some technical difficulties right now. Please try again in a moment, or contact our support team at support@eventsafe.id if you need immediate help with EventSafe!"
+            };
+            
+            setMessages(prev => [...prev, fallbackMessage]);
+            
+            // Disable send for 10 seconds, then re-enable
+            const disableUntil = Date.now() + 10000;
+            setAiDisabledUntil(disableUntil);
+            
+            setTimeout(() => {
+                setAiDisabledUntil(null);
+            }, 10000);
+
+            // Show non-intrusive toast
             toast({
-                variant: 'destructive',
-                title: "Error",
-                description: "Could not get a response from Rebecca. Please try again."
+                title: "Rebecca is temporarily unavailable",
+                description: "Please try again in a moment",
+                duration: 3000,
             });
-             // Add the user's message back to the input if the API call fails
-            setInput(userMessage.content);
-            setMessages(prev => prev.slice(0, prev.length -1));
         } finally {
             setIsLoading(false);
         }
-    }, [isLoading, messages, toast]);
+    }, [isLoading, messages, toast, aiDisabledUntil]);
     
     useEffect(() => {
         if (scrollAreaRef.current) {
@@ -120,9 +141,9 @@ export default function RebeccaChatbot() {
                         className="flex-1 resize-none text-foreground placeholder:text-muted-foreground caret-foreground bg-background"
                         minRows={1}
                         maxRows={5}
-                        disabled={isLoading}
+                        disabled={isLoading || (aiDisabledUntil && Date.now() < aiDisabledUntil)}
                     />
-                    <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+                    <Button type="submit" size="icon" disabled={isLoading || !input.trim() || (aiDisabledUntil && Date.now() < aiDisabledUntil)}>
                         <Send />
                     </Button>
                 </form>

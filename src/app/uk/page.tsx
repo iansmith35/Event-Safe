@@ -16,7 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Map from "@/components/map";
+import UkHeatmap from "@/components/UkHeatmap";
 
 const testimonials = [
   { name: 'Sarah L.', role: 'Guest', comment: "EventSafe is a game-changer. I finally feel totally secure at events!" },
@@ -209,7 +209,7 @@ export default function WelcomePage() {
                         </CardContent>
                     </Card>
 
-                    <Card className="flex flex-col">
+                    <Card className="flex flex-col rounded-2xl p-6 sm:p-8 bg-[#0f1422] max-w-full">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-3">
                                 <Users className="w-8 h-8 text-primary" />
@@ -220,14 +220,14 @@ export default function WelcomePage() {
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex-1 flex flex-col justify-end">
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Button asChild className="flex-1" size="lg" variant="secondary">
+                            <div className="flex flex-wrap gap-3 sm:gap-4">
+                                <Button asChild className="w-full sm:w-auto" size="lg" variant="secondary">
                                     <Link href="/host-signup">Onboard Your Venue</Link>
                                 </Button>
-                                <Button asChild className="flex-1" size="lg" variant="outline">
+                                <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
                                     <Link href="/demo/host">View Host Demo</Link>
                                 </Button>
-                                <Button asChild className="flex-1" size="lg" variant="outline">
+                                <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
                                     <Link href="/demo/venue">View Venue Demo</Link>
                                 </Button>
                             </div>
@@ -290,19 +290,7 @@ export default function WelcomePage() {
                     <h2 className="text-2xl font-semibold flex items-center justify-center gap-2"><MapPin /> Put Your UK Scene on the Map</h2>
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
-                <Map 
-                    className="rounded-lg border max-w-full h-96 mx-auto"
-                    center={{ lat: 54.5, lng: -2 }}
-                    zoom={6}
-                    markers={[
-                        { lat: 51.5074, lng: -0.1278, title: "London" },
-                        { lat: 53.4808, lng: -2.2426, title: "Manchester" },
-                        { lat: 55.9533, lng: -3.1883, title: "Edinburgh" },
-                        { lat: 51.4545, lng: -2.5879, title: "Bristol" },
-                        { lat: 53.4084, lng: -2.9916, title: "Liverpool" },
-                        { lat: 52.4862, lng: -1.8904, title: "Birmingham" }
-                    ]}
-                />
+                <UkHeatmap className="rounded-lg border max-w-full h-96 mx-auto" />
 
                 <Card>
                     <CardHeader>
