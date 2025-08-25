@@ -3,14 +3,12 @@ import { db } from '@/lib/firebase';
 import { 
   doc, 
   collection, 
-  addDoc, 
-  updateDoc, 
-  increment, 
-  getDoc,
   runTransaction,
-  serverTimestamp 
+  serverTimestamp,
+  increment
 } from 'firebase/firestore';
 import { log } from '@/lib/log';
+import { sendInterestNotification } from '@/lib/notifications';
 import { createHash } from 'crypto';
 
 export async function POST(request: NextRequest) {
@@ -70,14 +68,28 @@ export async function POST(request: NextRequest) {
           lastNotifiedLevel: crossedThreshold
         });
         
-        // TODO: Enqueue email notification
-        // For now, just log the event
+        // Log the threshold crossing event
         await log('venue_interest_threshold_crossed', {
           venueId,
           venueName: venueData.name,
           threshold: crossedThreshold,
           newCount,
           ownerEmail: venueData.ownerEmail
+        });
+        
+        // Queue email notification (async, don't block the response)
+        setImmediate(async () => {
+          try {
+            await sendInterestNotification({
+              venueId,
+              venueName: venueData.name,
+              ownerEmail: venueData.ownerEmail,
+              interestCount: newCount,
+              threshold: crossedThreshold
+            });
+          } catch (error) {
+            console.error('Failed to send notification:', error);
+          }
         });
       }
       

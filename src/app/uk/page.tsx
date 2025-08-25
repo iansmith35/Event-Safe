@@ -291,6 +291,15 @@ export default function WelcomePage() {
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
                 <UkHeatmap className="rounded-lg border max-w-full h-96 mx-auto" />
+                <div className="text-center space-y-2 max-w-2xl mx-auto">
+                    <p className="text-sm text-muted-foreground">
+                        <strong>Click any glowing point</strong> to see venue status and register your interest. 
+                        Brighter points are EventSafe-verified venues. Dimmer points show prospective locations where guests want EventSafe.
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                        When enough people show interest, we'll reach out to venue owners about joining EventSafe.
+                    </p>
+                </div>
 
                 <Card>
                     <CardHeader>

@@ -267,6 +267,59 @@ The Rebecca chatbot includes graceful error handling:
 - **No crashes**: All AI errors are caught and handled gracefully with fallback responses
 - **User experience**: Non-intrusive toast notifications instead of disruptive error dialogs
 
+## Maps Setup Checklist
+
+To set up the interactive UK map with venue interest workflow:
+
+### 1. Enable Google Maps API
+
+1. **Enable "Maps JavaScript API"** in Google Cloud Console
+2. **Attach billing** to your Google Cloud project (required for Maps API)
+3. **Enable the Visualization Library** (included automatically with `libraries=visualization`)
+
+### 2. Configure API Key Restrictions
+
+1. Go to **Google Cloud Console > APIs & Services > Credentials**
+2. Click on your API key
+3. Under **"Application restrictions"**, select **"HTTP referrers"**
+4. Add these referrers:
+   - `https://event-safe-id--rebbeca-bot.us-central1.hosted.app/*`
+   - `https://event-safe-id--rebbeca-bot.web.app/*`
+   - `https://*.vercel.app/*`
+   - `http://localhost:3000/*`
+
+### 3. Environment Variables
+
+Add to both Firebase Hosting env and Vercel Project env:
+
+```env
+# Required for map functionality
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_maps_api_key
+
+# Optional for email notifications
+EMAIL_FROM=support@eventsafe.id
+EMAIL_PROVIDER=sendgrid
+SENDGRID_API_KEY=your_sendgrid_key
+SITE_URL=https://event-safe-id--rebbeca-bot.us-central1.hosted.app
+```
+
+### 4. Seed UK Cities Data
+
+After deployment, use the admin panel to seed initial venue data:
+
+```bash
+# Login as admin, then POST to:
+/api/admin/seed-cities
+```
+
+This creates prospect venues for major UK cities (London, Manchester, Birmingham, etc.) with `interestCount: 0`.
+
+### 5. Troubleshooting
+
+- **If maps are still blocked**: Temporarily remove all restrictions to verify functionality, then re-apply restrictions
+- **If `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is missing**: The map component will show a graceful fallback message instead of crashing
+- **For email notifications**: If `EMAIL_PROVIDER` is not configured, notifications will be logged only (no actual emails sent)
+
 ## CTA Buttons Responsive Rule
 
 The "For Hosts & Venues" call-to-action buttons follow these responsive rules:

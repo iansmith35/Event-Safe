@@ -21,7 +21,6 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [venues, setVenues] = useState<Venue[]>([]);
-  const [selectedVenue, setSelectedVenue] = useState<Venue | null>(null);
   const [isRegistering, setIsRegistering] = useState(false);
   const heatmapRef = useRef<google.maps.visualization.HeatmapLayer | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
@@ -69,10 +68,12 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
         );
         
         // Update selected venue if it's the same one
-        setSelectedVenue(prev => 
-          prev?.id === venueId 
-            ? { ...prev, interestCount: data.newCount }
-            : prev
+        setVenues(prevVenues => 
+          prevVenues.map(v => 
+            v.id === venueId 
+              ? { ...v, interestCount: data.newCount }
+              : v
+          )
         );
         
         // Show success message (simple alert for now)
@@ -203,8 +204,6 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
           });
 
           marker.addListener('click', () => {
-            setSelectedVenue(venue);
-            
             const content = `
               <div class="p-4 min-w-[250px]">
                 <h3 class="font-semibold text-lg mb-2">${venue.name}</h3>
@@ -242,7 +241,7 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
         markersRef.current = markers;
 
         // Make registerInterest available globally for the InfoWindow
-        (window as any).registerInterest = registerInterest;
+        (window as Record<string, unknown>).registerInterest = registerInterest;
 
         // Animate by periodically shuffling weights for subtle glow effect
         const animateHeatmap = () => {
@@ -293,10 +292,10 @@ export default function UkHeatmap({ className = "h-[360px] w-full rounded-xl ove
       }
       // Clean up global function
       if (typeof window !== 'undefined') {
-        delete (window as any).registerInterest;
+        delete (window as Record<string, unknown>).registerInterest;
       }
     };
-  }, [venues, isRegistering]);
+  }, [venues, isRegistering, registerInterest]);
 
   // Fallback component when map is unavailable
   if (error) {
