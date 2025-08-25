@@ -9,10 +9,10 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { flags } from "@/lib/flags";
 import { useToast } from "@/hooks/use-toast";
-import Image from "next/image";
 
-export default function GlobalPage() {
+import Image from "next/image";
     const { toast } = useToast();
 
     const handleInterestSubmit = (e: React.FormEvent) => {
@@ -114,6 +114,28 @@ export default function GlobalPage() {
                     </form>
                 </CardContent>
             </Card>
+
+            {flags.showDemoLinks && (
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Try Our Demos</CardTitle>
+                        <CardDescription>Explore how EventSafe works for different user types</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <Button asChild variant="outline">
+                                <Link href="/demo/guest">Guest Demo</Link>
+                            </Button>
+                            <Button asChild variant="outline">
+                                <Link href="/demo/venue">Venue Demo</Link>
+                            </Button>
+                            <Button asChild variant="outline">
+                                <Link href="/demo/host">Host Demo</Link>
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
+            )}
 
         </div>
       </main>

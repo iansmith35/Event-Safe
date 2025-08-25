@@ -9,7 +9,7 @@ import Link from "next/link";
 import RebeccaChatbot from "@/components/rebecca-chatbot";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay"
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FunCourt from "@/components/fun-court";
 import { useToast } from "@/hooks/use-toast";
@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-import { getFlags, Flags } from "@/lib/flags";
+import { flags } from "@/lib/flags";
 
 import SafeMap from "@/components/SafeMap";
 
@@ -84,11 +84,6 @@ export default function WelcomePage() {
     const autoplayPlugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
     const testimonialPlugin = useRef(Autoplay({ delay: 10000, stopOnInteraction: true }));
     const { toast } = useToast();
-    const [flags, setFlags] = useState<Flags>({ homepageMap: false, loadVenues: false });
-
-    useEffect(() => { 
-        getFlags().then(setFlags); 
-    }, []);
 
     const handleInterestSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -210,9 +205,11 @@ export default function WelcomePage() {
                                 <Button asChild className="flex-1" size="lg" variant="secondary">
                                     <Link href="/signup">Create Your Event Pass</Link>
                                 </Button>
-                                <Button asChild className="flex-1" size="lg" variant="outline">
-                                    <Link href="/demo/guest">View Guest Demo</Link>
-                                </Button>
+                                {flags.showDemoLinks && (
+                                    <Button asChild className="flex-1" size="lg" variant="outline">
+                                        <Link href="/demo/guest">View Guest Demo</Link>
+                                    </Button>
+                                )}
                             </div>
                         </CardContent>
                     </Card>
@@ -232,12 +229,16 @@ export default function WelcomePage() {
                                 <Button asChild className="w-full sm:w-auto" size="lg" variant="secondary">
                                     <Link href="/host-signup">Onboard Your Venue</Link>
                                 </Button>
-                                <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
-                                    <Link href="/demo/host">View Host Demo</Link>
-                                </Button>
-                                <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
-                                    <Link href="/demo/venue">View Venue Demo</Link>
-                                </Button>
+                                {flags.showDemoLinks && (
+                                    <>
+                                        <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
+                                            <Link href="/demo/host">View Host Demo</Link>
+                                        </Button>
+                                        <Button asChild className="w-full sm:w-auto" size="lg" variant="outline">
+                                            <Link href="/demo/venue">View Venue Demo</Link>
+                                        </Button>
+                                    </>
+                                )}
                             </div>
                         </CardContent>
                     </Card>
@@ -299,14 +300,12 @@ export default function WelcomePage() {
                     <p className="text-muted-foreground">Tell us where you are. Help us bring EventSafe to your favorite local venues.</p>
                 </div>
 
-                {flags.homepageMap && flags.loadVenues ? (
-                    <SafeMap className="rounded-lg border max-w-full h-96 mx-auto" />   // will lazy-load client-only map component
+                {flags.homepageMapEnabled ? (
+                    <SafeMap className="rounded-lg border max-w-full h-96 mx-auto" />
                 ) : (
-                    <section className="rounded-lg border max-w-full h-96 mx-auto rounded-xl border-white/10 bg-white/5 p-8 text-center flex items-center justify-center">
-                        <div>
-                            <h3 className="text-lg font-semibold">Interactive map disabled</h3>
-                            <p className="mt-2 text-sm opacity-80">We'll switch this on once it's ready.</p>
-                        </div>
+                    <section className="rounded-lg border p-4">
+                        <h3 className="text-lg font-semibold">Interactive map coming soon</h3>
+                        <p className="text-sm opacity-80">We'll switch this on when it's ready.</p>
                     </section>
                 )}
 
