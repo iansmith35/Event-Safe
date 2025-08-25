@@ -226,6 +226,24 @@ GEMINI_API_KEY=your_gemini_key
 # Google Maps
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_maps_key
 
+## Maps Setup & Allowed Referrers
+
+To set up Google Maps properly:
+
+1. **Enable Maps JavaScript API** in Google Cloud Console
+2. **Attach billing** to your Google Cloud project (required for Maps API)
+3. **Configure API Key restrictions**:
+   - Go to Google Cloud Console > APIs & Services > Credentials
+   - Click on your API key
+   - Under "Application restrictions", select "HTTP referrers"
+   - Add these referrers:
+     - `https://event-safe-id--rebbeca-bot.us-central1.hosted.app/*`
+     - `https://event-safe-id--rebbeca-bot.web.app/*`
+     - `http://localhost:3000/*`
+4. **If maps are still blocked**, temporarily remove all restrictions to verify functionality, then re-apply restrictions
+
+**Note**: If `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is missing, the map component will show a graceful fallback message instead of crashing.
+
 # Firebase
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
 NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_key
@@ -239,3 +257,21 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 ADMIN_EMAIL=ian@ishe-ltd.co.uk
 ADMIN_PASSCODE=2338
 ```
+
+## AI Fallback Behavior
+
+The Rebecca chatbot includes graceful error handling:
+
+- **When AI is unavailable**: Shows user-friendly message "Rebecca is temporarily unavailable" and keeps the user on the same page
+- **Temporary cooldown**: Disables send button for 10 seconds after an error, then automatically re-enables
+- **No crashes**: All AI errors are caught and handled gracefully with fallback responses
+- **User experience**: Non-intrusive toast notifications instead of disruptive error dialogs
+
+## CTA Buttons Responsive Rule
+
+The "For Hosts & Venues" call-to-action buttons follow these responsive rules:
+
+- **Desktop (md+)**: Buttons display inline in a single row with proper spacing
+- **Mobile/Small screens**: Buttons stack vertically with full width
+- **Overflow prevention**: Uses `flex-wrap` and `max-w-full` to prevent buttons from hanging outside their container
+- **Spacing**: Consistent gap spacing (3-4 units) between buttons on all screen sizes
