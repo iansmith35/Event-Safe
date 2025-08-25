@@ -1,0 +1,150 @@
+name: Apply Patch from Issue Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  apply-patch:
+    if: contains(github.event.comment.body, '/apply-patch') && contains(github.event.comment.body, '```patch')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Extract patch content
+        id: extract-patch
+        run: |
+          # Extract patch content between ```patch and ``` markers
+          COMMENT_BODY='${{ github.event.comment.body }}'
+          
+          # Write comment body to temporary file for processing
+          echo "$COMMENT_BODY" > comment_body.txt
+          
+          # Extract patch content - find lines between ```patch and ```
+          awk '/```patch/{flag=1; next} /```/ && flag{flag=0} flag' comment_body.txt > extracted_patch.patch
+          
+          # Check if patch was extracted successfully
+          if [ ! -s extracted_patch.patch ]; then
+            echo "::error::No patch content found between \`\`\`patch and \`\`\` markers"
+            exit 1
+          fi
+          
+          echo "Extracted patch content:"
+          cat extracted_patch.patch
+          
+          # Save patch file path for later steps
+          echo "PATCH_FILE=extracted_patch.patch" >> $GITHUB_ENV
+      
+      - name: Create new branch
+        id: create-branch
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          BRANCH_NAME="chatgpt/update-${TIMESTAMP}"
+          
+          git checkout -b "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "branch-name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+      
+      - name: Apply patch
+        run: |
+          # Try to apply the patch
+          if git apply --check "$PATCH_FILE"; then
+            git apply "$PATCH_FILE"
+            echo "Patch applied successfully"
+          else
+            echo "::error::Failed to apply patch - checking for conflicts or issues"
+            git apply --check "$PATCH_FILE" || true
+            exit 1
+          fi
+      
+      - name: Commit changes
+        run: |
+          # Configure git user
+          git config user.name "Repo Bot"
+          git config user.email "noreply@github.com"
+          
+          # Add all changes
+          git add -A
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "::warning::No changes to commit after applying patch"
+            exit 1
+          fi
+          
+          # Commit with meaningful message
+          git commit -m "Apply patch from issue #${{ github.event.issue.number }}
+
+          Applied patch requested in comment: ${{ github.event.comment.html_url }}
+          
+          Co-authored-by: ${{ github.event.comment.user.login }} <${{ github.event.comment.user.login }}@users.noreply.github.com>"
+      
+      - name: Push branch
+        run: |
+          git push origin "$BRANCH_NAME"
+      
+      - name: Create Pull Request
+        id: create-pr
+        run: |
+          # Create PR using GitHub CLI
+          PR_URL=$(gh pr create \
+            --title "Apply patch from issue #${{ github.event.issue.number }}" \
+            --body "This PR applies a patch that was requested in issue #${{ github.event.issue.number }}.
+
+          **Original Comment:** ${{ github.event.comment.html_url }}
+          **Requested by:** @${{ github.event.comment.user.login }}
+
+          The patch has been automatically applied and committed to this branch.
+          
+          Please review the changes carefully before merging." \
+            --base main \
+            --head "$BRANCH_NAME")
+          
+          echo "pr-url=$PR_URL" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Reply to issue
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --body "✅ **Patch Applied Successfully!**
+
+          I've created a new Pull Request with your patch: ${{ steps.create-pr.outputs.pr-url }}
+
+          **Branch:** \`${{ env.BRANCH_NAME }}\`
+          **Changes:** Applied patch from this comment
+
+          The PR is ready for review and can be merged when approved."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Handle workflow failure
+        if: failure()
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --body "❌ **Patch Application Failed**
+
+          I encountered an error while trying to apply your patch. This could be due to:
+
+          - Invalid patch format or content
+          - Patch conflicts with current code
+          - Missing patch content between \`\`\`patch markers
+          - Other technical issues
+
+          Please check your patch format and try again. The patch should be enclosed in \`\`\`patch code blocks.
+
+          **Error details may be available in the [workflow logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).**"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Clean up temporary files
+        if: always()
+        run: |
+          rm -f comment_body.txt extracted_patch.patch
