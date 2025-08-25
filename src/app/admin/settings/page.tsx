@@ -1,6 +1,7 @@
 'use client';
 
 import withAuth from '@/lib/withAuth';
+import AdminNav from '@/components/AdminNav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -94,14 +95,22 @@ function AdminSettingsPage() {
   }
 
   return (
-    <div className="container max-w-4xl mx-auto p-6 space-y-6">
-      <div className="flex items-center gap-3 mb-6">
-        <Settings className="w-8 h-8" />
-        <div>
-          <h1 className="text-3xl font-bold">Admin Settings</h1>
-          <p className="text-muted-foreground">Manage feature flags and global configuration</p>
+    <div className="container max-w-6xl mx-auto p-6 space-y-6">
+      <div className="grid lg:grid-cols-4 gap-6">
+        {/* Navigation Sidebar */}
+        <div className="lg:col-span-1">
+          <AdminNav />
         </div>
-      </div>
+
+        {/* Main Content */}
+        <div className="lg:col-span-3 space-y-6">
+          <div className="flex items-center gap-3 mb-6">
+            <Settings className="w-8 h-8" />
+            <div>
+              <h1 className="text-3xl font-bold">Admin Settings</h1>
+              <p className="text-muted-foreground">Manage feature flags and global configuration</p>
+            </div>
+          </div>
 
       <Card>
         <CardHeader>
@@ -180,6 +189,8 @@ function AdminSettingsPage() {
           </div>
         </CardContent>
       </Card>
+        </div>
+      </div>
     </div>
   );
 }

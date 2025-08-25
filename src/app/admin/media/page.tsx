@@ -1,6 +1,7 @@
 'use client';
 
 import withAuth from '@/lib/withAuth';
+import AdminNav from '@/components/AdminNav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -370,27 +371,35 @@ function AdminMediaPage() {
   }
 
   return (
-    <div className="container max-w-6xl mx-auto p-6 space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Media Library</h1>
-          <p className="text-muted-foreground">Upload and manage images, videos, and documents</p>
+    <div className="container max-w-7xl mx-auto p-6 space-y-6">
+      <div className="grid lg:grid-cols-4 gap-6">
+        {/* Navigation Sidebar */}
+        <div className="lg:col-span-1">
+          <AdminNav />
         </div>
-        
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-          >
-            {viewMode === 'grid' ? <List className="w-4 h-4" /> : <Grid3X3 className="w-4 h-4" />}
-          </Button>
-          <Button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
-            <Upload className="w-4 h-4 mr-2" />
-            {uploading ? 'Uploading...' : 'Upload Files'}
-          </Button>
-        </div>
-      </div>
+
+        {/* Main Content */}
+        <div className="lg:col-span-3 space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold">Media Library</h1>
+              <p className="text-muted-foreground">Upload and manage images, videos, and documents</p>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+              >
+                {viewMode === 'grid' ? <List className="w-4 h-4" /> : <Grid3X3 className="w-4 h-4" />}
+              </Button>
+              <Button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
+                <Upload className="w-4 h-4 mr-2" />
+                {uploading ? 'Uploading...' : 'Upload Files'}
+              </Button>
+            </div>
+          </div>
 
       {/* Drop Zone */}
       <Card 
@@ -449,6 +458,8 @@ function AdminMediaPage() {
           ))}
         </div>
       )}
+        </div>
+      </div>
     </div>
   );
 }
