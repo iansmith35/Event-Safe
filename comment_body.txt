@@ -1,0 +1,21 @@
+/apply-patch
+```patch
+diff --git a/docs/_pipeline-ok.md b/docs/_pipeline-ok.md
+new file mode 100644
+index 0000000..b6fc4c2
+--- /dev/null
++++ b/docs/_pipeline-ok.md
+@@ -0,0 +12 @@
++# Patch Pipeline OK
++
++This file was created automatically by the /apply-patch workflow.
++
++- Repo: Event-Safe
++- Purpose: prove the patch/PR automation works end to end.
++- Next step: apply the “major patch” (homepage fast load, feature flags,
++  admin toggles, currency £, demo polish, health endpoint).
++
++Timestamp: 2025-08-25
++Source: ChatGPT patch test
++
+
